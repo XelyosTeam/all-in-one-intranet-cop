@@ -1,0 +1,68 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Edition Délit routier #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+{% endblock %}
+
+{% block description %}Détail délit routier{% endblock %}
+
+{% block key %}Délit routier{% endblock %}
+
+{% block title %}Délit de {% endblock %}
+
+{% block main %}
+  <section class="info_personne">
+    <h1 {% if civil.present == 0 %}style="color:#ff0000"{% endif %}>Fiche Citoyen</h1>
+    <img src="/assets/img/identité/{{ civil.photo }}" alt="Photo {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}">
+    <p><strong>Nom :</strong>{{ civil.nom|capitalize }}</p>
+    <p><strong>Prénom :</strong>{{ civil.prenom|capitalize }}</p>
+    <p><strong>Date de naissance :</strong>{{ civil.DOB|date("d/m/Y") }}</p>
+    <p><strong>Téléphone :</strong>{{ civil.phone }}</p>
+    <p><strong>Nationalité :</strong>{{ civil.nationality|upper }}</p>
+    <p><strong>Sexe :</strong>{{ civil.sexe }}</p>
+    <p><strong>Job :</strong><a href="{% if civil.job == _BDDFaction  %}/{{ _membreFaction }}/{{ policier.matricule }}{% endif %}">{{ civil.job }}</a></p>
+    <p><strong>PPA :</strong>{% if civil.ppa == 1  %}Oui{% else %}Non{% endif %}</p>
+    <p><strong>Permis :</strong>{% if civil.permis == 1  %}Oui{% else %}Non{% endif %}</p>
+    <div class="lien">
+      <a href="/civil/{{ civil.id }}">Retourner sur la fiche de {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</a>
+    </div>
+    </section>
+
+  <form action="/delit-routier/{{ delit.delit_id }}/modification" method="post">
+    <section class="information_casier">
+      <h1>Informations délit</h1>
+      <img src="/assets/img/vehicule/{{ voiture.lien }}" alt="Photo véhicule type {{ voiture.nom|capitalize }}">
+      <p><strong>Modèle :</strong>{{ voiture.nom|capitalize }}</p>
+      <p><strong>Couleur :</strong>{{ voiture.couleur }}</p>
+      <p><strong>Plaque d'immatriculation :</strong><a href="/vehicule/{{ voiture.plaque }}">{{ voiture.plaque|upper }}</a></p>
+      <p><strong>Propriétaire :</strong><a href="/civil/{{ proprio.id }}">{{ proprio.nom|capitalize }} {{ proprio.prenom|capitalize }}</a></p>
+      <p><strong>Nom Delit :</strong>{{ delit.nom|capitalize }}</p>
+      <p><strong>Amende :</strong>{{ detail.amende|number_format(2, ',', ' ') }} $</p>
+      <p><strong>Temps de prison :</strong>{{ detail.temps_prison }} mois</p>
+      <p><strong>Enregistrer par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
+      <p><strong>Enregistrer le :</strong>{{ delit.date_enregistre|date("d/m/Y") }}</p>
+      <p><strong>Etat :</strong>{% if delit.etat == 2 %}Fermé{% elseif delit.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
+      <p><strong>Rapport :</strong></p>
+      <p class="remarque"><textarea class="remarque" rows="8" cols="80" name="rapport">{{ delit.remarque }}</textarea></p>
+
+      <div class="btn_modif">
+        <button class="form_button" type="submit" name="button">Appliquer les modifications</button>
+      </div>
+    </section>
+  </form>
+
+
+
+
+{% endblock %}
+
+{% block script %}{% endblock %}

@@ -1,0 +1,26 @@
+{
+    "require": {
+        "rmccue/requests": "^1.7",
+        "mikecao/flight": "^1.3",
+        "twig/twig": "^3.0",
+        "michelf/php-markdown": "^1.9",
+        "j4mie/paris": "^1.5",
+        "josantonius/session": "^1.1",
+        "noiselabs/configparser": "dev-master",
+        "dompdf/dompdf": "^0.8.5"
+    },
+    "autoload": {
+        "files": [
+            "src/models.php",
+            "src/functions.php",
+            "src/insertion.php",
+            "src/edit.php",
+            "src/cryptage.php",
+            "src/close.php",
+            "src/connect.php",
+            "src/configParser.php",
+            "src/historique.php",
+            "src/impression.php"
+        ]
+    }
+}

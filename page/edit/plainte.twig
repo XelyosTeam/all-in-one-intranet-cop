@@ -1,0 +1,60 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Edition plainte civil #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+{% endblock %}
+
+{% block description %}Détail plainte{% endblock %}
+
+{% block key %}Détail plainte{% endblock %}
+
+{% block title %}Plainte sur {{ personne.nom }} {{ personne.prenom }}{% endblock %}
+
+{% block main %}
+  <section class="info_personne">
+    <h1 {% if personne.present == 0 %}style="color:#ff0000"{% endif %}>Fiche Citoyen</h1>
+    <img src="/assets/img/identité/{{ personne.photo }}" alt="Photo {{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}">
+    <p><strong>Nom :</strong>{{ personne.nom|capitalize }}</p>
+    <p><strong>Prénom :</strong>{{ personne.prenom|capitalize }}</p>
+    <p><strong>Date de naissance :</strong>{{ personne.DOB|date("d/m/Y") }}</p>
+    <p><strong>Téléphone :</strong>{{ personne.phone }}</p>
+    <p><strong>Nationalité :</strong>{{ personne.nationality|upper }}</p>
+    <p><strong>Sexe :</strong>{{ personne.sexe }}</p>
+    <p><strong>Job :</strong><a href="{% if personne.job == _BDDFaction  %}/{{ _membreFaction }}/{{ policier.matricule }}{% endif %}">{{ personne.job }}</a></p>
+    <p><strong>PPA :</strong>{% if personne.ppa == 1  %}Oui{% else %}Non{% endif %}</p>
+    <p><strong>Permis :</strong>{% if personne.permis == 1  %}Oui{% else %}Non{% endif %}</p>
+    <div class="lien">
+      <a href="/civil/{{ personne.id }}">Retourner sur la fiche de {{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</a>
+    </div>
+  </section>
+
+  <form action="/detail-plainte/{{ plainte.id }}/modification" method="POST">
+    <section class="information_casier">
+      <h1>Informations sur la plainte</h1>
+      <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+      <p><strong>Déposeur :</strong><a href="/civil/{{ deposeur.id }}">{{ deposeur.nom|capitalize }} {{ deposeur.prenom|capitalize }}</a></p>
+      <p><strong>Détail de la plainte :</strong></p>
+      <p class="remarque"><textarea class="remarque" rows="8" cols="80" name="rapport">{{ plainte.detail_plainte }}</textarea></p>
+      <p><strong>Enregistrer par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.prenom|capitalize }}</a></p></p>
+      <p><strong>Enregistrer le :</strong>{% if plainte.enregistrer_le != NULL %}{{ plainte.enregistrer_le|date("d/m/Y") }}{% endif %}</p>
+      <div class="btn_modif">
+        <button class="form_button" type="submit" name="button">Appliquer les modifications</button>
+      </div>
+    </section>
+
+
+  </form>
+
+
+{% endblock %}
+
+{% block script %}{% endblock %}

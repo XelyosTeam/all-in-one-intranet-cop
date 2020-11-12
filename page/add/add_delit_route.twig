@@ -1,0 +1,94 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Ajout Delit Routier #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/division_image.css">
+{% endblock %}
+
+{% block description %}Ajout Délit Routier{% endblock %}
+
+{% block key %}Ajout Délit Routier{% endblock %}
+
+{% block title %}Ajout Délit Routier{% endblock %}
+
+{% block main %}
+<section class="contenu">
+  <h1>Ajout Délit Routier</h1>
+
+  <form class="connexion" action="/insert/routier" method="POST">
+
+    <!-- Division des parties -->
+    <section class="div_content_photo">
+      <section class="part_add">
+        <div>
+          <label>Conducteur :</label>
+          <select id="personne_type" name="casier_owner" onchange="affiche_photo_personne();">
+            {% for personne in personnes %}
+            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label>Véhicule* :</label>
+
+          <select  id="car_type" name="vehicule_delit" onchange="affiche_photo_plaque();">
+            {% for voiture in voitures %}
+            <option value="{{ voiture.v_id }}">{{ voiture.plaque|upper }} - {{ voiture.nom|capitalize }}</option>
+            {% endfor %}
+
+          </select>
+        </div>
+
+        <div>
+          <label>Délit* :</label>
+
+          <select name="delit_name">
+            <option value="NULL">Sélectionner un délit</option>
+            {% for route in routes %}
+            <option value="{{ route.id }}">{{ route.intitule|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label>Rapport :</label>
+          <textarea name="rapport" placeholder="Insérer un éventuelle rapport"></textarea>
+        </div>
+      </section>
+
+      <section class="part_img">
+        <div>
+          <img id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+        </div>
+
+        <div>
+          <img id="image_voiture" src="/assets/img/vehicule/9f.png" alt="Image 9f">
+        </div>
+      </section>
+    </section>
+
+    {% if _agent.ajouter != 0 %}
+    <div class="btn">
+      <button class="form_button" type="submit" name="button">Enregistrer</button>
+    </div>
+    {% endif %}
+  </form>
+
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="/assets/script/event_saisie.js"></script>
+<script type="text/javascript">
+  affiche_photo_plaque();
+  affiche_photo_personne();
+</script>
+{% endblock %}

@@ -1,0 +1,95 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Ajout des véhicules #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/division_image.css">
+{% endblock %}
+
+{% block description %}Recensement Véhicule{% endblock %}
+
+{% block key %}Recensement Véhicule{% endblock %}
+
+{% block title %}Recensement Véhicule{% endblock %}
+
+{% block main %}
+<section class="contenu">
+  <h1>Inscription Véhicule</h1>
+
+  <form id="formulaire_ajout_car" name="form_car" action="/insert/voiture" method="post">
+
+    <!-- Division des parties -->
+    <section class="div_content_photo">
+      <section class="part_add">
+        <div>
+          <label>Modèle :</label>
+
+          <select id="car_type" name="vehicule_model" onchange="affiche_photo_voiture();">
+            {% for voiture in voitures %}
+              <option value="{{ voiture.id }}">{{ voiture.nom|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label>Couleur :</label>
+          <input type="text" name="vehicule_color" placeholder="Couleur de la voiture" required>
+        </div>
+
+        <div>
+          <label>Plaque :</label>
+          <input id="plaque_value" type="text" name="vehicule_plaque" placeholder="123 ABC -ou- 12 ABC 345" oninput="verif_plaque()" required>
+        </div>
+
+        <div>
+          <label>Propriétaire :</label>
+
+          <select id="personne_type" name="vehicule_owner" onchange="affiche_photo_personne();">
+
+            {% for personne in personnes %}
+            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label id="alerte_message">Le véhicule est déjà enregistré au nom de NOM PRENOM</label>
+        </div>
+      </section>
+
+      <section class="part_img">
+        <div>
+          <img id="image_voiture" src="/assets/img/vehicule/9f.png" alt="Image 9f">
+        </div>
+
+        <div>
+          <img id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+        </div>
+
+      </section>
+    </section>
+
+    {% if _agent.ajouter != 0 %}
+    <div class="btn">
+      <button id="valid_button" class="form_button" type="submit" name="button">Enregistrer</button>
+    </div>
+    {% endif %}
+  </form>
+
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="/assets/script/event_saisie.js"></script>
+<script type="text/javascript">
+  affiche_photo_voiture();
+  affiche_photo_personne();
+  verif_plaque();
+</script>
+{% endblock %}

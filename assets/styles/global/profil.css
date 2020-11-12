@@ -1,0 +1,341 @@
+/*
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+*/
+
+/* PC */
+.red
+{
+  color: #DA0000;
+}
+
+.orange
+{
+  color: #E09E08;
+}
+
+.green
+{
+  color: #00850B;
+}
+
+.info_personne
+{
+  float: left;
+  display: block;
+  margin-left: 10%;
+  width: 25%;
+  border-radius: 10px;
+  background-color: #EDEFF5;
+  text-align: center;
+  padding-bottom: 2%;
+}
+
+.info_personne img
+{
+  width: 40%;
+  height: auto;
+}
+
+.info_personne .description
+{
+  text-align: center;
+  color: #b0b0b0;
+  font-style: italic;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.info_personne h1
+{
+  padding-top: 2%;
+  padding-bottom: 1%;
+  color: #103469;
+  border-bottom: 2px solid #103469;
+}
+
+.info_personne p strong
+{
+  text-align: left;
+  color: #103469;
+  font-size: 1.25em;
+  margin-right: 3%;
+}
+
+.info_personne p
+{
+  text-align: left;
+  margin-left: 3%;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.info_personne .lien
+{
+  margin-top: 5%;
+}
+
+.info_personne .lien a, .btn_modif button, .information_casier .lien a
+{
+  border: none;
+  border-radius: 10px;
+  background-color: #103469;
+  color: #fff;
+  padding: 1%;
+  font-size: 1.25em;
+}
+
+.info_personne .lien a:hover, .btn_modif button:hover, .information_casier .lien a:hover
+{
+  color: #FFE000;
+}
+
+.btn_modif, .information_casier .lien
+{
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+.habilitation
+{
+  display: block;
+  margin-left: 37%;
+  width: 58%;
+  border-radius: 10px;
+  background-color: #EDEFF5;
+  text-align: center;
+  padding-bottom: 2%;
+}
+
+.habilitation h1
+{
+  padding-top: 2%;
+  padding-bottom: 1%;
+  color: #103469;
+  border-bottom: 2px solid #103469;
+}
+
+.habilitation p
+{
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.habilitation select
+{
+  margin: 0 auto;
+  font-weight: bold;
+  font-size: 1.2em;
+  width: 80%;
+  margin-bottom: 2%;
+}
+
+.habilitation .grille
+{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.liste
+{
+  display: block;
+  margin-top: 2.5%;
+  margin-left: 37%;
+  width: 58%;
+  border-radius: 10px;
+  background-color: #EDEFF5;
+  padding-bottom: 0.5%;
+}
+
+.liste h1
+{
+  padding-top: 2%;
+  color: #103469;
+  border-bottom: 2px solid #103469;
+  text-align: center;
+}
+
+.liste p strong
+{
+  text-align: left;
+  color: #103469;
+  font-size: 1.25em;
+  margin-right: 3%;
+}
+
+.liste p
+{
+  text-align: left;
+  margin-left: 3%;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.liste .ferm
+{
+  margin-left: 90%;
+  font-weight: bold;
+  font-size: 1.2em;
+  background: #103469;
+  color: #EDEFF5;
+  padding: 1%
+}
+
+.liste .ferm:hover
+{
+  color: #FFE000;
+}
+
+.liste .content
+{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 2%;
+  border-bottom: 0.5px solid #103469;
+}
+
+.liste .content img
+{
+  width: 40%;
+  height: auto;
+  padding-left: 20%;
+  padding-bottom: 5%;
+}
+
+.liste .content p
+{
+  width: 7%;
+  height: auto;
+  padding-left: 20%;
+  padding-top: 5%;
+  font-weight: bold;
+}
+
+.liste .content a
+{
+  width: 7%;
+  height: auto;
+  padding-top: 10%;
+  text-decoration: none;
+  color: #103469;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.liste .content a:hover
+{
+  color: #FFE000;
+  font-size: 2em;
+  margin-top: -0.25em;
+}
+
+.liste
+{
+  display: block;
+  margin-top: 2.5%;
+  margin-left: 37%;
+  width: 58%;
+  border-radius: 10px;
+  background-color: #EDEFF5;
+  padding-bottom: 0.5%;
+}
+
+.liste h1
+{
+  padding-top: 2%;
+  color: #103469;
+  border-bottom: 2px solid #103469;
+  text-align: center;
+}
+
+.liste .content
+{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 2%;
+  border-bottom: 0.5px solid #103469;
+}
+
+.liste .content img
+{
+  width: 40%;
+  height: auto;
+  padding-top: 5%;
+  padding-left: 20%;
+  padding-bottom: 5%;
+}
+
+.liste .content p
+{
+  white-space: nowrap;
+  width: 7%;
+  height: auto;
+  padding-left: 20%;
+  padding-top: 5%;
+}
+
+.liste .content a
+{
+  width: 7%;
+  height: auto;
+  padding-top: 10%;
+}
+
+.information_casier
+{
+  display: block;
+  margin-top: 2.5%;
+  margin-left: 37%;
+  width: 58%;
+  border-radius: 10px;
+  background-color: #EDEFF5;
+  padding-bottom: 0.5%;
+}
+
+.information_casier h1
+{
+  padding-top: 2%;
+  color: #103469;
+  border-bottom: 2px solid #103469;
+  text-align: center;
+}
+
+.information_casier p strong
+{
+  text-align: left;
+  color: #103469;
+  font-size: 1.25em;
+  margin-right: 1%;
+}
+
+.information_casier p
+{
+  text-align: left;
+  margin-left: 2%;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.information_casier .remarque
+{
+  text-align: justify;
+  padding-left: 1%;
+  padding-right: 3%;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.information_casier img
+{
+  margin-left: 42.5%;
+  width: 15%;
+  height: auto;
+}
+
+span
+{
+  background-color: #000000; /* Est utilisé pour le biffage des messages */
+}

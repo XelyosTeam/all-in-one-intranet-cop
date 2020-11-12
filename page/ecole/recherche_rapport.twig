@@ -1,0 +1,38 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Page vierge pour les twig #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/recherche.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/recherche.css">
+{% endblock %}
+
+{% block description %}Rapport non Vu{% endblock %}
+
+{% block key %}Rapport non Vu{% endblock %}
+
+{% block title %}Rapport non Vu{% endblock %}
+
+{% block main %}
+{% for rapport in listes %}
+<div class="Resultat">
+  <img src="/assets/img/identité/{{ rapport.photo}}" alt="Photo de {{ rapport.grade|capitalize }} {{ rapport.nom|capitalize }}">
+  <p>{{ rapport.titre|capitalize }}</p>
+  <a href="/rapport/{{ rapport.id }}">Consulter</a>
+</div>
+{% else %}
+<div class="Resultat">
+  <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+  <p>Aucun nouveau rapport pour le moment</p>
+</div>
+{% endfor %}
+</section>
+{% endblock %}
+
+{% block script %}{% endblock %}

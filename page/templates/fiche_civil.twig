@@ -1,0 +1,51 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+<section class="info_personne">
+  <h1 {% if civil.present == 0 %}style="color:#ff0000"{% endif %}>Fiche Citoyen</h1>
+  <img src="/assets/img/identité/{{ civil.photo }}" alt="Photo {{ civil.nom|capitalize}} {{ civil.prenom|capitalize }}">
+  <p><strong>Nom :</strong>{{ civil.nom|capitalize }}</p>
+  <p><strong>Prénom :</strong>{{ civil.prenom|capitalize }}</p>
+  <p><strong>Date de naissance :</strong>{{ civil.DOB|date("d/m/Y") }}</p>
+  <p><strong>Téléphone :</strong>{{ civil.phone }}</p>
+  <p><strong>Nationalité :</strong>{{ civil.nationality|upper }}</p>
+  <p><strong>Sexe :</strong>{{ civil.sexe }}</p>
+
+  {% if _etat_.goBack == 1 %}
+    <p><strong>Job :</strong>{{ civil.job }}</p>
+  {% else %}
+    <p><strong>Job :</strong><a href="{% if civil.job == _BDDFaction  %}/{{ _membreFaction }}/{{ policier.matricule }}{% endif %}">{{ civil.job|capitalize }}</a></p>
+  {% endif %}
+
+  <p><strong>PPA :</strong>{% if civil.ppa == 1  %}Oui{% else %}Non{% endif %}</p>
+  <p><strong>Permis :</strong>{% if civil.permis == 1  %}Oui{% else %}Non{% endif %}</p>
+  {% if civil.date_permis <= _tpsPermis %}
+  <p><strong>Retrait :</strong>{{ civil.date_trad }}</p>
+  {% endif %}
+
+  {% if _etat_.goBack == 1 %}
+    <div class="lien">
+      <a href="/civil/{{ civil.id }}">Retourner sur la fiche de {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</a>
+    </div>
+  {% else %}
+    {% if _etat_.amende == 1 %}
+      <div class="lien">
+        <a href="/civil/{{ civil.id }}/calcul-amende">Calculer l'amende</a>
+      </div>
+      <div class="lien">
+        <a href="/impression/civil/{{ civil.id }}">Imprimer Casier</a>
+      </div>
+    {% endif %}
+
+    {% if _agent.editer != 0 and civil.present != 0 %}
+      <div class="lien">
+        <a href="/civil/{{ civil.id }}/edit">Modifier la fiche</a>
+      </div>
+    {% endif %}
+  {% endif %}
+
+</section>

@@ -1,0 +1,235 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Administration - Modification #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/division_image.css">
+{% endblock %}
+
+{% block description %}Modification Administrateur{% endblock %}
+
+{% block key %}Modification Administrateur{% endblock %}
+
+{% block title %}Modification Administrateur{% endblock %}
+
+{% block main %}
+  {# Modification d'un mot de passe en mode administrateur #}
+  <section class="contenu">
+    <h1>Modification du mot de passe</h1>
+
+    <form class="connexion" action="" method="post">
+      <div>
+        <label>Nom de l'agent :</label>
+        <select id="nom_pwd" name="nom">
+          {% for agent in agents %}
+            <option value="{{ agent.lspd_id }}">{{ agent.nom }} {{ agent.prenom }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div>
+        <label for="mdp">Nouveau mot de passe</label>
+        <input type="text" name="mdp" id="mdp_content" placeholder="Nouveau mot de passe"required>
+      </div>
+
+      <div>
+        <p id="confirm_edit_mdp">Mot de passe modifié</p>
+      </div>
+
+      <div class="btn">
+        <button class="form_button" type="submit" name="button" onclick="editPassWord();" >Modifier</button>
+      </div>
+    </form>
+
+  </section>
+
+  {# Déblocage d'un accès #}
+  <section class="contenu">
+    <h1>Accès Bloqué</h1>
+
+    <form class="connexion" action="/administration/details/echec" method="post">
+      <div>
+        <label>Nom du {{ _BDDFaction }} :</label>
+        <select name="adresse">
+          {% for echec in echecs %}
+            <option value="{{ echec.adresse_ip }}">{{ echec.adresse_ip }} - {{ echec.NbEchecs }} échec(s)</option>
+          {% else %}
+            <option value="0">Rien à signaler</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="btn">
+        <button class="form_button" type="submit" name="button">Détails</button>
+      </div>
+    </form>
+  </section>
+
+  {# Modification Délit #}
+  <section class="contenu">
+    <h1>Modification Délit</h1>
+
+    <form class="" action="" method="post">
+      <div>
+        <label>Sélectionner un Type :</label>
+
+        <select id="delit_type" class="short" onchange="AfficheMenuModDelit();">
+          <option value="0">Sélectionner un type</option>
+          <option value="1">Délit Routier</option>
+          <option value="2">Délit Léger</option>
+          <option value="3">Délit Moyen</option>
+          <option value="4">Délit Grave</option>
+        </select>
+      </div>
+
+      <div id="list_route">
+        <label>Délit Routier :</label>
+        <select id="delit_id" onchange="EditMenuModDelit(this.value);">
+          <option value="0">Sélectionner un délit</option>
+          {% for delit in routes %}
+          <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div id="list_leger">
+        <label>Délit Léger :</label>
+        <select id="delit_id" onchange="EditMenuModDelit(this.value);">
+          <option value="0">Sélectionner un délit</option>
+          {% for delit in legers %}
+          <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div id="list_moyen">
+        <label>Délit Moyen :</label>
+        <select id="delit_id" onchange="EditMenuModDelit(this.value);">
+          <option value="0">Sélectionner un délit</option>
+          {% for delit in moyens %}
+          <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div id="list_grave">
+        <label>Délit Grave :</label>
+        <select id="delit_id" onchange="EditMenuModDelit(this.value);">
+          <option value="0">Sélectionner un délit</option>
+          {% for delit in graves %}
+          <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div id="dtls_amende">
+        <label for="delit_amende">Entrer le montant de l'amende :</label>
+        <input class="short" type="number" name="delit_amende" id="amd_delit" min="0" placeholder="Montant Amende" required>
+      </div>
+
+      <div id="dtls_prison">
+        <label for="delit_prison">Temps de prison (mois) :</label>
+        <input class="short" type="number" name="delit_prison" id="tps_delit" min="0" placeholder="Temps en mois">
+      </div>
+
+      <div>
+        <p id="confirm_edit_delit">Délit Modifié</p>
+      </div>
+
+      <div class="btn">
+        <button id="button_delit" class="form_button" type="submit" name="button" onclick="updateDelitAdmin();">Modifier</button>
+      </div>
+    </form>
+
+  </section>
+
+  {# Masquer un civil dans le registre #}
+  <section class="contenu">
+    <h1>Masquer Civil Registre</h1>
+
+    <form class="connexion" action="/edit/registre/0" method="post">
+      <!-- Division des parties -->
+      <section class="div_content_photo">
+        <section class="part_add">
+          <div>
+            <label>Citoyen :</label>
+
+            <select id="personne_type" name="nom_civil" onchange="affiche_photo_personne();">
+              {% for personne in visibles %}
+                <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+              {% else %}
+                <option>Aucun civil visible</option>
+              {% endfor %}
+            </select>
+          </div>
+        </section>
+
+        <section class="part_img">
+          <div>
+            <img id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+          </div>
+        </section>
+      </section>
+
+      <div class="btn">
+        <button class="form_button" type="submit" name="button">Masquer</button>
+      </div>
+    </form>
+  </section>
+
+  {# Réintégration civil dans le registre #}
+  <section class="contenu">
+    <h1>Réintégrer Civil Registre</h1>
+
+    <form class="connexion" action="/edit/registre/1" method="post">
+      <!-- Division des parties -->
+      <section class="div_content_photo">
+        <section class="part_add">
+          <div>
+            <label>Citoyen :</label>
+
+            <select id="personne_type_2" name="nom_civil" onchange="affiche_photo_personne_2();">
+              {% for personne in invisibles %}
+                <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+              {% else %}
+                <option>Aucun civil masqué</option>
+              {% endfor %}
+            </select>
+          </div>
+        </section>
+
+        <section class="part_img">
+          <div>
+            <img id="image_civil2" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+          </div>
+        </section>
+      </section>
+
+      <div class="btn">
+        <button class="form_button" type="submit" name="button">Réintégrer</button>
+      </div>
+    </form>
+  </section>
+
+{% endblock %}
+
+{% block script %}
+<script src="/assets/script/event_saisie.js"></script>
+<script type="text/javascript">
+  document.getElementById("confirm_edit_mdp").style.display = "none";
+  document.getElementById("confirm_edit_delit").style.display = "none";
+  document.getElementById("list_route").style.display = "none";
+  document.getElementById("list_leger").style.display = "none";
+  document.getElementById("list_moyen").style.display = "none";
+  document.getElementById("list_grave").style.display = "none";
+  document.getElementById("dtls_amende").style.display = "none";
+  document.getElementById("dtls_prison").style.display = "none";
+  document.getElementById("button_delit").style.display = "none";
+</script>
+{% endblock %}

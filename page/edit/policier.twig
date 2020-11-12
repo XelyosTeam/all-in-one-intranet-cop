@@ -1,0 +1,403 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Edition page policier #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+{% endblock %}
+
+{% block description %}Edition Fiche{% endblock %}
+
+{% block key %}Edition Fiche{% endblock %}
+
+{% block title %}Edition {{ agent.grade }} {{ agent.nom|capitalize }}{% endblock %}
+
+{% block main %}
+
+<form action="/{{ _membreFaction }}/{{ agent.matricule }}/modification" method="post">
+  <section class="info_personne">
+    <h1>Fiche {{ _BDDFaction }}</h1>
+    <img src="/assets/img/identité/{{ agent.photo }}" alt="Photo {{ agent.grade }} {{ agent.nom|capitalize }}">
+    <p><strong>Description :</strong><textarea name="note" rows="1">{{ agent.note }}</textarea></p>
+    <p><strong>Nom :</strong>{{ agent.nom|capitalize }}</p>
+    <p><strong>Prénom :</strong>{{ agent.prenom|capitalize }}</p>
+    <p><strong>Grade :</strong>
+    <select name="grade">
+      {% for grade in grades %}
+        {% if grade.nom == agent.grade %}
+          <option value="{{ grade.id }}">{{ grade.nom }}</option>
+          <option value="{{ grade.id }}">============</option>
+        {% endif %}
+      {% endfor %}
+
+      {% for grade in grades %}
+        {% if grade.nom != agent.grade %}
+          <option value="{{ grade.id }}">{{ grade.nom|capitalize }}</option>
+        {% endif %}
+      {% endfor %}
+    </select></p>
+    <p><strong>Matricule :</strong>{{ agent.matricule }}</p>
+    <p><strong>Téléphone :</strong>{{ agent.telephone }}</p>
+    <p><strong>Nationalité :</strong>{{ agent.nationality }}</p>
+    <p><strong>Sexe :</strong>{{ agent.sexe }}</p>
+  </section>
+
+  <section class="habilitation">
+    <h1>Habilitation</h1>
+
+    <div class="grille">
+      {% if _Hab1 != "" %}
+        <select name="hab1">
+            {% if agent.hab_1 == 0 %}
+              <option class="red" class="red" value="0">{{ _Hab1 }} (Non Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab1 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab1 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_1 == 1 %}
+              <option class="orange" class="orange" value="1">{{ _Hab1 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab1 }} (Formé)</option>
+              <option class="red" class="red" value="0">{{ _Hab1 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_1 == 2 %}
+              <option class="green" value="2">{{ _Hab1 }} (Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab1 }} (En formation)</option>
+              <option class="red" class="red" value="0">{{ _Hab1 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {% if _Hab2 != "" %}
+        <select name="hab2">
+            {% if agent.hab_2 == 0 %}
+              <option class="red" class="red" value="0">{{ _Hab2 }} (Non Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab2 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab2 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_2 == 1 %}
+              <option class="orange" class="orange" value="1">{{ _Hab2 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab2 }} (Formé)</option>
+              <option class="red" class="red" value="0">{{ _Hab2 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_2 == 2 %}
+              <option class="green" value="2">{{ _Hab2 }} (Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab2 }} (En formation)</option>
+              <option class="red" class="red" value="0">{{ _Hab2 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {% if _Hab3 != "" %}
+        <select name="hab3">
+            {% if agent.hab_3 == 0 %}
+              <option class="red" class="red" value="0">{{ _Hab3 }} (Non Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab3 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab3 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_3 == 1 %}
+              <option class="orange" class="orange" value="1">{{ _Hab3 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab3 }} (Formé)</option>
+              <option class="red" class="red" value="0">{{ _Hab3 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_3 == 2 %}
+              <option class="green" value="2">{{ _Hab3 }} (Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab3 }} (En formation)</option>
+              <option class="red" class="red" value="0">{{ _Hab3 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {% if _Hab4 != "" %}
+        <select name="hab4">
+            {% if agent.hab_4 == 0 %}
+              <option class="red" class="red" value="0">{{ _Hab4 }} (Non Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab4 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab4 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_4 == 1 %}
+              <option class="orange" class="orange" value="1">{{ _Hab4 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab4 }} (Formé)</option>
+              <option class="red" class="red" value="0">{{ _Hab4 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_4 == 2 %}
+              <option class="green" value="2">{{ _Hab4 }} (Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab4 }} (En formation)</option>
+              <option class="red" class="red" value="0">{{ _Hab4 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {% if _Hab5 != "" %}
+        <select name="hab5">
+            {% if agent.hab_5 == 0 %}
+              <option class="red" class="red" value="0">{{ _Hab5 }} (Non Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab5 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab5 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_5 == 1 %}
+              <option class="orange" class="orange" value="1">{{ _Hab5 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab5 }} (Formé)</option>
+              <option class="red" class="red" value="0">{{ _Hab5 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_5 == 2 %}
+              <option class="green" value="2">{{ _Hab5 }} (Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab5 }} (En formation)</option>
+              <option class="red" class="red" value="0">{{ _Hab5 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {% if _Hab6 != "" %}
+        <select name="hab6">
+            {% if agent.hab_6 == 0 %}
+              <option class="red" class="red" value="0">{{ _Hab6 }} (Non Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab6 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab6 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_6 == 1 %}
+              <option class="orange" class="orange" value="1">{{ _Hab6 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab6 }} (Formé)</option>
+              <option class="red" class="red" value="0">{{ _Hab6 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_6 == 2 %}
+              <option class="green" value="2">{{ _Hab6 }} (Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab6 }} (En formation)</option>
+              <option class="red" class="red" value="0">{{ _Hab6 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {% if _Hab7 != "" %}
+        <select name="hab7">
+            {% if agent.hab_7 == 0 %}
+              <option class="red" class="red" value="0">{{ _Hab7 }} (Non Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab7 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab7 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_7 == 1 %}
+              <option class="orange" class="orange" value="1">{{ _Hab7 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab7 }} (Formé)</option>
+              <option class="red" class="red" value="0">{{ _Hab7 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_7 == 2 %}
+              <option class="green" value="2">{{ _Hab7 }} (Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab7 }} (En formation)</option>
+              <option class="red" class="red" value="0">{{ _Hab7 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {% if _Hab8 != "" %}
+        <select name="hab8">
+            {% if agent.hab_8 == 0 %}
+              <option class="red" class="red" value="0">{{ _Hab8 }} (Non Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab8 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab8 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_8 == 1 %}
+              <option class="orange" class="orange" value="1">{{ _Hab8 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab8 }} (Formé)</option>
+              <option class="red" class="red" value="0">{{ _Hab8 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_8 == 2 %}
+              <option class="green" value="2">{{ _Hab8 }} (Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab8 }} (En formation)</option>
+              <option class="red" class="red" value="0">{{ _Hab8 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {% if _Hab9 != "" %}
+        <select name="hab9">
+            {% if agent.hab_9 == 0 %}
+              <option class="red" class="red" value="0">{{ _Hab9 }} (Non Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab9 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab9 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_9 == 1 %}
+              <option class="orange" class="orange" value="1">{{ _Hab9 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab9 }} (Formé)</option>
+              <option class="red" class="red" value="0">{{ _Hab9 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_9 == 2 %}
+              <option class="green" value="2">{{ _Hab9 }} (Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab9 }} (En formation)</option>
+              <option class="red" class="red" value="0">{{ _Hab9 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {# Pour fonctionnement sur notre serveur #}
+      <p></p>
+
+      {% if _Hab10 != "" %}
+        <select name="hab10">
+            {% if agent.hab_10 == 0 %}
+              <option class="red" class="red" value="0">{{ _Hab10 }} (Non Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab10 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab10 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_10 == 1 %}
+              <option class="orange" class="orange" value="1">{{ _Hab10 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab10 }} (Formé)</option>
+              <option class="red" class="red" value="0">{{ _Hab10 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_10 == 2 %}
+              <option class="green" value="2">{{ _Hab10 }} (Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab10 }} (En formation)</option>
+              <option class="red" class="red" value="0">{{ _Hab10 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {% if _Hab11 != "" %}
+        <select name="hab11">
+            {% if agent.hab_11 == 0 %}
+              <option class="red" class="red" value="0">{{ _Hab11 }} (Non Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab11 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab11 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_11 == 1 %}
+              <option class="orange" class="orange" value="1">{{ _Hab11 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab11 }} (Formé)</option>
+              <option class="red" class="red" value="0">{{ _Hab11 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_11 == 2 %}
+              <option class="green" value="2">{{ _Hab11 }} (Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab11 }} (En formation)</option>
+              <option class="red" class="red" value="0">{{ _Hab11 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {# Pour fonctionnement sur notre serveur #}
+      <p></p>
+
+      {% if _Hab12 != "" %}
+        <select name="hab12">
+            {% if agent.hab_12 == 0 %}
+            <option class="red" class="red" value="0">{{ _Hab12 }} (Non Formé)</option>
+            <option class="orange" class="orange" value="1">{{ _Hab12 }} (En formation)</option>
+            <option class="green" value="2">{{ _Hab12 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_12 == 1 %}
+            <option class="orange" class="orange" value="1">{{ _Hab12 }} (En formation)</option>
+            <option class="green" value="2">{{ _Hab12 }} (Formé)</option>
+            <option class="red" class="red" value="0">{{ _Hab12 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_12 == 2 %}
+            <option class="green" value="2">{{ _Hab12 }} (Formé)</option>
+            <option class="orange" class="orange" value="1">{{ _Hab12 }} (En formation)</option>
+            <option class="red" class="red" value="0">{{ _Hab12 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {% if _Hab13 != "" %}
+        <select name="hab13">
+          {% if agent.hab_13 == 0 %}
+            <option class="red" class="red" value="0">{{ _Hab13 }} (Non Formé)</option>
+            <option class="orange" class="orange" value="1">{{ _Hab13 }} (En formation)</option>
+            <option class="green" value="2">{{ _Hab13 }} (Formé)</option>
+          {% endif %}
+
+          {% if agent.hab_13 == 1 %}
+            <option class="orange" class="orange" value="1">{{ _Hab13 }} (En formation)</option>
+            <option class="green" value="2">{{ _Hab13 }} (Formé)</option>
+            <option class="red" class="red" value="0">{{ _Hab13 }} (Non Formé)</option>
+          {% endif %}
+
+          {% if agent.hab_13 == 2 %}
+            <option class="green" value="2">{{ _Hab13 }} (Formé)</option>
+            <option class="orange" class="orange" value="1">{{ _Hab13 }} (En formation)</option>
+            <option class="red" class="red" value="0">{{ _Hab13 }} (Non Formé)</option>
+          {% endif %}
+        </select>
+      {% endif %}
+
+      {% if _Hab14 != "" %}
+        <select name="hab14">
+            {% if agent.hab_14 == 0 %}
+              <option class="red" class="red" value="0">{{ _Hab14 }} (Non Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab14 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab14 }} (Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_14 == 1 %}
+              <option class="orange" class="orange" value="1">{{ _Hab14 }} (En formation)</option>
+              <option class="green" value="2">{{ _Hab14 }} (Formé)</option>
+              <option class="red" class="red" value="0">{{ _Hab13 }} (Non Formé)</option>
+            {% endif %}
+
+            {% if agent.hab_14 == 2 %}
+              <option class="green" value="2">{{ _Hab14 }} (Formé)</option>
+              <option class="orange" class="orange" value="1">{{ _Hab14 }} (En formation)</option>
+              <option class="red" class="red" value="0">{{ _Hab14 }} (Non Formé)</option>
+            {% endif %}
+        </select>
+      {% endif %}
+
+      {% if _Hab15 != "" %}
+        <select name="hab15">
+          {% if agent.hab_15 == 0 %}
+            <option class="red" class="red" value="0">{{ _Hab15 }} (Non Formé)</option>
+            <option class="orange" class="orange" value="1">{{ _Hab15 }} (En formation)</option>
+            <option class="green" value="2">{{ _Hab15 }} (Formé)</option>
+          {% endif %}
+
+          {% if agent.hab_15 == 1 %}
+            <option class="orange" class="orange" value="1">{{ _Hab15 }} (En formation)</option>
+            <option class="green" value="2">{{ _Hab15 }} (Formé)</option>
+            <option class="red" class="red" value="0">{{ _Hab15 }} (Non Formé)</option>
+          {% endif %}
+
+          {% if agent.hab_15 == 2 %}
+            <option class="green" value="2">{{ _Hab15 }} (Formé)</option>
+            <option class="orange" class="orange" value="1">{{ _Hab15 }} (En formation)</option>
+            <option class="red" class="red" value="0">{{ _Hab15 }} (Non Formé)</option>
+          {% endif %}
+        </select>
+      {% endif %}
+
+    </div>
+  </section>
+
+  <div class="btn_modif" align="Center">
+    <button class="form_button" type="submit" name="button">Enregistrer</button>
+  </div>
+
+</form>
+
+{% endblock %}
+
+{% block script %}{% endblock %}

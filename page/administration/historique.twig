@@ -1,0 +1,84 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Administration - Historique #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/historique.css">
+{% endblock %}
+
+{% block description %}Historique Agent {{ _nomFaction }}{% endblock %}
+
+{% block key %}Historique Agent {{ _nomFaction }}{% endblock %}
+
+{% block title %}Historique Agent {{ _nomFaction }}{% endblock %}
+
+{% block main %}
+{# Liste des agents en service et hors service #}
+<section class="list_agent">
+  <h1>Liste des agents</h1>
+  <section>
+    {% for cop in cops %}
+    <div onclick="protocoleHistorique('{{ cop.matricule }}');">
+      <img src="/assets/img/identité/{{ cop.photo}}" alt="Photo de {{ cop.nom|capitalize }} {{ cop.prenom|capitalize }}">
+      <p>{{ cop.grade}} {{ cop.nom}}</p>
+    </div>
+    {% endfor %}
+    {% for cop in oldcops %}
+    <div class="old" onclick="protocoleHistorique('{{ cop.matricule }}');">
+      <img src="/assets/img/identité/{{ cop.photo}}" alt="Photo de {{ cop.nom|capitalize }} {{ cop.prenom|capitalize }}">
+      <p>{{ cop.nom}} {{ cop.prenom}}</p>
+    </div>
+    {% endfor %}
+  </section>
+</section>
+
+{# Stats - Agent #}
+<section class="information_stats">
+  <h1>Stats <span id="agent_nom"></span></h1>
+
+  <p id="stats_null" class="vide">Aucune information à afficher</p>
+
+  <section id="stat_full">
+    <div>
+      <p><strong>Nombre de connexion : </strong><span id ="nb_connect"></span></p>
+      <p><strong>Nombre d'évènement : </strong><span id ="nb_action"></span></p>
+    </div>
+
+    <div>
+      <p><strong>Nombre de dossier créé : </strong><span id ="nb_open"></span></p>
+      <p><strong>Nombre de dossier fermé : </strong><span id ="nb_close"></span></p>
+    </div>
+
+    <p><strong>Nombre de véhicule enregistré :</strong><span id ="nb_car"></span></p>
+    <!-- <p><strong></strong><span id ="value"></span></p> -->
+  </section>
+</section>
+
+{# Historique d'action en fonctoin de l'agent #}
+<section class="information_historique">
+  <h1>Historique <span id="agent_nom2"></span></h1>
+
+  <section id="contenu_historique">
+    <p class="vide">Aucune action effectuée</p>
+  </section>
+</section>
+
+{# Historique de connexion en fonctoin de l'agent #}
+<section class="information_historique">
+  <h1>Historique de connexion <span id="agent_nom3"></span></h1>
+
+  <section id="contenu_historique2">
+    <p class="vide">Aucune action effectuée</p>
+  </section>
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="/assets/script/historique.js"></script>
+{% endblock %}

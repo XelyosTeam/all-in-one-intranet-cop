@@ -1,0 +1,46 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Recherche Véhicule #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/recherche.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/recherche.css">
+{% endblock %}
+
+{% block description %}Recherche Véhicule{% endblock %}
+
+{% block key %}Recherche Véhicule{% endblock %}
+
+{% block title %}Recherche Véhicule{% endblock %}
+
+{% block main %}
+  <form class="recherche" action="/recherche/vehicule" method="GET">
+    <input type="search" name="modele"placeholder="{% if modele != NULL %}{{ modele|capitalize }}{% else %}Modèle{% endif %}">
+    <input type="search" name="plaque" placeholder="{% if plaque != NULL %}{{ plaque|upper }}{% else %}Plaque{% endif %}">
+    <input type="search" name="couleur" placeholder="{% if couleur != NULL %}{{ couleur|upper }}{% else %}Couleur{% endif %}">
+    <button>Search</button>
+  </form>
+
+  {% for voiture in voitures %}
+  <div class="Resultat2">
+    <img src="/assets/img/vehicule/{{ voiture.lien }}" alt="Photo {{ voiture.nom|capitalize }}">
+    <p>{{ voiture.nom|capitalize }}</p>
+    <p>{{ voiture.plaque|upper }}</p>
+    <a href="/vehicule/{{ voiture.plaque }}">Consulter</a>
+  </div>
+  {% else %}
+  <div class="Resultat2">
+    <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+    <p>Aucun véhicule ne correspond à votre recherche</p>
+    <a href="#"></a>
+  </div>
+  {% endfor %}
+{% endblock %}
+
+{% block script %}{% endblock %}

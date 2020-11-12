@@ -1,0 +1,361 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Dossier Candidat #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/candid.css">
+{% endblock %}
+
+{% block description %}Candidature {{ _nomFaction }}{% endblock %}
+
+{% block key %}Candidature {{ _nomFaction }}{% endblock %}
+
+{% block title %}Candidature {{ personne.nom }} {{ personne.prenom }}{% endblock %}
+
+{% block main %}
+  <form action="/dossier-candidat" method="GET">
+    <section class="contenu">
+      <h1>Candidature en cours</h1>
+      <div>
+        <label>Nom :</label>
+
+        <select name="identifiant">
+          {% for personne in attente %}
+            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+          {% else %}
+            <option value="">Aucun candidat pour le moment</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="btn">
+        <button class="form_button" type="submit">Afficher</button>
+      </div>
+    </section>
+  </form>
+
+  <form action="/dossier-candidat" method="GET">
+    <section class="contenu">
+      <h1>Candidature Refusée</h1>
+      <div>
+        <label>Nom :</label>
+
+        <select name="identifiant">
+          {% for personne in refuser %}
+            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+          {% else %}
+            <option value="">Aucune candidature refusée pour le moment</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="btn">
+        <button class="form_button" type="submit">Afficher</button>
+      </div>
+    </section>
+  </form>
+
+  <form action="/dossier-candidat" method="GET">
+    <section class="contenu">
+      <h1>Candidature Acceptée</h1>
+      <div>
+        <label>Nom :</label>
+
+        <select name="identifiant">
+          {% for personne in accepter %}
+            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+          {% else %}
+            <option value="">Aucune candidature acceptée pour le moment</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="btn">
+        <button class="form_button" type="submit">Afficher</button>
+      </div>
+    </section>
+  </form>
+
+  {% if personne == NULL %}
+  <section class="contenu">
+    <h1>Selectionner un candidat</h1>
+  </section>
+  {% else %}
+  <section class="contenu">
+    <h1>Inscription Civil</h1>
+      <div>
+        <p><strong>Identifiant Discord : </strong>{{ personne.discord_id }}</p>
+      </div>
+      <div>
+        <p><strong>Téléphone :</strong>{{ personne.phone }}</p>
+      </div>
+  </section>
+
+  <section class="contenu">
+    <h1>Présentation</h1>
+    <div>
+      <p><strong>Nom :</strong>{{ personne.nom|capitalize }}</p>
+    </div>
+    <div>
+      <p><strong>Prénom :</strong>{{ personne.prenom|capitalize }}</p>
+    </div>
+    <div>
+      <p><strong>Age (IG) :</strong>{{ personne.age_IG }}</p>
+    </div>
+    <div>
+      <p><strong>Age (IRL) :</strong>{{ personne.age_IRL }}</p>
+    </div>
+  </section>
+
+  <section class="contenu">
+    <h1>Information</h1>
+    <div>
+      <p><strong>Temps de jeu sur le serveur :</strong>{{ personne.tmps_serveur }}</p>
+    </div>
+    <div>
+      <p><strong>Temps de jeu GTA RP :</strong>{{ personne.tmps_life }}</p>
+    </div>
+    <div>
+      <p><strong>Ancien membre des forces de l'odre :</strong>{% if personne.ancien_flic == 1 %}Oui{% else %}Non{% endif %}</p>
+    </div>
+    {% if personne.ancien_flic == 1 %}
+    <div>
+      <p><strong>Poste : </strong>{{ personne.detail_flic }}</p>
+    </div>
+    {% endif %}
+  </section>
+
+  <section class="contenu">
+    <h1>Disponibilité</h1>
+    {% if personne.dispo_ecole == 1 %}
+    <div>
+      <p><strong>Periode scolaire/alternance :</strong></p>
+    </div>
+    <section class="grille_dispo"> <!-- A améliorer -->
+      <p></p>
+      <p>Matin</p>
+      <p>Après-midi</p>
+      <p>Soir</p>
+      <p>Nuit</p>
+      <p>Lundi</p>
+      {% if ecole[0] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[1] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[2] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[3] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Mardi</p>
+      {% if ecole[4] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[5] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[6] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[7] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Mercredi</p>
+      {% if ecole[8] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[9] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[10] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[11] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Jeudi</p>
+      {% if ecole[12] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[13] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[14] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[15] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Vendredi</p>
+      {% if ecole[16] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[17] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[18] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[19] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Samedi</p>
+      {% if ecole[20] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[21] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[22] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[23] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Dimanche</p>
+      {% if ecole[24] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[25] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[26] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if ecole[27] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+    </section>
+    {% endif %}
+
+    {% if personne.dispo_vacance == 1 %}
+    <div>
+      <p><strong>Periode de vacances :</strong></p>
+    </div>
+
+    <section class="grille_dispo"> <!-- A améliorer -->
+      <p></p>
+      <p>Matin</p>
+      <p>Après-midi</p>
+      <p>Soir</p>
+      <p>Nuit</p>
+      <p>Lundi</p>
+      {% if vacance[0] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[1] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[2] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[3] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Mardi</p>
+      {% if vacance[4] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[5] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[6] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[7] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Mercredi</p>
+      {% if vacance[8] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[9] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[10] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[11] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Jeudi</p>
+      {% if vacance[12] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[13] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[14] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[15] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Vendredi</p>
+      {% if vacance[16] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[17] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[18] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[19] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Samedi</p>
+      {% if vacance[20] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[21] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[22] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[23] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Dimanche</p>
+      {% if vacance[24] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[25] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[26] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if vacance[27] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+    </section>
+    {% endif %}
+
+    {% if personne.dispo_travail == 1 %}
+    <div>
+      <p><strong>Periode de vacances :</strong></p>
+    </div>
+
+    <section class="grille_dispo"> <!-- A améliorer -->
+      <p></p>
+      <p>Matin</p>
+      <p>Après-midi</p>
+      <p>Soir</p>
+      <p>Nuit</p>
+      <p>Lundi</p>
+      {% if travail[0] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[1] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[2] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[3] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Mardi</p>
+      {% if travail[4] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[5] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[6] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[7] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Mercredi</p>
+      {% if travail[8] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[9] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[10] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[11] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Jeudi</p>
+      {% if travail[12] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[13] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[14] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[15] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Vendredi</p>
+      {% if travail[16] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[17] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[18] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[19] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Samedi</p>
+      {% if travail[20] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[21] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[22] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[23] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      <p>Dimanche</p>
+      {% if travail[24] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[25] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[26] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+      {% if travail[27] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+    </section>
+    {% endif %}
+  </section>
+
+  <section class="contenu">
+    <h1>Objectifs au sein de la police</h1>
+
+    <div>
+      <p><strong>Unités souhaitées :</strong>{{ personne.objectif_lspd }}</p>
+    </div>
+
+    <div>
+      <p><strong>Motivations :</strong>{{ personne.motivation_lspd }}</p>
+    </div>
+  </section>
+
+  <section class="contenu">
+    <h1>Test de connaissance</h1>
+
+    <div>
+      <p><strong>Force d'intervention :</strong>
+        {% if personne.reponse_intervention == 0 %}GIGN{% endif %}
+        {% if personne.reponse_intervention == 1 %}NOOSE{% endif %}
+        {% if personne.reponse_intervention == 2 %}RAID{% endif %}
+        {% if personne.reponse_intervention == 3 %}SWAT{% endif %}
+        {% if personne.reponse_intervention == 4 %}Force d'intervention{% endif %}
+      </p>
+    </div>
+
+    <div>
+      <p><strong>Unité K9 :</strong>{{ personne.reponse_k9 }}</p>
+    </div>
+
+    <div>
+      <p><strong>Meilleur Arme :</strong>
+        {% if concat[0] == 0 %}Fusil d'assault{% endif %}
+        {% if concat[0] == 1 %}Parole{% endif %}
+        {% if concat[0] == 2 %}Tazer{% endif %}
+        {% if concat[0] == 3 %}Sniper{% endif %}
+        {% if concat[0] == 4 %}Batteuse{% endif %}
+        {% if concat[0] == 5 %}Camion anti-émeute{% endif %}
+      </p>
+    </div>
+
+    <div>
+      <p><strong>Lieu de vie :</strong>
+        {% if concat[1] == 0 %}Un régiment{% endif %}
+        {% if concat[1] == 1 %}Une brigade{% endif %}
+        {% if concat[1] == 2 %}Un commissariat{% endif %}
+      </p>
+    </div>
+
+    <div>
+      <p><strong>Code de la route :</strong>
+        {% if concat[2] == 0 %}Non{% endif %}
+        {% if concat[2] == 1 %}Oui{% endif %}
+      </p>
+    </div>
+
+    <div>
+      <p><strong>Ordre dangereux :</strong>
+        {% if concat[3] == 0 %}Je le fais{% endif %}
+        {% if concat[3] == 1 %}Je refuse{% endif %}
+        {% if concat[3] == 2 %}J'en discute avec lui{% endif %}
+      </p>
+    </div>
+  </section>
+
+  {% if personne.etat_act == 0 %}
+  <section class="contenu">
+    <h1>Accepter/Refuser</h1>
+    <div class="Selection">
+      <a href="/dossier-candidat/accepter/{{ personne.id }}">Accepter</a>
+      <a href="/dossier-candidat/refuser/{{ personne.id }}">Refuser</a>
+    </div>
+  </section>
+  {% endif %}
+
+  {% endif %}
+
+{% endblock %}
+
+{% block script %}{% endblock %}

@@ -1,0 +1,86 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Ajout Plainte #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/division_image.css">
+{% endblock %}
+
+{% block description %}Enregistrement plainte{% endblock %}
+
+{% block key %}Enregistrement plainte{% endblock %}
+
+{% block title %}Enregistrement plainte{% endblock %}
+
+{% block main %}
+<section class="contenu">
+  <h1>Plainte sur Civil</h1>
+
+  <form class="connexion" action="/insert/plainte" method="post">
+
+    <!-- Division des parties -->
+    <section class="div_content_photo">
+      <section class="part_add">
+        <div>
+          <label>Déposeur :</label>
+
+          <select id="personne_type" name="deposeur" onchange="affiche_photo_personne();">
+            <option value="NULL">Sélectionner un citoyen</option>
+            {% for personne in personnes %}
+            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label>Citoyen :</label>
+
+          <select id="personne_type_2" name="citoyen_1" onchange="affiche_photo_personne_2();">
+            <option value="NULL">Sélectionner un citoyen</option>
+            <option value="1">Inconnu</option>
+            {% for personne in personnes %}
+            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label>Détail de la plainte :</label>
+          <textarea name="plainte" placeholder="Saisie des détails de la plainte" required></textarea>
+        </div>
+      </section>
+
+      <section class="part_img">
+        <div>
+          <img id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+        </div>
+
+        <div>
+          <img id="image_civil2" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+        </div>
+      </section>
+    </section>
+
+
+    {% if _agent.ajouter != 0 %}
+    <div class="btn">
+      <button class="form_button" type="submit" name="button">Enregistrer</button>
+    </div>
+    {% endif %}
+  </form>
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="/assets/script/event_saisie.js"></script>
+<script type="text/javascript">
+  affiche_photo_personne();
+  affiche_photo_personne_2();
+</script>
+{% endblock %}

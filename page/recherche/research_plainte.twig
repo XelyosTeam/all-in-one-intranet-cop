@@ -1,0 +1,45 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Recherche Plainte #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/recherche.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/recherche.css">
+{% endblock %}
+
+{% block description %}Recherche Plainte{% endblock %}
+
+{% block key %}Recherche Plainte{% endblock %}
+
+{% block title %}Recherche Plainte{% endblock %}
+
+{% block main %}
+  <form class="recherche" action="/recherche/plainte" method="GET">
+    <input type="search" name="civil_name"placeholder="Nom">
+    <input type="search" name="civil_firstname" placeholder="Prénom">
+    <button>Search</button>
+  </form>
+
+  {% for plainte in plaintes %}
+  <div class="Resultat2">
+    <img src="/assets/img/identité/{% if plainte.lien == NULL %}temp.png{% else %}{{ plainte.lien }}{% endif %}" alt="Photo de {{ plainte.nom_1|capitalize }} {{ plainte.prenom_1|capitalize }}">
+    <p>{{ plainte.nom_1|capitalize }} {{ plainte.prenom_1|capitalize }}</p>
+    <p>{{ plainte.detail|capitalize|slice(0, 20) }}</p>
+    <a href="/detail-plainte/{{ plainte.p_id }}">Consulter</a>
+  </div>
+  {% else %}
+  <div class="Resultat">
+    <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+    <p>Aucune plainte ne correspond à votre recherche</p>
+    <a href="#"></a>
+  </div>
+  {% endfor %}
+{% endblock %}
+
+{% block script %}{% endblock %}

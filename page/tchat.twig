@@ -1,0 +1,44 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Page vierge pour les twig #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/chat.css">
+{% endblock %}
+
+{% block description %}Discussion Interne{% endblock %}
+
+{% block key %}Discussion Interne{% endblock %}
+
+{% block title %} Discussion Interne{% endblock %}
+
+{% block main %}
+<section class="contenu">
+  <h1>Discussion Interne</h1>
+
+  <section class="chat">
+      <div class="message"></div>
+  </section>
+
+  <form class="connexion" action="/chat?task=write" method="POST">
+    <div>
+      <label for="content">Message :</label>
+      <input type="text" name="content" id="content" placeholder="Entrer votre message" required>
+    </div>
+
+    <div class="btn">
+      <button class="form_button" type="submit" name="button">🔥 Envoyer</button>
+    </div>
+  </form>
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="/assets/script/chat.js"></script>
+{% endblock %}

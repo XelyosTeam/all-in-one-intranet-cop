@@ -1,0 +1,71 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Page de connexion #}
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="/assets/styles/reset.css">
+    <link rel="stylesheet" type="text/css" href="/assets/styles/global/general.css">
+    <link rel="stylesheet" type="text/css" href="/assets/styles/phone/general.css">
+    <link rel="stylesheet" type="text/css" href="/assets/styles/global/connect.css">
+    <link rel="stylesheet" type="text/css" href="/assets/styles/phone/connect.css">
+    <meta name="description" content="Connexion">
+    <meta name="author" content="Xelyos Team - Thomas">
+    <meta name="edited" content="">
+    <meta name="keywords" content="Connexion, {{ _nomFaction }}, Site Factice, {{ _jeuServeur }}, {{ _nomServeur }}">
+    <title>{{ _nomFaction }} - Connexion</title>
+  </head>
+
+  <body>
+    <header>
+      <img src="/assets/img/logo.png" alt="">
+    </header>
+
+    <main>
+      <form id="formulaire_connexion" class="connexion" action="/connect" method="post">
+        <h1>Connexion</h1>
+
+        <div class="form_matricule">
+          <input type="tel" name="user_matricule" id="user_matricule" placeholder="Matricule" oninput="initialisation();" required>
+        </div>
+
+        <div class="form_mdp">
+          <input type="password" name="user_mdp" id="user_mdp" placeholder="Mot de passe" oninput="initialisation();" required>
+        </div>
+
+        <div>
+          <p id="info_error">Message d'erreur</p>
+        </div>
+
+        <div>
+          <button class="form_button" type="submit" name="button" onclick="verif_data()">Se connecter</button>
+        </div>
+      </form>
+
+      <div class="animation_connect" id="animation_page">
+        <p id="txt1"></p>
+        <p id="txt2"></p>
+        <p id="txt3"></p>
+        <p id="txt4"></p>
+        <p id="txt5"></p>
+        <p id="txt6"></p>
+        <p id="txt7"></p>
+      </div>
+    </main>
+
+    <footer>
+      <p>{{ _nomcompletFaction }}</p>
+      <p>2020</p>
+      <p>Developped by Xelyos Team</p>
+      <p>V {{ _Version }}</p>
+    </footer>
+    <script type="text/javascript" src="/assets/script/connect.js"></script>
+  </body>
+
+</html>

@@ -1,0 +1,51 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Détail Rapport #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+{% endblock %}
+
+{% block description %}Détail rapport{% endblock %}
+
+{% block key %}Détail Rapport{% endblock %}
+
+{% block title %}Plainte sur {{ agent.grade }} {{ agent.nom }}{% endblock %}
+
+{% block main %}
+
+  {# Fiche Policier #}
+  {% if (agent.matricule != _agent.matricule) and (_agent.hab_1 == 2) %}
+    {% set _etat_ = {'rapport': 1} %}
+    {% include "/templates/fiche_cop.twig" with _etat_ %}
+  {% endif %}
+
+
+  {% if (agent.matricule != _agent.matricule) and (_agent.hab_1 == 2) %}
+  <section class="information_casier">
+    <h1>{{ rapport.titre }}</h1>
+    <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+    <p><strong>Déposeur :</strong><a href="/{{ _membreFaction }}/{{ deposeur.matricule }}">{{ deposeur.grade }} {{ deposeur.nom|capitalize }}</a></p>
+    <p><strong>Détail sur le rapport :</strong></p>
+    <p class="remarque">{{ rapport.contenu|capitalize|raw }}</p>
+    <p><strong>Enregistré le :</strong>{{ rapport.ecrit_le|date("d/m/Y") }}</p>
+  </section>
+  {% else %}
+  <section class="information_casier">
+    <h1>Rapport indisponible</h1>
+    <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+    <p><strong>Vous n'avez pas l'autorisation d'accéder à ce rapport</strong></p>
+
+  </section>
+  {% endif %}
+
+{% endblock %}
+
+{% block script %}{% endblock %}

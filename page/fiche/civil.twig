@@ -1,0 +1,107 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# fiche Civil #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+{% endblock %}
+
+{% block description %}Fiche citoyen{% endblock %}
+
+{% block key %}Fiche citoyen{% endblock %}
+
+{% block title %}Fiche {{ perso.nom }}{% endblock %}
+
+{% block main %}
+
+  {# Fiche Civil #}
+  {% set _etat_ = {'amende': 1} %}
+  {% include "/templates/fiche_civil.twig" with _etat_ %}
+
+  {# Liste Voiture #}
+  {% include "/templates/liste_vehicule.twig" %}
+
+  {# Liste Arme #}
+  {% include "/templates/liste_arme.twig" %}
+
+  <section class="liste">
+    <h1>Casier Judiciaires</h1>
+    {% for casier in casiers %}
+    <div class="content">
+      <p>{{ casier.nom }}</p>
+
+      {% if casier.etat == 2 %}
+        <p class="">Fermé</p>
+      {% elseif casier.etat == 1 %}
+        <p class="">Charges Abandonnées</p>
+      {% else %}
+        <p class="red">En cours</p>
+      {% endif %}
+
+      <a href="/casier-judiciaire/{{ casier.id_delit }}">Consulter</a>
+    </div>
+    {% else %}
+    <div class="content">
+      <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+      <p>Le civil n'a commis aucun délit</p>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="liste">
+    <h1>Délits Routiers</h1>
+    {% for route in routes %}
+    <div class="content">
+      <p>{{ route.nom }}</p>
+
+      {% if route.etat == 2 %}
+        <p class="">Fermé</p>
+      {% elseif route.etat == 1 %}
+        <p class="">Charges Abandonnées</p>
+      {% else %}
+        <p class="red">En cours</p>
+      {% endif %}
+
+      <a href="/delit-routier/{{ route.delit_id }}">Consulter</a>
+    </div>
+    {% else %}
+    <div class="content">
+      <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+      <p>Le casier de cette personne est vierge</p>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="liste">
+    <h1>Plainte</h1>
+    {% for plainte in plaintes %}
+    <div class="content">
+      <p>{{ plainte.detail_plainte|slice(0, 20) }} ...</p>
+
+      {% if plainte.etat == 2 %}
+        <p class="">Fermé</p>
+      {% elseif plainte.etat == 1 %}
+        <p class="">Charges Abandonnées</p>
+      {% else %}
+        <p class="red">En cours</p>
+      {% endif %}
+
+      <a href="/detail-plainte/{{ plainte.id }}">Consulter</a>
+    </div>
+    {% else %}
+    <div class="content">
+      <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+      <p>Le civil ne fait l'objet d'aucune plainte</p>
+    </div>
+    {% endfor %}
+  </section>
+{% endblock %}
+
+{% block script %}{% endblock %}

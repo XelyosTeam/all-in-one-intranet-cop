@@ -1,0 +1,45 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Recherche Force de l'Ordre #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/recherche.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/recherche.css">
+{% endblock %}
+
+{% block description %}Liste {{ _BDDFaction }}{% endblock %}
+
+{% block key %}Liste {{ _BDDFaction }}{% endblock %}
+
+{% block title %}Liste {{ _BDDFaction }}{% endblock %}
+
+{% block main %}
+  <form class="recherche" action="/{{ _membreFaction }}" method="GET">
+    <input type="search" name="flic_name"placeholder="{% if nom == NULL %}Nom{% else %}{{ nom|capitalize }}{% endif %}">
+    <input type="search" name="flic_firstname" placeholder="{% if prenom == NULL %}Prénom{% else %}{{ prenom|capitalize }}{% endif %}">
+    <input type="search" name="flic_matricule" placeholder="{% if matricule == NULL %}Matricule{% else %}{{ matricule }}{% endif %}">
+    <button>Search</button>
+  </form>
+
+  {% for policier in policiers %}
+  <div class="Resultat">
+    <img src="/assets/img/identité/{{ policier.photo}}" alt="Photo de {{ policier.nom|capitalize }} {{ policier.prenom|capitalize }}">
+    <p>{{ policier.nom|capitalize }} {{ policier.prenom|capitalize }}</p>
+    <a href="/{{ _membreFaction }}/{{ policier.matricule }}">Consulter</a>
+  </div>
+  {% else %}
+  <div class="Resultat">
+    <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+    <p>Aucune agent ne correspond à votre recherche</p>
+  </div>
+  {% endfor %}
+  </section>
+{% endblock %}
+
+{% block script %}{% endblock %}

@@ -1,0 +1,240 @@
+/*
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+*/
+
+/* PC */
+::placeholder {
+  color: #2D548F;
+  opacity: 0.5;
+}
+
+.hidden
+{
+  display: none;
+}
+
+a
+{
+  text-decoration: none;
+}
+
+h6
+{
+  visibility: hidden;
+  margin-bottom: -5%;
+}
+
+body /* Trouver une solution pour l'améliorer */
+{
+  /*background: #CACACA;*/
+  background-image: url(/assets/img/background.png);
+  background-attachment: fixed;
+}
+
+header
+{
+  text-align: center;
+}
+
+header img
+{
+  margin-top: 3%;
+  width: 12.5%;
+  height: auto;
+}
+
+.croix, .barre
+{
+  display: none;
+}
+
+.nav_bar
+{
+  display: grid;
+  max-width: 90%;
+  grid-template-columns: repeat(8,1fr);
+  margin-top: 2%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 10px;
+  background-color: #103469;
+}
+
+.nav_bar a
+{
+  color: #fff;
+  text-transform: capitalize;
+  font-size: 1.3em;
+}
+
+.nav_bar a:hover
+{
+  color: #FFE000;
+}
+
+footer
+{
+  margin-top: 2%;
+  margin-bottom: 0;
+  width: 100%;
+  background-color: #103469;
+  text-align: center;
+  padding-top: 0.25%;
+  padding-bottom: 0.25%;
+}
+
+footer p
+{
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1em;
+  font: Arial;
+}
+
+
+/* Menu Déroulant */
+.menu_deroulant, .menu_deroulant ul
+{
+  padding :0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.menu_deroulant .top
+{
+  margin-top: 5%;
+}
+
+.menu_deroulant li
+{
+  display: inline-block;
+  position: relative;
+  border-radius: 8px 8px 0 0;
+}
+
+.menu_deroulant ul li
+{
+  display: inherit;
+  border-radius: 0;
+}
+
+.menu_deroulant ul li:hover
+{
+  border-radius: 0;
+}
+
+.menu_deroulant ul li:last-child
+{
+  border-radius: 0 0 8px 8px;
+}
+
+.menu_deroulant ul
+{
+  position:absolute;
+  z-index: 5;
+  max-height: 0;
+  left: 0;
+  right: 0;
+  overflow:hidden;
+  -moz-transition: .8s all .3s;
+  -webkit-transition: .8s all .3s;
+  transition: .8s all .3s;
+}
+
+.menu_deroulant li:hover ul
+{
+  max-height: 20em;
+}
+
+/* background des liens menus */
+.menu_deroulant li:first-child
+{
+  background-color: #103469;
+}
+
+.menu_deroulant li:nth-child(2)
+{
+  background-color: #103469;
+}
+
+.menu_deroulant li:nth-child(3)
+{
+  background-color: #103469;
+}
+
+.menu_deroulant li:last-child
+{
+  background-color: #103469;
+}
+
+/* background des liens sous menus */
+.menu_deroulant li:first-child li
+{
+  background: #103469;
+}
+
+.menu_deroulant li:nth-child(2) li
+{
+  background: #103469;
+}
+
+.menu_deroulant li:nth-child(3) li
+{
+  background: #103469;
+}
+
+.menu_deroulant li:last-child li
+{
+  background: #103469;
+}
+
+/* background des liens menus et sous menus au survol */
+.menu_deroulant li:first-child:hover, .menu_deroulant li:first-child li:hover
+{
+  background: #103469;
+}
+
+.menu_deroulant li:nth-child(2):hover, .menu_deroulant li:nth-child(2) li:hover
+{
+  background: #103469;
+}
+
+.menu_deroulant li:nth-child(3):hover, .menu_deroulant li:nth-child(3) li:hover
+{
+  background: #103469;
+}
+
+.menu_deroulant li:last-child:hover, .menu_deroulant li:last-child li:hover
+{
+  background: #103469;
+}
+
+/* les a href */
+.menu_deroulant a
+{
+  text-decoration: none;
+  display: block;
+  padding: 8px 32px;
+  color: #fff;
+}
+
+.menu_deroulant ul a
+{
+  padding: 8px 0;
+}
+
+.menu_deroulant li:hover li a
+{
+  color: #fff;
+  text-transform: inherit;
+}
+
+.menu_deroulant li:hover a, .menu_deroulant li li:hover a
+{
+  color: #FFE000;
+}

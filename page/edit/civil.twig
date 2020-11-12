@@ -1,0 +1,143 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Edition page Civil #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+{% endblock %}
+
+{% block description %}Modification Fiche citoyen{% endblock %}
+
+{% block key %}Modification Fiche citoyen{% endblock %}
+
+{% block title %}Modification Fiche {{ perso.nom|capitalize }} {{ perso.prenom|capitalize }}{% endblock %}
+
+{% block main %}
+  <form action="/civil/{{ perso.id }}/modification" method="POST">
+    <section class="info_personne">
+      <h1 {% if perso.present == 0 %}style="color:#ff0000"{% endif %}>Fiche Citoyen</h1>
+      <img src="/assets/img/identité/{{ perso.photo }}" alt="Photo {{ perso.nom|capitalize}} {{ perso.prenom|capitalize }}">
+      <p><strong>Nom :</strong>{{ perso.nom|capitalize }}</p>
+      <p><strong>Prénom :</strong>{{ perso.prenom|capitalize }}</p>
+      <p><strong>Date de naissance :</strong>{{ perso.DOB|date("d/m/Y") }}</p>
+      <p><strong>Téléphone :</strong><textarea name="telephone" rows="1">{{ perso.phone }}</textarea></p>
+      <p><strong>Nationalité :</strong>{{ perso.nationality|upper }}</p>
+      <p><strong>Sexe :</strong>{{ perso.sexe }}</p>
+      <p><strong>Job :</strong>{% if perso.job == _BDDFaction  %}{{ perso.job }}{% else %}<textarea name="metier" rows="1">{{ perso.job }}</textarea>{% endif %}</p>
+      <p><strong>PPA :</strong>{% if perso.ppa == 1  %}Oui{% else %}Non{% endif %}</p>
+
+      <p><strong>Permis :</strong>
+        <select name="permis">
+          {% if perso.permis == 1 %}
+          <option value="1">Oui</option>
+          <option value="0">Non</option>
+          {% else %}
+          <option value="0">Non</option>
+          <option value="1">Oui</option>
+          {% endif %}
+        </select>
+      </p>
+
+      <div class="btn_modif">
+        <button class="form_button" type="submit" name="button">Appliquer les modifications</button>
+      </div>
+    </section>
+  </form>
+
+  <section class="liste">
+    <h1>Véhicules</h1>
+    {% for voiture in voitures %}
+    <div class="content">
+      <img src="/assets/img/vehicule/{{ voiture.lien }}" alt="Image du véhicule">
+      <p>{{ voiture.plaque|upper }}</p>
+      <a href="/vehicule/{{ voiture.plaque }}">Consulter</a>
+    </div>
+    {% else %}
+    <div class="content">
+      <img src="/assets/img/logo.png" alt="image_vehicule">
+      <p>Pas de véhicule enregistré</p>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="liste">
+    <h1>Casier Judiciaires</h1>
+    {% for casier in casiers %}
+    <div class="content">
+      <p>{{ casier.nom }}</p>
+
+      {% if casier.etat == 2 %}
+        <p class="">Fermé</p>
+      {% elseif casier.etat == 1 %}
+        <p class="">Charges Abandonnées</p>
+      {% else %}
+        <p class="red">En cours</p>
+      {% endif %}
+
+      <a href="/casier-judiciaire/{{ casier.id_delit }}">Consulter</a>
+    </div>
+    {% else %}
+    <div class="content">
+      <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+      <p>Ce véhicule ne fait l'objet d'aucun délit</p>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="liste">
+    <h1>Délits Routiers</h1>
+    {% for route in routes %}
+    <div class="content">
+      <p>{{ route.nom }}</p>
+
+      {% if route.etat == 2 %}
+        <p class="">Fermé</p>
+      {% elseif route.etat == 1 %}
+        <p class="">Charges Abandonnées</p>
+      {% else %}
+        <p class="red">En cours</p>
+      {% endif %}
+
+      <a href="/delit-routier/{{ route.delit_id }}">Consulter</a>
+    </div>
+    {% else %}
+    <div class="content">
+      <img src="/assets/img/logo.png" alt="Image {{ _nomFaction }}">
+      <p>Le casier de cette personne est vierge</p>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="liste">
+    <h1>Plainte</h1>
+    {% for plainte in plaintes %}
+    <div class="content">
+      <p>{{ plainte.detail_plainte|slice(0, 20) }} ...</p>
+
+      {% if plainte.etat == 2 %}
+        <p class="">Fermé</p>
+      {% elseif plainte.etat == 1 %}
+        <p class="">Charges Abandonnées</p>
+      {% else %}
+        <p class="red">En cours</p>
+      {% endif %}
+
+      <a href="/detail-plainte/{{ plainte.id }}">Consulter</a>
+    </div>
+    {% else %}
+    <div class="content">
+      <img src="/assets/img/logo.png" alt="Image {{ _nomFaction }}">
+      <p>Aunce plainte deposée</p>
+    </div>
+    {% endfor %}
+  </section>
+{% endblock %}
+
+{% block script %}{% endblock %}

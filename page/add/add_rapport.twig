@@ -1,0 +1,74 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Ajout Rapport #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/division_image.css">
+{% endblock %}
+
+{% block description %}Enregistrement rapport{% endblock %}
+
+{% block key %}Enregistrement rapport{% endblock %}
+
+{% block title %}Enregistrement rapport{% endblock %}
+
+{% block main %}
+<section class="contenu">
+  <h1>Rapport sur Agent</h1>
+
+  <form class="connexion" action="/insert/rapport" method="POST">
+    <section class="div_content_photo">
+      <section class="part_add">
+        <div>
+          <label>Nom de l'agent :</label>
+
+          <select id="cop_type" name="agent_vise" onchange="affiche_photo_cop();">
+            <option value="{{ _agent.lspd_id }}">Sélectionner un agent</option>
+            {% for agent in agents %}
+              {% if agent.matricule != _agent.matricule %}
+                <option value="{{ agent.lspd_id }}">{{ agent.nom|capitalize }} {{ agent.prenom|capitalize }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label>Titre du rapport :</label>
+          <input type="text" name="titre_rapport" placeholder="Titre votre rapport" required>
+        </div>
+
+        <div>
+          <label>Détail du Rapport :</label>
+          <textarea name="rapport" placeholder="Enregistrer votre rapport" required></textarea>
+        </div>
+      </section>
+
+      <section class="part_img">
+        <div>
+          <img id="image_cop" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+        </div>
+      </section>
+
+    </section>
+
+    {% if _agent.ajouter != 0 %}
+    <div class="btn">
+      <button class="form_button" type="submit" name="button">Enregistrer</button>
+    </div>
+    {% endif %}
+  </form>
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="/assets/script/event_saisie.js"></script>
+<script type="text/javascript">
+  affiche_photo_cop();
+</script>
+{% endblock %}

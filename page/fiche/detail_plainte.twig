@@ -1,0 +1,55 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Détails Plainte #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+{% endblock %}
+
+{% block description %}Détail plainte{% endblock %}
+
+{% block key %}Détail plainte{% endblock %}
+
+{% block title %}Plainte sur {{ civil.nom }} {{ civil.prenom }}{% endblock %}
+
+{% block main %}
+
+  {# Fiche Civil #}
+  {% set _etat_ = {'goBack': 1} %}
+  {% include "/templates/fiche_civil.twig" with _etat_ %}
+
+  <section class="information_casier">
+    <h1>Informations sur la plainte</h1>
+    <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+    <p><strong>Déposeur :</strong><a href="/civil/{{ deposeur.id }}">{{ deposeur.nom|capitalize }} {{ deposeur.prenom|capitalize }}</a></p>
+    <p><strong>Détail de la plainte :</strong></p>
+    <p class="remarque">{{ plainte.detail_plainte }}</p>
+    {% if ((ouvert.matricule == _agent.matricule) or (_agent.hab_1 == 2)) and (plainte.etat == 0) %}
+    <div class="lien">
+      <a href="/detail-plainte/{{ plainte.id }}/edit">Modifier le rapport</a>
+    </div>
+    {% endif %}
+    <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
+    <p><strong>Enregistré le :</strong>{% if plainte.enregistrer_le != NULL %}{{ plainte.enregistrer_le|date("d/m/Y") }}{% endif %}</p>
+    <p><strong>Etat :</strong>{% if plainte.etat == 2 %}Fermé{% elseif plainte.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
+    <p><strong>Fermé le :</strong>{{ plainte.fermer_le}}</p>
+    <p><strong>Fermé par :</strong><a href="/{{ _membreFaction }}/{{ fermer.matricule }}">{{ fermer.grade }} {{ fermer.nom|capitalize }}</a></p></p>
+    {% if plainte.etat == 0 and _agent.supprimer != 0 %}
+    <div class="lien">
+      <a class="ferm" href="/detail-plainte/{{ plainte.id }}/1">Classé sans suite</a>
+    </div>
+    <div class="lien">
+      <a class="ferm" href="/detail-plainte/{{ plainte.id }}/2">Fermé</a>
+    </div>
+    {% endif %}
+  </section>
+{% endblock %}
+
+{% block script %}{% endblock %}

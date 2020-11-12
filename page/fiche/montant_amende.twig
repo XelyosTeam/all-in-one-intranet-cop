@@ -1,0 +1,56 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Calcul du montant de l'amende #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+{% endblock %}
+
+{% block description %}Montant Amende{% endblock %}
+
+{% block key %}Montant Amende{% endblock %}
+
+{% block title %}Montant Amende {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}{% endblock %}
+
+{% block main %}
+
+{# Fiche Civil #}
+{% set _etat_ = {'goBack': 1} %}
+{% include "/templates/fiche_civil.twig" with _etat_ %}
+
+<section class="liste">
+  <h1>Détail de la peine</h1>
+  <p><strong>Montant de l'amende : </strong>{{ amende }} $</p>
+  <p><strong>Temps de prison : </strong>{{ prison }} mois</p>
+  <p><strong>Temps de prison : </strong>{{ prisonAnnée }}</p>
+  {% if prison > _tpsFederal and prison < _tpsFederalVie %}
+  <p><strong>L'individu doit aller en fédéral</strong></p>
+  {% endif %}
+  {% if prison >  _tpsFederalVie %}
+  <p><strong>L'individu doit aller en fédéral à vie</strong></p>
+  {% endif %}
+  {% if amende != NULL %}
+  <a class="ferm" href="/civil/{{ civil.id }}/close-casiers">Fermé</a>
+  {% endif %}
+
+  <h1>Refus de payer</h1>
+  <p><strong>Montant de l'amende : </strong>{{ amende / _divAmende }} $</p>
+  <p><strong>Temps de prison : </strong>{{ prison * _multPrison }} mois</p>
+  <p><strong>Temps de prison : </strong>{{ prisonAnnée2 }}</p>
+  {% if (prison * _multPrison) > _tpsFederal and (prison * _multPrison) < _tpsFederalVie %}
+  <p><strong>L'individu doit aller en fédéral</strong></p>
+  {% endif %}
+  {% if (prison * _multPrison) > _tpsFederalVie %}
+  <p><strong>L'individu doit aller en fédéral à vie</strong></p>
+  {% endif %}
+</section>
+{% endblock %}
+
+{% block script %}{% endblock %}

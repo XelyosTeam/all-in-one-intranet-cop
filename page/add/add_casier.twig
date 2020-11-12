@@ -1,0 +1,93 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Ajout Casier #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/division_image.css">
+{% endblock %}
+
+{% block description %}Ajout Casier{% endblock %}
+
+{% block key %}Ajout Casier{% endblock %}
+
+{% block title %}Ajout Casier{% endblock %}
+
+
+{% block main %}
+<section class="contenu">
+  <h1>Ajout Délit Civil</h1>
+
+  <form class="connexion" action="/insert/casier" method="post">
+
+    <!-- Division des parties -->
+    <section class="div_content_photo">
+      <section class="part_add">
+        <div>
+          <label>Citoyen :</label>
+
+          <select id="personne_type" name="casier_owner"onchange="affiche_photo_personne();">
+            {% for personne in personnes %}
+            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label>Délit :</label>
+
+          <select name="delit_name">
+            <option value="NULL">Sélectionner un délit</option>
+            <option value="NULL">----- Délit Léger -----</option>
+            {% for delit in leger %}
+            <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+            {% endfor %}
+
+            <option value="NULL">----- Délit Moyen -----</option>
+            {% for delit in moyen %}
+            <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+            {% endfor %}
+
+            <option value="NULL">----- Délit Grave -----</option>
+            {% for delit in grave %}
+            <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label>Rapport :</label>
+          <textarea name="rapport" placeholder="Insérer un éventuelle rapport"></textarea>
+        </div>
+      </section>
+
+      <section class="part_img">
+        <div>
+          <img id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+        </div>
+      </section>
+    </section>
+
+
+
+    {% if _agent.ajouter != 0 %}
+    <div class="btn">
+      <button class="form_button" type="submit" name="button">Enregistrer</button>
+    </div>
+    {% endif %}
+  </form>
+
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="/assets/script/event_saisie.js"></script>
+<script type="text/javascript">
+  affiche_photo_personne();
+</script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+<section class="info_personne">
+  <h1>Fiche {{ _BDDFaction }}</h1>
+  <img src="/assets/img/identité/{{ agent.photo }}" alt="Photo {{ agent.nom|capitalize }} {{ agent.prenom|capitalize }}">
+  <p class="description">{{ agent.note }}</p>
+  <p><strong>Nom :</strong>{{ agent.nom|capitalize }}</p>
+  <p><strong>Prénom :</strong>{{ agent.prenom|capitalize }}</p>
+  <p><strong>Grade :</strong>{{ agent.grade }}</p>
+  <p><strong>Matricule :</strong>{{ agent.matricule }}</p>
+  <p><strong>Téléphone :</strong>{{ agent.telephone }}</p>
+  <p><strong>Nationalité :</strong>{{ agent.nationality|upper }}</p>
+  <p><strong>Sexe :</strong>{{ agent.sexe }}</p>
+
+  {% if _etat_.rapport %}
+  <div class="lien">
+    <a href="/{{ _membreFaction }}/{{ agent.matricule }}">Afficher la fiche du {{ agent.grade }} {{ agent.nom|capitalize }}</a>
+  </div>
+  {% else %}
+    {% if agent.matricule == _agent.matricule %}
+    <div class="lien">
+      <a href="/nouveau-mot-de-passe">Modifier le mot de passe</a>
+    </div>
+    {% endif %}
+    {% if _agent.hab_1 == 2 %}
+    <div class="lien">
+      <a href="/{{ _membreFaction }}/{{ agent.matricule }}/edit">Modifier la fiche</a>
+    </div>
+    {% endif %}
+  {% endif %}
+</section>

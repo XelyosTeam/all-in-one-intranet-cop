@@ -1,0 +1,13 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+<h2>Information Civil</h2>
+<p><strong>Nom :</strong> {{ civil.nom|capitalize }}</p>
+<p><strong>Prénom :</strong> {{ civil.prenom|capitalize }}</p>
+<p><strong>Date de naissance :</strong> {{ civil.DOB|date("d/m/Y") }}</p>
+<p><strong>PPA :</strong> {% if civil.ppa == 1  %}Oui{% else %}Non{% endif %}</p>
+<p><strong>Permis :</strong> {% if civil.permis == 1  %}Oui{% else %}Non{% endif %}</p>

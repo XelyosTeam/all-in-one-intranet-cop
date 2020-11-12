@@ -1,0 +1,62 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Détails Délit routier #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+{% endblock %}
+
+{% block description %}Détail délit routier{% endblock %}
+
+{% block key %}Délit routier{% endblock %}
+
+{% block title %}Délit de {% endblock %}
+
+{% block main %}
+
+  {# Fiche Civil #}
+  {% set _etat_ = {'goBack': 1} %}
+  {% include "/templates/fiche_civil.twig" with _etat_ %}
+
+  <section class="information_casier">
+    <h1>Informations délit</h1>
+    <img src="/assets/img/vehicule/{{ voiture.lien }}" alt="Photo véhicule type {{ voiture.nom|capitalize }}">
+    <p><strong>Modèle :</strong>{{ voiture.nom|capitalize }}</p>
+    <p><strong>Couleur :</strong>{{ voiture.couleur }}</p>
+    <p><strong>Plaque d'immatriculation :</strong><a href="/vehicule/{{ voiture.plaque }}">{{ voiture.plaque|upper }}</a></p>
+    <p><strong>Propriétaire :</strong><a href="/civil/{{ proprio.id }}">{{ proprio.nom|capitalize }} {{ proprio.prenom|capitalize }}</a></p>
+    <p><strong>Nom Delit :</strong>{{ delit.nom|capitalize }}</p>
+    <p><strong>Amende :</strong>{{ delit.amende|number_format(2, ',', ' ') }} $</p>
+    <p><strong>Temps de prison :</strong>{{ delit.prison }} mois</p>
+    <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
+    <p><strong>Enregistré le :</strong>{{ delit.date_enregistre|date("d/m/Y") }}</p>
+    <p><strong>Etat :</strong>{% if delit.etat == 2 %}Fermé{% elseif delit.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
+    <p><strong>Rapport :</strong></p>
+    <p class="remarque">{{ delit.remarque }}</p>
+    {% if ((ouvert.matricule == _agent.matricule) or (_agent.hab_1 == 2)) and (delit.etat == 0) %}
+    <div class="lien">
+      <a href="/delit-routier/{{ delit.delit_id }}/edit">Modifier le rapport</a>
+    </div>
+    {% endif %}
+    <p><strong>Fermé le :</strong>{% if delit.acquite_le != NULL %}{{ delit.acquite_le|date("d/m/Y") }}{% endif %}</p>
+    <p><strong>Fermé par :</strong><a href="/{{ _membreFaction }}/{{ fermer.matricule }}">{{ fermer.grade }} {{ fermer.nom|capitalize }}</a></p>
+    {% if delit.etat == 0 and _agent.supprimer != 0 %}
+    <div class="lien">
+      <a class="ferm" href="/delit-routier/{{ delit.delit_id }}/1">Classé sans suite</a>
+    </div>
+    <div class="lien">
+      <a class="ferm" href="/delit-routier/{{ delit.delit_id }}/2">Fermé</a>
+    </div>
+    {% endif %}
+  </section>
+
+{% endblock %}
+
+{% block script %}{% endblock %}

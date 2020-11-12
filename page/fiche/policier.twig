@@ -1,0 +1,124 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Fiche Force de l'ordre #}
+{% extends "_base.twig" %}
+
+{% block style %}
+  <link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
+  <link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+{% endblock %}
+
+{% block description %}Information Agent{% endblock %}
+
+{% block key %}Information Agent{% endblock %}
+
+{% block title %}{{ agent.grade|capitalize }} {{ agent.nom|capitalize }}{% endblock %}
+
+{% block main %}
+
+  {# Fiche Policier #}
+  {% include "/templates/fiche_cop.twig" %}
+
+  <section class="habilitation">
+    <h1>Habilitation</h1>
+    <div class="grille">
+      {% if _Hab1 != "" %}
+        <p class="{% if agent.hab_1 == 2 %}green{% elseif agent.hab_1 == 1 %}orange{% else %}red{% endif %}">{{ _Hab1 }}</p>
+      {% endif %}
+
+      {% if _Hab2 != "" %}
+        <p class="{% if agent.hab_2 == 2 %}green{% elseif agent.hab_2 == 1 %}orange{% else %}red{% endif %}">{{ _Hab2 }}</p>
+      {% endif %}
+
+      {% if _Hab3 != "" %}
+        <p class="{% if agent.hab_3 == 2 %}green{% elseif agent.hab_3 == 1 %}orange{% else %}red{% endif %}">{{ _Hab3 }}</p>
+      {% endif %}
+
+      {% if _Hab4 != "" %}
+        <p class="{% if agent.hab_4 == 2 %}green{% elseif agent.hab_4 == 1 %}orange{% else %}red{% endif %}">{{ _Hab4 }}</p>
+      {% endif %}
+
+      {% if _Hab5 != "" %}
+        <p class="{% if agent.hab_5 == 2 %}green{% elseif agent.hab_5 == 1 %}orange{% else %}red{% endif %}">{{ _Hab5 }}</p>
+      {% endif %}
+
+      {% if _Hab6 != "" %}
+        <p class="{% if agent.hab_6 == 2 %}green{% elseif agent.hab_6 == 1 %}orange{% else %}red{% endif %}">{{ _Hab6 }}</p>
+      {% endif %}
+
+      {% if _Hab7 != "" %}
+        <p class="{% if agent.hab_7 == 2 %}green{% elseif agent.hab_7 == 1 %}orange{% else %}red{% endif %}">{{ _Hab7 }}</p>
+      {% endif %}
+
+      {% if _Hab8 != "" %}
+        <p class="{% if agent.hab_8 == 2 %}green{% elseif agent.hab_8 == 1 %}orange{% else %}red{% endif %}">{{ _Hab8 }}</p>
+      {% endif %}
+
+      {% if _Hab9 != "" %}
+        <p class="{% if agent.hab_9 == 2 %}green{% elseif agent.hab_9 == 1 %}orange{% else %}red{% endif %}">{{ _Hab9 }}</p>
+      {% endif %}
+
+      {# Spécialement pour un fonctionnement à 10 habilitations #}
+      <p></p>
+
+      {% if _Hab10 != "" %}
+        <p class="{% if agent.hab_10 == 2 %}green{% elseif agent.hab_10 == 1 %}orange{% else %}red{% endif %}">{{ _Hab10 }}</p>
+      {% endif %}
+
+      {% if _Hab11 != "" %}
+        <p class="{% if agent.hab_11 == 2 %}green{% elseif agent.hab_11 == 1 %}orange{% else %}red{% endif %}">{{ _Hab11 }}</p>
+      {% endif %}
+
+      {# Spécialement pour un fonctionnement à 10 habilitations #}
+      <p></p>
+
+      {% if _Hab12 != "" %}
+        <p class="{% if agent.hab_12 == 2 %}green{% elseif agent.hab_12 == 1 %}orange{% else %}red{% endif %}">{{ _Hab12 }}</p>
+      {% endif %}
+
+      {% if _Hab13 != "" %}
+        <p class="{% if agent.hab_13 == 2 %}green{% elseif agent.hab_13 == 1 %}orange{% else %}red{% endif %}">{{ _Hab13 }}</p>
+      {% endif %}
+
+      {% if _Hab14 != "" %}
+        <p class="{% if agent.hab_14 == 2 %}green{% elseif agent.hab_14 == 1 %}orange{% else %}red{% endif %}">{{ _Hab14 }}</p>
+      {% endif %}
+
+      {% if _Hab15 != "" %}
+        <p class="{% if agent.hab_15 == 2 %}green{% elseif agent.hab_15 == 1 %}orange{% else %}red{% endif %}">{{ _Hab15 }}</p>
+      {% endif %}
+    </div>
+  </section>
+
+  {# Liste Arme #}
+  {% include "/templates/liste_arme.twig" %}
+
+  {# Liste Voiture #}
+  {% include "/templates/liste_vehicule.twig" %}
+
+  {% if (_agent.matricule != agent.matricule) and (_agent.hab_1 > 1) %}
+  <section class="liste">
+    <h1>Rapport</h1>
+    {% for rapport in rapports %}
+      <div class="content">
+        <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+        <p>{{ rapport.titre|capitalize }}</p>
+        <a href="/rapport/{{ rapport.id }}">Consulter</a>
+      </div>
+    {% else %}
+      <div class="content">
+        <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+        <p>Aucun rapport déposé sur la personne</p>
+      </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+{% endblock %}
+
+{% block script %}{% endblock %}

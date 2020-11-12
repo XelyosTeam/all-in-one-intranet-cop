@@ -1,0 +1,93 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Edition véhicule #}
+{% extends "_base.twig" %}
+
+{% block style %}
+  <link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
+  <link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+{% endblock %}
+
+{% block description %}Modification Véhicule{% endblock %}
+
+{% block key %}Modification Véhicule{% endblock %}
+
+{% block title %}Edition {{ voiture.plaque|upper }}{% endblock %}
+
+{% block main %}
+  <form action="/vehicule/{{ voiture.plaque }}/modification" method="post">
+    <section class="info_personne">
+      <h1>Informations Véhicules</h1>
+      <img src="/assets/img/vehicule/{{ voiture.lien }}" alt="Photo {{ voiture.nom|capitalize }}">
+      <p><strong>Modèles :</strong>{{ voiture.nom|capitalize }}</p>
+      <p><strong>Couleur :</strong><textarea name="couleur" rows="1">{{ voiture.couleur }}</textarea></p>
+      <p><strong>Plaques :</strong>{{ voiture.plaque|upper }}</p>
+      <p><strong>Propriétaire :</strong>
+        <select name="proprio">
+          {% for civil in civils %}
+          {% if civil.id == proprio.id %}
+          <option value="{{ civil.id }}">{{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</option>
+          <option value="{{ civil.id }}">============</option>
+          {% endif %}
+          {% endfor %}
+
+          {% for civil in civils %}
+          {% if civil.id != proprio.id %}
+          <option value="{{ civil.id }}">{{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </p>
+      <p><strong>Enregistrer Par :</strong><a href="/{{ _membreFaction }}/{{ policier.matricule }}">{{ policier.grade|capitalize }} {{ policier.prenom|capitalize }}</a></p></p>
+      <p><strong>En circulation :</strong>
+        <select name="circu">
+          {% if voiture.circulation == 1 %}
+          <option value="1">Oui</option>
+          <option value="0">Non</option>
+          {% else %}
+          <option value="0">Non</option>
+          <option value="1">Oui</option>
+          {% endif %}
+        </select>
+      </p>
+
+      <div class="btn_modif">
+        <button class="form_button" type="submit" name="button">Appliquer les modifications</button>
+      </div>
+    </section>
+  </form>
+
+  <section class="liste">
+    <h1>Délits Routier</h1>
+
+    {% for delit in delits %}
+    <div class="content">
+      <p>{{ delit.nom|capitalize }}</p>
+
+      {% if delit.etat == 2 %}
+        <p class="">Fermé</p>
+      {% elseif delit.etat == 1 %}
+        <p class="">Charges Abandonnées</p>
+      {% else %}
+        <p class="red">En cours</p>
+      {% endif %}
+
+      <a href="/delit-routier/{{ delit.delit_id }}">Consulter</a>
+    </div>
+    {% else %}
+    <div class="content">
+      <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+      <p>Ce véhicule ne fait l'objet d'aucun délit</p>
+    </div>
+    {% endfor %}
+
+{% endblock %}
+
+{# Pour continuer, il faut ajouter les délits, et les relier avec les véhicules #}
+
+{% block script %}{% endblock %}

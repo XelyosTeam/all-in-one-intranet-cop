@@ -1,0 +1,22 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+<section class="liste">
+  <h1>Armes</h1>
+  {% for arme in armes %}
+  <div class="content">
+    <img src="/assets/img/arme/{{ arme.photo }}" alt="Image {{ arme.nom }}">
+    <p>{{ arme.prefix|upper }}{{ arme.numero|upper }}</p>
+    <a href="/arme/{{ arme.numero }}">Consulter</a>
+  </div>
+  {% else %}
+  <div class="content">
+    <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+    <p>Aucune arme déclarée</p>
+  </div>
+  {% endfor %}
+</section>

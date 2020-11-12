@@ -1,0 +1,85 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Ajout Civil #}
+{% extends "_base.twig" %}
+
+{% block style %}{% endblock %}
+
+{% block description %}Recensement Civil{% endblock %}
+
+{% block key %}Recensement Civil{% endblock %}
+
+{% block title %}Recensement Civil{% endblock %}
+
+{% block main %}
+<section class="contenu">
+  <h1>Inscription Civil</h1>
+
+  <form class="connexion" action="/insert/civil" method="post">
+
+    <div>
+      <label for="name">Nom :</label>
+      <input type="text" name="civil_name" id="name" placeholder="Nom" oninput="alerte_citoyennete();" required>
+    </div>
+
+    <div>
+      <label for="firstname">Prénom :</label>
+      <input type="text" name="civil_firstame" id="firstname" placeholder="Prénom" oninput="alerte_citoyennete();" required>
+    </div>
+
+    <div>
+      <label for="DOB">Naissance :</label>
+      <input type="date" name="civil_dob" id="DOB" placeholder="Date de naissance" required>
+    </div>
+
+    <div>
+      <label for="phone">Téléphone :</label>
+      <input type="tel" name="civil_phone" id="phone" max="5559999" placeholder="Numéro de téléphone">
+    </div>
+
+    <div>
+      <label for="nationality">Nationalité :</label>
+      <input type="text" name="civil_nationality" id="nationality" placeholder="Nationalité" required>
+    </div>
+
+    <div>
+      <label for="sexe">Sexe :</label>
+
+      <select name="civil_sex" id="sexe">
+          <option value="M">Homme</option>
+          <option value="F">Femme</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="job">Métier :</label>
+      <input type="text" name="civil_job" id="job" placeholder="Entrer le métier de la personne">
+    </div>
+
+    <div>
+      <label for="licence">Permis :</label>
+
+      <select name="civil_licence" id="licence">
+          <option value="0">Non</option>
+          <option value="1">Oui</option>
+      </select>
+    </div>
+
+    {% if _agent.ajouter != 0 %}
+    <div class="btn">
+      <button class="form_button" type="submit" name="button">Enregistrer</button>
+    </div>
+    {% endif %}
+  </form>
+
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="/assets/script/event_saisie.js"></script>
+{% endblock %}

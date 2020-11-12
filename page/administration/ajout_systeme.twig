@@ -1,0 +1,214 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Administration - Ajout #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/division_image.css">
+{% endblock %}
+
+{% block description %}Ajout système{% endblock %}
+
+{% block key %}Ajout système{% endblock %}
+
+{% block title %}Ajout système{% endblock %}
+
+{% block main %}
+  <section class="contenu">
+    <h1>Ajouter Véhicule</h1>
+
+    <form class="connexion" action="/insert/img/vehicule" enctype="multipart/form-data" method="post">
+
+      <div>
+        <label for="name">Entrer le nom du véhicule :</label>
+        <input type="text" name="vehicule_name" id="name" placeholder="Nom du véhicule" required>
+      </div>
+
+      <div>
+        <label for="img">Sélectionner l'image du véhicule :</label>
+        <input type="file" name="photo">
+        <input type="hidden" name="MAX_FILE_SIZE" value="5000000"> <!-- Limiteur de taille du fichier ici = 5Mo -->
+      </div>
+
+      <div class="btn">
+        <button class="form_button" type="submit" name="button">Insérer</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="contenu">
+    <h1>Ajouter Délit</h1>
+
+    <form class="connexion" action="" method="POST">
+      <div>
+        <label for="delit_name">Entrer le nom du delit :</label>
+        <input type="text" name="delit_name" id="name_delit" placeholder="Nom du délit" required>
+      </div>
+
+      <div>
+        <label for="delit_amende">Entrer le montant de l'amende :</label>
+        <input type="number" name="delit_amende" id="amd_delit" min="0" placeholder="Montant Amende">
+      </div>
+
+      <div>
+        <label for="delit_prison">Temps de prison (mois) :</label>
+        <input type="number" name="delit_prison" id="tps_delit" min="0" placeholder="Temps en mois">
+      </div>
+
+      <div>
+        <label>Type de délit :</label>
+
+        <select name="delit_type" id="type_delit">
+          <option value="0">Délit Routier</option>
+          <option value="1">Délit Léger</option>
+          <option value="2">Délit Moyen</option>
+          <option value="3">Délit Grave</option>
+        </select>
+      </div>
+
+      <div>
+        <p id="confirm_admin_delit">Délit ajouté</p>
+      </div>
+
+      <div class="btn">
+        <button class="form_button" type="submit" name="button" onclick="AddDelitAdmin();">Insérer</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="contenu">
+    <h1>Ajouter Catégorie Arme</h1>
+
+    <form class="connexion" action="" method="POST">
+      <div>
+        <label for="categorie_name">Entrer le nom de la catégorie :</label>
+        <input class="short" type="text" name="categorie_name" id="categorie_weapon" placeholder="Nom catégorie" required>
+      </div>
+
+      <div>
+        <label for="categorie_prefix">Entrer le prefix de la catégorie :</label>
+        <input class="short" type="text" name="categorie_prefix" id="prefixe_weapon" placeholder="Préfix catégorie" required>
+      </div>
+
+      <div>
+        <p id="confirm_add_catWeapon">Catégorie créée</p>
+      </div>
+
+      <div class="btn">
+        <button class="form_button" type="submit" name="button" onclick="addWeaponCategorie();">Ajouter</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="contenu">
+    <h1>Ajouter Arme</h1>
+
+    <form class="connexion" action="/insert/img/arme" enctype="multipart/form-data"  method="POST">
+      <div>
+        <label for="nom_name">Entrer le nom de l'arme :</label>
+        <input class="short" type="text" name="nom_name" placeholder="Nom arme" required>
+      </div>
+
+      <div>
+        <label>Type d'arme :</label>
+
+        <select class="short" name="cat_weapon">
+          {% for arme in armes %}
+            <option value="{{ arme.id }}">{{ arme.nom }} ({{ arme.prefix }})</option>
+          {% else %}
+            <option>Aucune catégorie enregistrée</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div>
+        <label for="img">Photo Arme :</label>
+        <input type="file" name="photo">
+        <input type="hidden" name="MAX_FILE_SIZE" value="5000000"> <!-- Limiteur de taille du fichier ici = 5Mo -->
+      </div>
+
+      <div class="btn">
+        <button class="form_button" type="submit" name="button" onclick="addWeapon();">Ajouter</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="contenu">
+    <h1>Ajouter Photo</h1>
+
+    <form class="connexion" action="/insert/img/identité" enctype="multipart/form-data" method="post">
+      <div>
+        <label>Nom de la personne :</label>
+
+        <select name="nom">
+          {% for personne in personnes %}
+            <option value="{{ personne.id }}">{{ personne.nom }} {{ personne.prenom }}</option>
+          {% else %}
+            <option value="0">Tous les citoyens ont une photo</option>
+          {% endfor %}
+
+        </select>
+      </div>
+
+      <div>
+        <label for="photo">Insérer la photo</label>
+        <input type="file" name="photo">
+        <input type="hidden" name="MAX_FILE_SIZE" value="5000000"> <!-- Limiteur de taille du fichier ici = 5Mo -->
+      </div>
+
+      <div class="btn">
+        <button class="form_button" type="submit" name="button">Insérer</button>
+      </div>
+    </form>
+  </section>
+
+  {# Déclarer un enseignant #}
+  <section class="contenu">
+    <h1>Ajouter un {{ _Hab1|lower }}</h1>
+    <form class="connexion" action="/add/prof" method="post">
+
+      <!-- Division des parties -->
+      <section class="div_content_photo">
+        <section class="part_add">
+          <div>
+            <label>{{ _BDDFaction }} :</label>
+            <select id="cop_type" name="nom_cop" onchange="affiche_photo_cop();">
+              {% for agent in agents %}
+              <option value="{{ agent.lspd_id }}">{{ agent.nom|capitalize }} {{ agent.prenom|capitalize }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </section>
+
+        <section class="part_img">
+          <div>
+            <img id="image_cop" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+          </div>
+        </section>
+      </section>
+
+      <div class="btn">
+        <button class="form_button" type="submit" name="button">Ajouter</button>
+      </div>
+
+      <div>
+        <p id="confirm_prof">{{ _Hab1|capitalize }} ajouté</p>
+      </div>
+    </form>
+  </section>
+{% endblock %}
+
+{% block script %}
+<script src="/assets/script/event_saisie.js"></script>
+<script type="text/javascript">
+  document.getElementById("confirm_admin_delit").style.display = "none";
+  document.getElementById("confirm_prof").style.display = "none";
+  document.getElementById("confirm_add_catWeapon").style.display = "none";
+  affiche_photo_cop();
+</script>
+{% endblock %}

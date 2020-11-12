@@ -1,0 +1,81 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+{# Modèle de page #}
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Fiche Civil">
+    <meta name="author" content="Xelyos Team - Thomas">
+    <meta name="keywords" content="Fiche civil, {{ _nomFaction }}, Site Factice, {{ _jeuServeur }}, {{ _nomServeur }}">
+    <title>Extrait Casier {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</title>
+
+    <style media="screen">
+      img {
+        position: fixed;
+        top: -45px; left: -45px;
+        z-index: 0;
+        max-width: 790px;
+      }
+
+      h1 {
+        text-align: center;
+        z-index: 1;
+        margin-top: 50px;+
+      }
+
+      h2 {
+        text-decoration: underline overline #FF3028;
+        z-index: 1;
+      }
+
+      p {
+        margin-left: 20px;
+        z-index: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <img src="{{ img }}" alt="">
+
+    <h1>Casier n°{{ civil.id }}</h1>
+    {% include "/templates/impression_civil.twig"%}
+
+    <h2>Casier Judiciaires</h2>
+    {% for casier in casiers %}
+      <p>{{ casier.nom }} =>
+        {% if casier.etat == 2 %}
+          Fermé
+        {% elseif casier.etat == 1 %}
+          Charges Abandonnées
+        {% else %}
+          En cours
+        {% endif %}
+    </p>
+    {% else %}
+      <p>Le civil n'a commis aucun délit</p>
+    {% endfor %}
+
+    <h2>Délits Routiers</h2>
+    {% for route in routes %}
+      <p>{{ route.nom }} =>
+        {% if route.etat == 2 %}
+          Fermé
+        {% elseif route.etat == 1 %}
+          Charges Abandonnées
+        {% else %}
+          En cours
+        {% endif %}
+    </p>
+    {% else %}
+      <p>Le civil n'a commis aucun délit</p>
+    {% endfor %}
+  </body>
+
+</html>
