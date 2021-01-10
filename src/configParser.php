@@ -10,14 +10,14 @@
 
   function serveurIni($categorie, $param) {
     $params = new ConfigParser();
-    $params->read('xlsServerINI.ini');
+    $params->read('server.ini');
     return $params[$categorie][$param];
 
   }
 
   function editserveurIni($categorie, $param, $value) {
     $params = new ConfigParser();
-    $params->read('xlsServerINI.ini');
+    $params->read('server.ini');
     $params->set($categorie, $param, $value);
     $params->save();
   }
