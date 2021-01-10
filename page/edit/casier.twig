@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Edition Casier Judiciaire #}
 {% extends "_base.twig" %}
 
@@ -17,7 +18,7 @@
 
 {% block key %}Modification Casier Judiciaire{% endblock %}
 
-{% block title %}Modification Casier de  {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}{% endblock %}
+{% block title %}Modification Casier de {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}{% endblock %}
 
 {% block main %}
   <section class="info_personne">
@@ -45,9 +46,9 @@
       <p><strong>Type :</strong>{% if detail.type_delit == 3 %}Grave{% elseif detail.type_delit == 2 %}Moyen{% else %}Léger{% endif %}</p>
       <p><strong>Amende :</strong>{{ detail.amende|number_format(2, ',', ' ') }} $</p>
       <p><strong>Temps de prison :</strong>{{ detail.temps_prison }} mois</p>
-      <p><strong>Enregistrer par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
-      <p><strong>Enregistrer le :</strong>{{ delit.enregistrer_le|date("d/m/Y") }}</p>
-      <p><strong>Etat :</strong>{% if delit.etat == 2 %}Fermé{% elseif delit.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
+      <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
+      <p><strong>Enregistré le :</strong>{{ delit.enregistrer_le|date("d/m/Y") }}</p>
+      <p><strong>État :</strong>{% if delit.etat == 2 %}Fermé{% elseif delit.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
       <p><strong>Rapport :</strong></p>
       <p class="remarque"><textarea class="remarque" rows="8" cols="80" name="rapport">{{ delit.remarque }}</textarea></p>
 

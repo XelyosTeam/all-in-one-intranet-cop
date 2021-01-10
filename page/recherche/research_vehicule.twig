@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Recherche Véhicule #}
 {% extends "_base.twig" %}
 
@@ -28,18 +29,18 @@
   </form>
 
   {% for voiture in voitures %}
-  <div class="Resultat2">
-    <img src="/assets/img/vehicule/{{ voiture.lien }}" alt="Photo {{ voiture.nom|capitalize }}">
-    <p>{{ voiture.nom|capitalize }}</p>
-    <p>{{ voiture.plaque|upper }}</p>
-    <a href="/vehicule/{{ voiture.plaque }}">Consulter</a>
-  </div>
+    <div class="Resultat2">
+      <img src="/assets/img/vehicule/{{ voiture.lien }}" alt="Photo {{ voiture.nom|capitalize }}">
+      <p>{{ voiture.nom|capitalize }}</p>
+      <p>{{ voiture.plaque|upper }}</p>
+      <a href="/vehicule/{{ voiture.plaque }}">Consulter</a>
+    </div>
   {% else %}
-  <div class="Resultat2">
-    <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
-    <p>Aucun véhicule ne correspond à votre recherche</p>
-    <a href="#"></a>
-  </div>
+    <div class="Resultat2">
+      <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+      <p>Aucun véhicule ne correspond à votre recherche</p>
+      <a href="#"></a>
+    </div>
   {% endfor %}
 {% endblock %}
 

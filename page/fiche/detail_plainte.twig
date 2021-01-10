@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Détails Plainte #}
 {% extends "_base.twig" %}
 
@@ -38,7 +39,7 @@
     {% endif %}
     <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
     <p><strong>Enregistré le :</strong>{% if plainte.enregistrer_le != NULL %}{{ plainte.enregistrer_le|date("d/m/Y") }}{% endif %}</p>
-    <p><strong>Etat :</strong>{% if plainte.etat == 2 %}Fermé{% elseif plainte.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
+    <p><strong>État :</strong>{% if plainte.etat == 2 %}Fermé{% elseif plainte.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
     <p><strong>Fermé le :</strong>{{ plainte.fermer_le}}</p>
     <p><strong>Fermé par :</strong><a href="/{{ _membreFaction }}/{{ fermer.matricule }}">{{ fermer.grade }} {{ fermer.nom|capitalize }}</a></p></p>
     {% if plainte.etat == 0 and _agent.supprimer != 0 %}

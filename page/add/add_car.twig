@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Ajout des véhicules #}
 {% extends "_base.twig" %}
 
@@ -24,6 +25,8 @@
 
   <form id="formulaire_ajout_car" name="form_car" action="/insert/voiture" method="post">
 
+    {% set __add = true %} <!-- v2.0.0 -->
+
     <!-- Division des parties -->
     <section class="div_content_photo">
       <section class="part_add">
@@ -33,6 +36,9 @@
           <select id="car_type" name="vehicule_model" onchange="affiche_photo_voiture();">
             {% for voiture in voitures %}
               <option value="{{ voiture.id }}">{{ voiture.nom|capitalize }}</option>
+            {% else %}
+              {% set __add = false %}
+              <option>Aucun modèle renseigné</option>
             {% endfor %}
           </select>
         </div>
@@ -54,6 +60,9 @@
 
             {% for personne in personnes %}
             <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+            {% else %}
+              {% set __add = false %}
+              <option>Aucun civil recensé</option>
             {% endfor %}
           </select>
         </div>
@@ -65,7 +74,7 @@
 
       <section class="part_img">
         <div>
-          <img id="image_voiture" src="/assets/img/vehicule/9f.png" alt="Image 9f">
+          <img id="image_voiture" src="/assets/img/vehicule/pnj.png" alt="Image PNJ">
         </div>
 
         <div>
@@ -75,7 +84,7 @@
       </section>
     </section>
 
-    {% if _agent.ajouter != 0 %}
+    {% if _agent.ajouter != 0 and __add %}
     <div class="btn">
       <button id="valid_button" class="form_button" type="submit" name="button">Enregistrer</button>
     </div>
@@ -88,8 +97,8 @@
 {% block script %}
 <script src="/assets/script/event_saisie.js"></script>
 <script type="text/javascript">
-  affiche_photo_voiture();
-  affiche_photo_personne();
-  verif_plaque();
+affiche_photo_voiture();
+affiche_photo_personne();
+verif_plaque();
 </script>
 {% endblock %}

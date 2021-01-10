@@ -31,7 +31,7 @@
 {
   margin-left: 4%;
   margin-bottom: 2%;
-  color: #103469;
+  color: var(--Text);
   font-size: 1.2em;
 }
 

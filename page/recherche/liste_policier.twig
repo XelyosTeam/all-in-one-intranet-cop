@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Recherche Force de l'Ordre #}
 {% extends "_base.twig" %}
 
@@ -28,16 +29,16 @@
   </form>
 
   {% for policier in policiers %}
-  <div class="Resultat">
-    <img src="/assets/img/identité/{{ policier.photo}}" alt="Photo de {{ policier.nom|capitalize }} {{ policier.prenom|capitalize }}">
-    <p>{{ policier.nom|capitalize }} {{ policier.prenom|capitalize }}</p>
-    <a href="/{{ _membreFaction }}/{{ policier.matricule }}">Consulter</a>
-  </div>
+    <div class="Resultat">
+      <img src="/assets/img/identité/{{ policier.photo}}" alt="Photo de {{ policier.nom|capitalize }} {{ policier.prenom|capitalize }}">
+      <p>{{ policier.nom|capitalize }} {{ policier.prenom|capitalize }}</p>
+      <a href="/{{ _membreFaction }}/{{ policier.matricule }}">Consulter</a>
+    </div>
   {% else %}
-  <div class="Resultat">
-    <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
-    <p>Aucune agent ne correspond à votre recherche</p>
-  </div>
+    <div class="Resultat">
+      <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+      <p>Aucune agent ne correspond à votre recherche</p>
+    </div>
   {% endfor %}
   </section>
 {% endblock %}

@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Recherche Plainte #}
 {% extends "_base.twig" %}
 
@@ -27,18 +28,18 @@
   </form>
 
   {% for plainte in plaintes %}
-  <div class="Resultat2">
-    <img src="/assets/img/identité/{% if plainte.lien == NULL %}temp.png{% else %}{{ plainte.lien }}{% endif %}" alt="Photo de {{ plainte.nom_1|capitalize }} {{ plainte.prenom_1|capitalize }}">
-    <p>{{ plainte.nom_1|capitalize }} {{ plainte.prenom_1|capitalize }}</p>
-    <p>{{ plainte.detail|capitalize|slice(0, 20) }}</p>
-    <a href="/detail-plainte/{{ plainte.p_id }}">Consulter</a>
-  </div>
+    <div class="Resultat2">
+      <img src="/assets/img/identité/{% if plainte.lien == NULL %}temp.png{% else %}{{ plainte.lien }}{% endif %}" alt="Photo de {{ plainte.nom_1|capitalize }} {{ plainte.prenom_1|capitalize }}">
+      <p>{{ plainte.nom_1|capitalize }} {{ plainte.prenom_1|capitalize }}</p>
+      <p>{{ plainte.detail|capitalize|slice(0, 20) }}</p>
+      <a href="/detail-plainte/{{ plainte.p_id }}">Consulter</a>
+    </div>
   {% else %}
-  <div class="Resultat">
-    <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
-    <p>Aucune plainte ne correspond à votre recherche</p>
-    <a href="#"></a>
-  </div>
+    <div class="Resultat">
+      <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+      <p>Aucune plainte ne correspond à votre recherche</p>
+      <a href="#"></a>
+    </div>
   {% endfor %}
 {% endblock %}
 

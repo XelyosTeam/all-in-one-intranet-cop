@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Page vierge pour les twig #}
 {% extends "_base.twig" %}
 
@@ -20,19 +21,18 @@
 {% block title %}Rapport non Vu{% endblock %}
 
 {% block main %}
-{% for rapport in listes %}
-<div class="Resultat">
-  <img src="/assets/img/identité/{{ rapport.photo}}" alt="Photo de {{ rapport.grade|capitalize }} {{ rapport.nom|capitalize }}">
-  <p>{{ rapport.titre|capitalize }}</p>
-  <a href="/rapport/{{ rapport.id }}">Consulter</a>
-</div>
-{% else %}
-<div class="Resultat">
-  <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
-  <p>Aucun nouveau rapport pour le moment</p>
-</div>
-{% endfor %}
-</section>
+  {% for rapport in listes %}
+    <div class="Resultat">
+      <img src="/assets/img/identité/{{ rapport.photo}}" alt="Photo de {{ rapport.grade|capitalize }} {{ rapport.nom|capitalize }}">
+      <p>{{ rapport.titre|capitalize }}</p>
+      <a href="/rapport/{{ rapport.id }}">Consulter</a>
+    </div>
+  {% else %}
+    <div class="Resultat">
+      <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+      <p>Aucun nouveau rapport pour le moment</p>
+    </div>
+  {% endfor %}
 {% endblock %}
 
 {% block script %}{% endblock %}

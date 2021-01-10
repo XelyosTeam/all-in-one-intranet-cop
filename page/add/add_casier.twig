@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Ajout Casier #}
 {% extends "_base.twig" %}
 
@@ -25,6 +26,10 @@
 
   <form class="connexion" action="/insert/casier" method="post">
 
+    <!-- v2.0.0 -->
+    {% set __add = true %}
+    {% set __nbdelit = false %}
+
     <!-- Division des parties -->
     <section class="div_content_photo">
       <section class="part_add">
@@ -33,35 +38,40 @@
 
           <select id="personne_type" name="casier_owner"onchange="affiche_photo_personne();">
             {% for personne in personnes %}
-            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+              <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+            {% else %}
+              {% set __add = false %}
+              <option>Aucun civil recensé</option>
             {% endfor %}
           </select>
         </div>
 
         <div>
           <label>Délit :</label>
-
           <select name="delit_name">
             <option value="NULL">Sélectionner un délit</option>
             <option value="NULL">----- Délit Léger -----</option>
             {% for delit in leger %}
-            <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+              {% set __nbdelit  = true %}
+              <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
             {% endfor %}
 
             <option value="NULL">----- Délit Moyen -----</option>
             {% for delit in moyen %}
-            <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+              {% set __nbdelit  = true %}
+              <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
             {% endfor %}
 
             <option value="NULL">----- Délit Grave -----</option>
             {% for delit in grave %}
-            <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+              {% set __nbdelit  = true %}
+              <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
             {% endfor %}
           </select>
         </div>
 
         <div>
-          <label>Rapport :</label>
+          <label>Rapport : {{ _stat }}</label>
           <textarea name="rapport" placeholder="Insérer un éventuelle rapport"></textarea>
         </div>
       </section>
@@ -73,9 +83,7 @@
       </section>
     </section>
 
-
-
-    {% if _agent.ajouter != 0 %}
+    {% if _agent.ajouter != 0 and __add and __nbdelit %}
     <div class="btn">
       <button class="form_button" type="submit" name="button">Enregistrer</button>
     </div>
@@ -88,6 +96,6 @@
 {% block script %}
 <script src="/assets/script/event_saisie.js"></script>
 <script type="text/javascript">
-  affiche_photo_personne();
+affiche_photo_personne();
 </script>
 {% endblock %}

@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Edition plainte civil #}
 {% extends "_base.twig" %}
 
@@ -44,17 +45,13 @@
       <p><strong>Déposeur :</strong><a href="/civil/{{ deposeur.id }}">{{ deposeur.nom|capitalize }} {{ deposeur.prenom|capitalize }}</a></p>
       <p><strong>Détail de la plainte :</strong></p>
       <p class="remarque"><textarea class="remarque" rows="8" cols="80" name="rapport">{{ plainte.detail_plainte }}</textarea></p>
-      <p><strong>Enregistrer par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.prenom|capitalize }}</a></p></p>
-      <p><strong>Enregistrer le :</strong>{% if plainte.enregistrer_le != NULL %}{{ plainte.enregistrer_le|date("d/m/Y") }}{% endif %}</p>
+      <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.prenom|capitalize }}</a></p></p>
+      <p><strong>Enregistré le :</strong>{% if plainte.enregistrer_le != NULL %}{{ plainte.enregistrer_le|date("d/m/Y") }}{% endif %}</p>
       <div class="btn_modif">
         <button class="form_button" type="submit" name="button">Appliquer les modifications</button>
       </div>
     </section>
-
-
   </form>
-
-
 {% endblock %}
 
 {% block script %}{% endblock %}

@@ -20,7 +20,7 @@
   margin-left: 5%;
   width: 25%;
   border-radius: 10px;
-  background-color: #EDEFF5;
+  background-color: var(--background);
   text-align: center;
   padding-bottom: 2%;
 }
@@ -41,8 +41,8 @@
 {
   padding-top: 2%;
   padding-bottom: 1%;
-  color: #103469;
-  border-bottom: 2px solid #103469;
+  color: var(--Text);
+  border-bottom: 2px solid var(--Text);
 }
 
 .list_agent div, .information_historique div
@@ -51,21 +51,21 @@
   max-width: 100%;
   grid-template-columns: 25% 75% repeat(2, 1fr);
   vertical-align: middle;
-  border-top: 1px solid #103469;
-  border-bottom: 1px solid #103469;
+  border-top: 1px solid var(--Text);
+  border-bottom: 1px solid var(--Text);
   padding: 1%;
 }
 
 .list_agent div:hover, .information_historique div:hover, .list_agent .old:hover
 {
-  border-top: 2px solid #103469;
-  border-bottom: 2px solid #103469;
+  border-top: 2px solid var(--Text);
+  border-bottom: 2px solid var(--Text);
   cursor: pointer;
 }
 
 .list_agent .old
 {
-  background-color: #D5D5D5;
+  background-color: var(--oldAgent);
 }
 
 .list_agent div img
@@ -91,15 +91,15 @@
   margin-left: 37%;
   width: 58%;
   border-radius: 10px;
-  background-color: #EDEFF5;
+  background-color: var(--background);
   padding-bottom: 0.5%;
 }
 
 .information_historique h1, .information_stats h1
 {
   padding-top: 2%;
-  color: #103469;
-  border-bottom: 2px solid #103469;
+  color: var(--Text);
+  border-bottom: 2px solid var(--Text);
   text-align: center;
 }
 
@@ -107,7 +107,7 @@
 {
   text-align: center;
   font-weight: bold;
-  color: #ff0000;
+  color: var(--textAlert);
 }
 
 /* Partie de droite - Stats */
@@ -127,7 +127,7 @@
 
 strong
 {
-  color: #103469;
+  color: var(--Text);
   font-size: 1.25em;
   margin-right: 3%;
 }

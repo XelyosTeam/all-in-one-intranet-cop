@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Edition Délit routier #}
 {% extends "_base.twig" %}
 
@@ -48,8 +49,8 @@
       <p><strong>Nom Delit :</strong>{{ delit.nom|capitalize }}</p>
       <p><strong>Amende :</strong>{{ detail.amende|number_format(2, ',', ' ') }} $</p>
       <p><strong>Temps de prison :</strong>{{ detail.temps_prison }} mois</p>
-      <p><strong>Enregistrer par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
-      <p><strong>Enregistrer le :</strong>{{ delit.date_enregistre|date("d/m/Y") }}</p>
+      <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
+      <p><strong>Enregistré le :</strong>{{ delit.date_enregistre|date("d/m/Y") }}</p>
       <p><strong>Etat :</strong>{% if delit.etat == 2 %}Fermé{% elseif delit.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
       <p><strong>Rapport :</strong></p>
       <p class="remarque"><textarea class="remarque" rows="8" cols="80" name="rapport">{{ delit.remarque }}</textarea></p>
@@ -59,10 +60,6 @@
       </div>
     </section>
   </form>
-
-
-
-
 {% endblock %}
 
 {% block script %}{% endblock %}

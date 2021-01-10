@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Liste PPA #}
 {% extends "_base.twig" %}
 
@@ -29,10 +30,13 @@
         <section class="part_add">
           <div>
             <label>Citoyen :</label>
-
+            {% set __add = true %}
             <select id="personne_type" name="nom_civil" onchange="affiche_photo_personne();">
               {% for personne in ppa %}
                 <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+              {% else %}
+                {% set __add = false %}
+                <option>Liste vide</option>
               {% endfor %}
             </select>
           </div>
@@ -45,7 +49,7 @@
         </section>
       </section>
 
-      {% if _agent.hab_1 == 2 %}
+      {% if _agent.hab_1 == 2 and __add %}
       <div class="btn">
         <button class="form_button" type="submit" name="button">Ajouter</button>
       </div>
@@ -64,10 +68,13 @@
         <section class="part_add">
           <div>
             <label>Citoyen :</label>
-
+            {% set __remove = true %}
             <select id="personne_type_2" name="nom_civil" onchange="affiche_photo_personne_2();">
               {% for personne in nonppa %}
                 <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+              {% else %}
+                {% set __remove = false %}
+                <option>Liste vide</option>
               {% endfor %}
             </select>
           </div>
@@ -80,7 +87,7 @@
         </section>
       </section>
 
-      {% if _agent.hab_1 == 2 %}
+      {% if _agent.hab_1 == 2 and __remove %}
       <div class="btn">
         <button class="form_button" type="submit" name="button">Retirer</button>
       </div>

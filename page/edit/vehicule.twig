@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Edition véhicule #}
 {% extends "_base.twig" %}
 
@@ -27,23 +28,24 @@
       <p><strong>Modèles :</strong>{{ voiture.nom|capitalize }}</p>
       <p><strong>Couleur :</strong><textarea name="couleur" rows="1">{{ voiture.couleur }}</textarea></p>
       <p><strong>Plaques :</strong>{{ voiture.plaque|upper }}</p>
+      <!-- v1.6.1 -->
       <p><strong>Propriétaire :</strong>
         <select name="proprio">
           {% for civil in civils %}
-          {% if civil.id == proprio.id %}
-          <option value="{{ civil.id }}">{{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</option>
-          <option value="{{ civil.id }}">============</option>
-          {% endif %}
+            {% if civil.id == proprio.id %}
+              <option value="{{ civil.id }}">{{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</option>
+              <option value="{{ civil.id }}">============</option>
+            {% endif %}
           {% endfor %}
 
           {% for civil in civils %}
-          {% if civil.id != proprio.id %}
-          <option value="{{ civil.id }}">{{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</option>
-          {% endif %}
+            {% if civil.id != proprio.id %}
+              <option value="{{ civil.id }}">{{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</option>
+            {% endif %}
           {% endfor %}
         </select>
       </p>
-      <p><strong>Enregistrer Par :</strong><a href="/{{ _membreFaction }}/{{ policier.matricule }}">{{ policier.grade|capitalize }} {{ policier.prenom|capitalize }}</a></p></p>
+      <p><strong>Enregistré Par :</strong><a href="/{{ _membreFaction }}/{{ policier.matricule }}">{{ policier.grade|capitalize }} {{ policier.prenom|capitalize }}</a></p></p>
       <p><strong>En circulation :</strong>
         <select name="circu">
           {% if voiture.circulation == 1 %}

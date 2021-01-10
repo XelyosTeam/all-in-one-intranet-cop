@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Ajout Delit Routier #}
 {% extends "_base.twig" %}
 
@@ -24,6 +25,10 @@
 
   <form class="connexion" action="/insert/routier" method="POST">
 
+    <!-- v2.0.0 -->
+    {% set __add = true %}
+    {% set __nbdelit = true %}
+
     <!-- Division des parties -->
     <section class="div_content_photo">
       <section class="part_add">
@@ -31,29 +36,37 @@
           <label>Conducteur :</label>
           <select id="personne_type" name="casier_owner" onchange="affiche_photo_personne();">
             {% for personne in personnes %}
-            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+              <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+            {% else %}
+              {% set __add = false %}
+              <option>Aucun conducteur recensé</option>
             {% endfor %}
           </select>
         </div>
 
         <div>
-          <label>Véhicule* :</label>
+          <label>Véhicule :</label>
 
           <select  id="car_type" name="vehicule_delit" onchange="affiche_photo_plaque();">
             {% for voiture in voitures %}
-            <option value="{{ voiture.v_id }}">{{ voiture.plaque|upper }} - {{ voiture.nom|capitalize }}</option>
+              <option value="{{ voiture.v_id }}">{{ voiture.plaque|upper }} - {{ voiture.nom|capitalize }}</option>
+            {% else %}
+              {% set __add = false %}
+              <option>Aucun véhicule recensé</option>
             {% endfor %}
-
           </select>
         </div>
 
         <div>
-          <label>Délit* :</label>
+          <label>Délit :</label>
 
           <select name="delit_name">
             <option value="NULL">Sélectionner un délit</option>
             {% for route in routes %}
-            <option value="{{ route.id }}">{{ route.intitule|capitalize }}</option>
+              <option value="{{ route.id }}">{{ route.intitule|capitalize }}</option>
+            {% else %}
+              {% set __nbdelit = false %}
+            < option>Aucun délit déclaré</option>
             {% endfor %}
           </select>
         </div>
@@ -75,7 +88,7 @@
       </section>
     </section>
 
-    {% if _agent.ajouter != 0 %}
+    {% if _agent.ajouter != 0 and __add and __nbdelit %}
     <div class="btn">
       <button class="form_button" type="submit" name="button">Enregistrer</button>
     </div>

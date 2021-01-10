@@ -38,10 +38,10 @@
 
 .chat .ems p
 {
-  color: red;
+  color: var(--secourColor);
 }
 
 .chat .cop p
 {
-  color: blue;
+  color: var(--copColor);
 }

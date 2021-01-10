@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Dossier Candidat #}
 {% extends "_base.twig" %}
 
@@ -24,19 +25,22 @@
       <h1>Candidature en cours</h1>
       <div>
         <label>Nom :</label>
-
+        {% set __cours = true %}<!-- v2.0.0 -->
         <select name="identifiant">
           {% for personne in attente %}
             <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
           {% else %}
+            {% set __cours = false %}<!-- v2.0.0 -->
             <option value="">Aucun candidat pour le moment</option>
           {% endfor %}
         </select>
       </div>
 
-      <div class="btn">
-        <button class="form_button" type="submit">Afficher</button>
-      </div>
+      {% if __cours %}
+        <div class="btn">
+          <button class="form_button" type="submit">Afficher</button>
+        </div>
+      {% endif %}
     </section>
   </form>
 
@@ -45,19 +49,24 @@
       <h1>Candidature Refusée</h1>
       <div>
         <label>Nom :</label>
+        {% set __refuse = true %}
 
         <select name="identifiant">
           {% for personne in refuser %}
             <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
           {% else %}
+            {% set __refuse = false %}
             <option value="">Aucune candidature refusée pour le moment</option>
           {% endfor %}
         </select>
       </div>
 
-      <div class="btn">
-        <button class="form_button" type="submit">Afficher</button>
-      </div>
+      {% if __refuse %}
+        <div class="btn">
+          <button class="form_button" type="submit">Afficher</button>
+        </div>
+      {% endif %}
+
     </section>
   </form>
 
@@ -66,19 +75,23 @@
       <h1>Candidature Acceptée</h1>
       <div>
         <label>Nom :</label>
+        {% set __accept = true %}<!-- v2.0.0 -->
 
         <select name="identifiant">
           {% for personne in accepter %}
             <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
           {% else %}
+            {% set __accept = false %}
             <option value="">Aucune candidature acceptée pour le moment</option>
           {% endfor %}
         </select>
       </div>
 
-      <div class="btn">
-        <button class="form_button" type="submit">Afficher</button>
-      </div>
+      {% if __accept %}
+        <div class="btn">
+          <button class="form_button" type="submit">Afficher</button>
+        </div>
+      {% endif %}
     </section>
   </form>
 
@@ -133,151 +146,67 @@
 
   <section class="contenu">
     <h1>Disponibilité</h1>
-    {% if personne.dispo_ecole == 1 %}
-    <div>
-      <p><strong>Periode scolaire/alternance :</strong></p>
-    </div>
-    <section class="grille_dispo"> <!-- A améliorer -->
-      <p></p>
-      <p>Matin</p>
-      <p>Après-midi</p>
-      <p>Soir</p>
-      <p>Nuit</p>
-      <p>Lundi</p>
-      {% if ecole[0] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[1] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[2] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[3] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Mardi</p>
-      {% if ecole[4] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[5] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[6] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[7] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Mercredi</p>
-      {% if ecole[8] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[9] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[10] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[11] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Jeudi</p>
-      {% if ecole[12] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[13] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[14] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[15] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Vendredi</p>
-      {% if ecole[16] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[17] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[18] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[19] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Samedi</p>
-      {% if ecole[20] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[21] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[22] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[23] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Dimanche</p>
-      {% if ecole[24] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[25] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[26] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if ecole[27] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-    </section>
-    {% endif %}
+    <!-- v2.0.0 -->
+    {# Génération de la variable globale #}
+    {% set __superVar = [] %}
 
-    {% if personne.dispo_vacance == 1 %}
-    <div>
-      <p><strong>Periode de vacances :</strong></p>
-    </div>
+    {% set __ecole = { 'status': personne.dispo_ecole, 'content': ecole, 'name' : 'scolaire/alternance' } %}
+    {% set __vacance = { 'status': personne.dispo_vacance, 'content': vacance, 'name' : 'de vacances' } %}
+    {% set __travail = { 'status': personne.dispo_travail, 'content': travail, 'name' : 'de travail' } %}
 
-    <section class="grille_dispo"> <!-- A améliorer -->
-      <p></p>
-      <p>Matin</p>
-      <p>Après-midi</p>
-      <p>Soir</p>
-      <p>Nuit</p>
-      <p>Lundi</p>
-      {% if vacance[0] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[1] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[2] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[3] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Mardi</p>
-      {% if vacance[4] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[5] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[6] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[7] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Mercredi</p>
-      {% if vacance[8] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[9] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[10] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[11] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Jeudi</p>
-      {% if vacance[12] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[13] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[14] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[15] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Vendredi</p>
-      {% if vacance[16] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[17] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[18] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[19] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Samedi</p>
-      {% if vacance[20] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[21] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[22] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[23] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Dimanche</p>
-      {% if vacance[24] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[25] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[26] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if vacance[27] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-    </section>
-    {% endif %}
+    {% set __superVar = __superVar|merge([__ecole, __vacance, __travail]) %}
 
-    {% if personne.dispo_travail == 1 %}
-    <div>
-      <p><strong>Periode de vacances :</strong></p>
-    </div>
+    {% for __superItem in __superVar %}
+      {% if __superItem.status == 1 %}
+        <div>
+          <p><strong>Periode {{ __superItem.name }} :</strong></p>
+        </div>
 
-    <section class="grille_dispo"> <!-- A améliorer -->
-      <p></p>
-      <p>Matin</p>
-      <p>Après-midi</p>
-      <p>Soir</p>
-      <p>Nuit</p>
-      <p>Lundi</p>
-      {% if travail[0] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[1] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[2] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[3] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Mardi</p>
-      {% if travail[4] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[5] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[6] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[7] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Mercredi</p>
-      {% if travail[8] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[9] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[10] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[11] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Jeudi</p>
-      {% if travail[12] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[13] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[14] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[15] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Vendredi</p>
-      {% if travail[16] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[17] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[18] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[19] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Samedi</p>
-      {% if travail[20] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[21] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[22] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[23] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      <p>Dimanche</p>
-      {% if travail[24] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[25] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[26] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-      {% if travail[27] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-    </section>
-    {% endif %}
+        <section class="grille_dispo"> <!-- A améliorer -->
+          <p></p>
+          <p>Matin</p>
+          <p>Après-midi</p>
+          <p>Soir</p>
+          <p>Nuit</p>
+          <p>Lundi</p>
+          {% if __superItem.content[0] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[1] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[2] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[3] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          <p>Mardi</p>
+          {% if __superItem.content[4] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[5] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[6] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[7] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          <p>Mercredi</p>
+          {% if __superItem.content[8] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[9] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[10] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[11] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          <p>Jeudi</p>
+          {% if __superItem.content[12] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[13] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[14] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[15] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          <p>Vendredi</p>
+          {% if __superItem.content[16] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[17] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[18] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[19] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          <p>Samedi</p>
+          {% if __superItem.content[20] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[21] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[22] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[23] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          <p>Dimanche</p>
+          {% if __superItem.content[24] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[25] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[26] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          {% if __superItem.content[27] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+        </section>
+      {% endif %}
+    {% endfor %}
+
   </section>
 
   <section class="contenu">

@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Recrutement Force de l'Ordre #}
 {% extends "_base.twig" %}
 
@@ -24,7 +25,7 @@
     <h1>Ajouter un {{ _BDDFaction }}</h1>
 
     <form class="connexion" action="/add/cop" method="post">
-
+      {% set __add = true %}
       <!-- Division des parties -->
       <section class="div_content_photo">
         <section class="part_add">
@@ -34,7 +35,8 @@
               {% for personne in personnes %}
                 <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
               {% else %}
-                <option value="">Tous les citoyens sont ajoutés</option>
+                {% set __add = false %}
+                <option value="">Tous les citoyens ont un travail</option>
               {% endfor %}
             </select>
           </div>
@@ -47,7 +49,7 @@
         </section>
       </section>
 
-      {% if _agent.hab_1 == 2 %}
+      {% if _agent.hab_1 == 2 and __add %}
       <div class="btn">
         <button class="form_button" type="submit" name="button">Ajouter</button>
       </div>
@@ -60,6 +62,7 @@
     <h1>Licencier un {{ _BDDFaction }}</h1>
 
     <form class="connexion" action="/edit/licenciement" method="post">
+      {% set __remove = true %}
       <!-- Division des parties -->
       <section class="div_content_photo">
         <section class="part_add">
@@ -69,6 +72,7 @@
               {% for cop in cops %}
                 <option value="{{ cop.lspd_id }}">{{ cop.nom|capitalize }} {{ cop.prenom|capitalize }}</option>
               {% else %}
+                {% set __remove = false %}
                 <option value="">Aucun agent enregitré</option>
               {% endfor %}
             </select>
@@ -82,7 +86,7 @@
         </section>
       </section>
 
-      {% if _agent.hab_1 == 2 %}
+      {% if _agent.hab_1 == 2 and __remove %}
       <div class="btn">
         <button class="form_button" type="submit" name="button">Licencier</button>
       </div>
@@ -95,6 +99,7 @@
     <h1>Réhabiliter un {{ _BDDFaction }}</h1>
 
     <form class="connexion" action="/edit/rehabilitaton" method="post">
+      {% set __readd = true %}
       <!-- Division des parties -->
       <section class="div_content_photo">
         <section class="part_add">
@@ -104,6 +109,7 @@
               {% for cop in oldcops %}
                 <option value="{{ cop.lspd_id }}">{{ cop.nom|capitalize }} {{ cop.prenom|capitalize }}</option>
               {% else %}
+                {% set __readd = false %}
                 <option value="">Aucun agent licencié</option>
               {% endfor %}
             </select>
@@ -117,7 +123,7 @@
         </section>
       </section>
 
-      {% if _agent.hab_1 == 2 %}
+      {% if _agent.hab_1 == 2 and __readd %}
       <div class="btn">
         <button class="form_button" type="submit" name="button">Réhabiliter</button>
       </div>

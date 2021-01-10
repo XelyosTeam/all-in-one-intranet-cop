@@ -64,7 +64,7 @@ function verif_data() {
       if (resultat.etat == 1) {
          let tab_phrase = [
            ["Initialisation de la connexion.....", "txt1", 1],
-           ["Ligne bloquée.....", "txt2", 0], // A modifier plus tard pour trouver qqc de plus beau
+           ["Ligne bloquée.....", "txt2", 0],
            ["Contactez votre supérieur.....", "txt3", 1],
            ["Accès refusé !", "txt4", 0]
          ];

@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Administration - Détails Echec Connexion #}
 {% extends "_base.twig" %}
 
@@ -18,11 +19,11 @@
 
 {% block main %}
 <section class="contenu">
-  <h1>Détail Echec(s)- {{ ip }}</h1>
+  <h1>Détails Echec(s)- {{ ip }}</h1>
 
   {% for liste in listes %}
   <div>
-    <label>Matricule : {{ liste.matricule_utilise }} / Mdp : {{ liste.mpd_utilise|slice(0, 20) }} / Détail : {{ liste.commentaire }}</label>
+    <label>Matricule : {{ liste.matricule_utilise }} / Mdp : {{ liste.mpd_utilise|slice(0, 20) }} / Détails : {{ liste.commentaire }}</label>
   </div>
   {% endfor %}
 

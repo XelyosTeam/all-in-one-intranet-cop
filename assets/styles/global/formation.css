@@ -36,6 +36,6 @@
 
 .contenu a:hover
 {
-  color: #103469;
+  color: var(--Text);
   text-decoration: underline;
 }

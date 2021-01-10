@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Administration - Historique #}
 {% extends "_base.twig" %}
 
@@ -24,16 +25,22 @@
   <h1>Liste des agents</h1>
   <section>
     {% for cop in cops %}
-    <div onclick="protocoleHistorique('{{ cop.matricule }}');">
-      <img src="/assets/img/identité/{{ cop.photo}}" alt="Photo de {{ cop.nom|capitalize }} {{ cop.prenom|capitalize }}">
-      <p>{{ cop.grade}} {{ cop.nom}}</p>
-    </div>
+      <div onclick="protocoleHistorique('{{ cop.matricule }}');">
+        <img src="/assets/img/identité/{{ cop.photo}}" alt="Photo de {{ cop.nom|capitalize }} {{ cop.prenom|capitalize }}">
+        <p>{{ cop.grade}} {{ cop.nom}}</p>
+      </div>
+    {% else %}
+      <div>
+        <img src="/assets/img/logo.png" alt="Logo">
+        <p>Aucun {{ _membreFaction }} actif enregistré</p>
+      </div>
     {% endfor %}
+
     {% for cop in oldcops %}
-    <div class="old" onclick="protocoleHistorique('{{ cop.matricule }}');">
-      <img src="/assets/img/identité/{{ cop.photo}}" alt="Photo de {{ cop.nom|capitalize }} {{ cop.prenom|capitalize }}">
-      <p>{{ cop.nom}} {{ cop.prenom}}</p>
-    </div>
+      <div class="old" onclick="protocoleHistorique('{{ cop.matricule }}');">
+        <img src="/assets/img/identité/{{ cop.photo}}" alt="Photo de {{ cop.nom|capitalize }} {{ cop.prenom|capitalize }}">
+        <p>{{ cop.nom}} {{ cop.prenom}}</p>
+      </div>
     {% endfor %}
   </section>
 </section>
@@ -56,11 +63,10 @@
     </div>
 
     <p><strong>Nombre de véhicule enregistré :</strong><span id ="nb_car"></span></p>
-    <!-- <p><strong></strong><span id ="value"></span></p> -->
   </section>
 </section>
 
-{# Historique d'action en fonctoin de l'agent #}
+{# Historique d'action en fonction de l'agent #}
 <section class="information_historique">
   <h1>Historique <span id="agent_nom2"></span></h1>
 
@@ -69,7 +75,7 @@
   </section>
 </section>
 
-{# Historique de connexion en fonctoin de l'agent #}
+{# Historique de connexion en fonction de l'agent #}
 <section class="information_historique">
   <h1>Historique de connexion <span id="agent_nom3"></span></h1>
 

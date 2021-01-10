@@ -8,7 +8,7 @@
 
 /* PC */
 ::placeholder {
-  color: #2D548F;
+  color: var(--placeholder);
   opacity: 0.5;
 }
 
@@ -61,19 +61,19 @@ header img
   margin-left: 5%;
   margin-right: 5%;
   border-radius: 10px;
-  background-color: #103469;
+  background-color: var(--navBarBack);
 }
 
 .nav_bar a
 {
-  color: #fff;
+  color: var(--navBarText);
   text-transform: capitalize;
   font-size: 1.3em;
 }
 
 .nav_bar a:hover
 {
-  color: #FFE000;
+  color: var(--navBarHover);
 }
 
 footer
@@ -81,7 +81,7 @@ footer
   margin-top: 2%;
   margin-bottom: 0;
   width: 100%;
-  background-color: #103469;
+  background-color: var(--footerBack);
   text-align: center;
   padding-top: 0.25%;
   padding-bottom: 0.25%;
@@ -89,7 +89,7 @@ footer
 
 footer p
 {
-  color: #fff;
+  color: var(--footerText);
   font-weight: bold;
   font-size: 1.1em;
   font: Arial;
@@ -154,64 +154,64 @@ footer p
 /* background des liens menus */
 .menu_deroulant li:first-child
 {
-  background-color: #103469;
+  background-color: var(--navBarBack);
 }
 
 .menu_deroulant li:nth-child(2)
 {
-  background-color: #103469;
+  background-color: var(--navBarBack);
 }
 
 .menu_deroulant li:nth-child(3)
 {
-  background-color: #103469;
+  background-color: var(--navBarBack);
 }
 
 .menu_deroulant li:last-child
 {
-  background-color: #103469;
+  background-color: var(--navBarBack);
 }
 
 /* background des liens sous menus */
 .menu_deroulant li:first-child li
 {
-  background: #103469;
+  background: var(--navBarBack);
 }
 
 .menu_deroulant li:nth-child(2) li
 {
-  background: #103469;
+  background: var(--navBarBack);
 }
 
 .menu_deroulant li:nth-child(3) li
 {
-  background: #103469;
+  background: var(--navBarBack);
 }
 
 .menu_deroulant li:last-child li
 {
-  background: #103469;
+  background: var(--navBarBack);
 }
 
 /* background des liens menus et sous menus au survol */
 .menu_deroulant li:first-child:hover, .menu_deroulant li:first-child li:hover
 {
-  background: #103469;
+  background: var(--navBarBack);
 }
 
 .menu_deroulant li:nth-child(2):hover, .menu_deroulant li:nth-child(2) li:hover
 {
-  background: #103469;
+  background: var(--navBarBack);
 }
 
 .menu_deroulant li:nth-child(3):hover, .menu_deroulant li:nth-child(3) li:hover
 {
-  background: #103469;
+  background: var(--navBarBack);
 }
 
 .menu_deroulant li:last-child:hover, .menu_deroulant li:last-child li:hover
 {
-  background: #103469;
+  background: var(--navBarBack);
 }
 
 /* les a href */
@@ -220,7 +220,7 @@ footer p
   text-decoration: none;
   display: block;
   padding: 8px 32px;
-  color: #fff;
+  color: var(--navBarText);
 }
 
 .menu_deroulant ul a
@@ -230,11 +230,11 @@ footer p
 
 .menu_deroulant li:hover li a
 {
-  color: #fff;
+  color: var(--navBarText);
   text-transform: inherit;
 }
 
 .menu_deroulant li:hover a, .menu_deroulant li li:hover a
 {
-  color: #FFE000;
+  color: var(--navBarHover);
 }

@@ -1,0 +1,42 @@
+/*
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+*/
+
+/* Gestion des couleurs sur l'intranet */
+:root {
+  /* Barre de navigation */
+  --navBarBack: #103469; /* couleur barre de navigation */
+  --navBarText: #fff; /* couleur du text barre de navigation */
+  --navBarHover: #d7be03; /* Couleur du text barre de navigation survolé*/
+
+  /* Content */
+  --background: #EDEFF5; /* couleur de fond */
+  --Bouton: #103469; /* fond bouton */
+  --BoutonText: #f7f7f7; /* texte bouton */
+  --BoutonTextHover: #d7be03; /* texte bouton survolé */
+  --Text: #103469; /* couleur texte */
+  --placeholder: #2D548F; /* texte champ de saisie */
+  --textAlert: #AE0000; /* texte des alertes */
+  --profilDescription: #b0b0b0; /* texte profil de description */
+
+  /* Habilitation */
+  --Habilite: #00850B; /* habitlitaté */
+  --nonHabilite: #DA0000; /* non habilité */
+  --inFormation: #E09E08; /* en formation */
+
+  /* Historique */
+  --oldAgent: #b0b0b0; /* couleur de fond ancien agent historique */
+
+  /* Tchat inter service */
+  --copColor: #103469;
+  --secourColor: #AE0000;
+
+  /* Footer */
+  --footerBack: #103469; /* Couleur de fond */
+  --footerText: #fff; /* Couleur des textes */
+
+}

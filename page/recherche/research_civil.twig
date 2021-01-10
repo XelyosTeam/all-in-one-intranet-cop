@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Recherche Civil #}
 {% extends "_base.twig" %}
 
@@ -29,17 +30,17 @@
   </form>
 
   {% for civil in civils %}
-  <div class="Resultat">
-    <img src="/assets/img/identité/{{ civil.photo }}" alt="Photo de {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}">
-    <p>{{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</p>
-    <a href="/civil/{{ civil.id }}">Consulter</a>
-  </div>
+    <div class="Resultat">
+      <img src="/assets/img/identité/{{ civil.photo }}" alt="Photo de {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}">
+      <p>{{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</p>
+      <a href="/civil/{{ civil.id }}">Consulter</a>
+    </div>
   {% else %}
-  <div class="Resultat">
-    <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
-    <p>Aucune personne ne correspond à votre recherche</p>
-    <a href="#"></a>
-  </div>
+    <div class="Resultat">
+      <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+      <p>Aucune personne ne correspond à votre recherche</p>
+      <a href="#"></a>
+    </div>
   {% endfor %}
 
 

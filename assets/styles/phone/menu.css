@@ -23,7 +23,7 @@
   .mobile_phone
   {
     /* Apparence du menu */
-    background-color: #103469;
+    background-color: var(--navBarBack);
     position: fixed;
     top: 0px;
     left: 0px;
@@ -39,11 +39,9 @@
 
   .mobile_phone button
   {
-    background-color: #103469;
+    background-color: var(--navBarBack);
     border: none;
-    color: #fff;
+    color: var(--navBarText);
     font-size: 3em;
   }
-
-
 }

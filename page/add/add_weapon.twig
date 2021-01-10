@@ -5,24 +5,27 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
-{# Ajout des véhicules #}
+
+{# Signalement des armes #}
 {% extends "_base.twig" %}
 
 {% block style %}
 <link rel="stylesheet" type="text/css" href="/assets/styles/global/division_image.css">
 {% endblock %}
 
-{% block description %}Recensement Véhicule{% endblock %}
+{% block description %}Signalement Arme{% endblock %}
 
-{% block key %}Recensement Véhicule{% endblock %}
+{% block key %}Signalement Arme{% endblock %}
 
-{% block title %}Recensement Véhicule{% endblock %}
+{% block title %}Signalement Arme{% endblock %}
 
 {% block main %}
 <section class="contenu">
   <h1>Signalement Arme</h1>
 
   <form id="formulaire_ajout_car" name="form_car" action="/insert/weapon" method="post">
+    <!-- v2.0.0 -->
+    {% set __add = true %}
 
     <!-- Division des parties -->
     <section class="div_content_photo">
@@ -33,6 +36,9 @@
           <select id="weapon_type" name="weapon_model" onchange="affiche_photo_arme();">
             {% for arme in armes %}
               <option value="{{ arme.id }}">{{ arme.nom|capitalize }}</option>
+            {% else %}
+              {% set __add = false %}
+              <option>Aucun modèle d'arme enregistré</option>
             {% endfor %}
           </select>
         </div>
@@ -43,7 +49,10 @@
           <select id="personne_type" name="weapon_owner" onchange="affiche_photo_personne();">
 
             {% for personne in personnes %}
-            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+              <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+            {% else %}
+              {% set __add = false %}
+              <option>Aucun civil rencencé</option>
             {% endfor %}
           </select>
         </div>
@@ -61,7 +70,7 @@
       </section>
     </section>
 
-    {% if _agent.ajouter != 0 %}
+    {% if _agent.ajouter != 0 and __add %}
     <div class="btn">
       <button id="valid_button" class="form_button" type="submit" name="button">Enregistrer</button>
     </div>

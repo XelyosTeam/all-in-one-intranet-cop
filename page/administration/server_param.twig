@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Administration - Modification Paramètre Serveur #}
 {% extends "_base.twig" %}
 
@@ -21,57 +22,34 @@
   <form class="connexion" action="" method="post">
     <h1>Section paramètre</h1>
     <div>
-      <label for="name">Echec maximum de connexion :</label>
+      <label for="name">Échec maximum de connexion :</label>
       <input class="short" type="number" min="0" name="failed_connexion" id="failed_connexion" placeholder="{{ fail }}"></input>
     </div>
 
     <div>
       <label for="name">Période de retrait de permis :</label>
       <select class="short" name="periode_drive" id="periode_drive">
-        {% if _typePermis == "w" %}
-        <option value="w">Semaine</option>
-        <option value="w">=========</option>
-        <option value="j">Jour</option>
-        <option value="h">Heure</option>
-        <option value="m">Minute</option>
-        <option value="s">Seconde</option>
-        {% endif %}
+        <!-- v2.0.0 -->
+        {# Déclaration des types #}
+        {% set __week = {'type': 'w', 'name': 'Semaine'} %}
+        {% set __day = {'type': 'j', 'name': 'Jour'} %}
+        {% set __hour = {'type': 'h', 'name': 'Heure'} %}
+        {% set __minute = {'type': 'm', 'name': 'Minute'} %}
+        {% set __sec = {'type': 's', 'name': 'Seconde'} %}
+        {# Fabrication tableau #}
+        {% set __list = [__week, __day, __hour, __minute, __sec, ] %}
 
-        {% if _typePermis == "j" %}
-        <option value="j">Jour</option>
-        <option value="j">=========</option>
-        <option value="w">Semaine</option>
-        <option value="h">Heure</option>
-        <option value="m">Minute</option>
-        <option value="s">Seconde</option>
-        {% endif %}
+        {% for item in __list %}
+          {% if _typePermis == item.type %}
+          <option value="{{ item.type }}">{{ item.name }}</option>
+          <option value="{{ item.type }}">=========</option>
+          {% endif %}
+        {% endfor %}
 
-        {% if _typePermis == "h" %}
-        <option value="h">Heure</option>
-        <option value="h">=========</option>
-        <option value="w">Semaine</option>
-        <option value="j">Jour</option>
-        <option value="m">Minute</option>
-        <option value="s">Seconde</option>
-        {% endif %}
+        {% for item in __list %}
+          <option value="{{ item.type }}">{{ item.name }}</option>
+        {% endfor %}
 
-        {% if _typePermis == "m" %}
-        <option value="m">Minute</option>
-        <option value="m">=========</option>
-        <option value="w">Semaine</option>
-        <option value="j">Jour</option>
-        <option value="h">Heure</option>
-        <option value="s">Seconde</option>
-        {% endif %}
-
-        {% if _typePermis == "s" %}
-        <option value="s">Seconde</option>
-        <option value="s">=========</option>
-        <option value="w">Semaine</option>
-        <option value="j">Jour</option>
-        <option value="h">Heure</option>
-        <option value="m">Minute</option>
-        {% endif %}
       </select>
     </div>
 
@@ -87,14 +65,14 @@
     </div>
 
     <div>
-      <label for="name">Etat candidature :</label>
+      <label for="name">État candidature :</label>
       <select class="short" name="etat_recrut" id="etat_recrut">
         {% if _Recrutement == "0" %}
-        <option value="0">Fermé</option>
-        <option value="1">Ouvert</option>
+          <option value="0">Fermé</option>
+          <option value="1">Ouvert</option>
         {% else %}
-        <option value="1">Ouvert</option>
-        <option value="0">Fermé</option>
+          <option value="1">Ouvert</option>
+          <option value="0">Fermé</option>
         {% endif %}
       </select>
     </div>

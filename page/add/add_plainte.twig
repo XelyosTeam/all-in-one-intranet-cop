@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Ajout Plainte #}
 {% extends "_base.twig" %}
 
@@ -23,6 +24,8 @@
   <h1>Plainte sur Civil</h1>
 
   <form class="connexion" action="/insert/plainte" method="post">
+    <!-- v2.0.0 -->
+    {% set __add = true %}
 
     <!-- Division des parties -->
     <section class="div_content_photo">
@@ -33,7 +36,10 @@
           <select id="personne_type" name="deposeur" onchange="affiche_photo_personne();">
             <option value="NULL">Sélectionner un citoyen</option>
             {% for personne in personnes %}
-            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+              <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+            {% else %}
+              {% set __add = false %}
+              <option>Aucun civil recensé</option>
             {% endfor %}
           </select>
         </div>
@@ -45,14 +51,17 @@
             <option value="NULL">Sélectionner un citoyen</option>
             <option value="1">Inconnu</option>
             {% for personne in personnes %}
-            <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+              <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+            {% else %}
+              {% set __add = false %}
+              <option>Aucun civil recensé</option>
             {% endfor %}
           </select>
         </div>
 
         <div>
-          <label>Détail de la plainte :</label>
-          <textarea name="plainte" placeholder="Saisie des détails de la plainte" required></textarea>
+          <label>Détails de la plainte :</label>
+          <textarea name="plainte" placeholder="Entrez les détails de la plainte" required></textarea>
         </div>
       </section>
 
@@ -67,8 +76,7 @@
       </section>
     </section>
 
-
-    {% if _agent.ajouter != 0 %}
+    {% if _agent.ajouter != 0 and __add %}
     <div class="btn">
       <button class="form_button" type="submit" name="button">Enregistrer</button>
     </div>

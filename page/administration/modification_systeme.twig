@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Administration - Modification #}
 {% extends "_base.twig" %}
 
@@ -24,11 +25,15 @@
     <h1>Modification du mot de passe</h1>
 
     <form class="connexion" action="" method="post">
+      {% set __agt = true %} <!-- v2.0.0 -->
       <div>
         <label>Nom de l'agent :</label>
         <select id="nom_pwd" name="nom">
           {% for agent in agents %}
             <option value="{{ agent.lspd_id }}">{{ agent.nom }} {{ agent.prenom }}</option>
+          {% else %}
+          {% set __agt = false %}
+            <option>Aucun {{ _membreFaction }} actif enregistré</option>
           {% endfor %}
         </select>
       </div>
@@ -42,9 +47,11 @@
         <p id="confirm_edit_mdp">Mot de passe modifié</p>
       </div>
 
-      <div class="btn">
-        <button class="form_button" type="submit" name="button" onclick="editPassWord();" >Modifier</button>
-      </div>
+      {% if __agt %}
+        <div class="btn">
+          <button class="form_button" type="submit" name="button" onclick="editPassWord();" >Modifier</button>
+        </div>
+      {% endif %}
     </form>
 
   </section>
@@ -54,20 +61,25 @@
     <h1>Accès Bloqué</h1>
 
     <form class="connexion" action="/administration/details/echec" method="post">
+      {% set __hist = true %}
       <div>
         <label>Nom du {{ _BDDFaction }} :</label>
         <select name="adresse">
           {% for echec in echecs %}
             <option value="{{ echec.adresse_ip }}">{{ echec.adresse_ip }} - {{ echec.NbEchecs }} échec(s)</option>
           {% else %}
+            {% set __hist = false %}
             <option value="0">Rien à signaler</option>
           {% endfor %}
         </select>
       </div>
 
-      <div class="btn">
-        <button class="form_button" type="submit" name="button">Détails</button>
-      </div>
+      {% if __hist %}
+        <div class="btn">
+          <button class="form_button" type="submit" name="button">Détails</button>
+        </div>
+      {% endif %}
+
     </form>
   </section>
 
@@ -93,7 +105,9 @@
         <select id="delit_id" onchange="EditMenuModDelit(this.value);">
           <option value="0">Sélectionner un délit</option>
           {% for delit in routes %}
-          <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+            <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+          {% else %}
+            <option value="0">Aucun délit enregistré</option>
           {% endfor %}
         </select>
       </div>
@@ -104,6 +118,8 @@
           <option value="0">Sélectionner un délit</option>
           {% for delit in legers %}
           <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+          {% else %}
+            <option value="0">Aucun délit enregistré</option>
           {% endfor %}
         </select>
       </div>
@@ -114,6 +130,8 @@
           <option value="0">Sélectionner un délit</option>
           {% for delit in moyens %}
           <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+          {% else %}
+            <option value="0">Aucun délit enregistré</option>
           {% endfor %}
         </select>
       </div>
@@ -124,6 +142,8 @@
           <option value="0">Sélectionner un délit</option>
           {% for delit in graves %}
           <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+          {% else %}
+            <option value="0">Aucun délit enregistré</option>
           {% endfor %}
         </select>
       </div>
@@ -157,13 +177,14 @@
       <!-- Division des parties -->
       <section class="div_content_photo">
         <section class="part_add">
+          {% set __visible = true %}
           <div>
             <label>Citoyen :</label>
-
             <select id="personne_type" name="nom_civil" onchange="affiche_photo_personne();">
               {% for personne in visibles %}
                 <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
               {% else %}
+                {% set __visible = false %}
                 <option>Aucun civil visible</option>
               {% endfor %}
             </select>
@@ -177,9 +198,12 @@
         </section>
       </section>
 
-      <div class="btn">
-        <button class="form_button" type="submit" name="button">Masquer</button>
-      </div>
+      {% if __visible %}
+        <div class="btn">
+          <button class="form_button" type="submit" name="button">Masquer</button>
+        </div>
+      {% endif %}
+
     </form>
   </section>
 
@@ -191,6 +215,7 @@
       <!-- Division des parties -->
       <section class="div_content_photo">
         <section class="part_add">
+          {% set __invisible = true %}
           <div>
             <label>Citoyen :</label>
 
@@ -198,6 +223,7 @@
               {% for personne in invisibles %}
                 <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
               {% else %}
+                {% set __invisible = false %}
                 <option>Aucun civil masqué</option>
               {% endfor %}
             </select>
@@ -211,9 +237,11 @@
         </section>
       </section>
 
-      <div class="btn">
-        <button class="form_button" type="submit" name="button">Réintégrer</button>
-      </div>
+      {% if __invisible %}
+        <div class="btn">
+          <button class="form_button" type="submit" name="button">Réintégrer</button>
+        </div>
+      {% endif %}
     </form>
   </section>
 

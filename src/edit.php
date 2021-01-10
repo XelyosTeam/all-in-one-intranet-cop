@@ -143,12 +143,12 @@
     $modification->save();
   }
 
-  function editVehicule($plaque, $color, $road) {
+  function editVehicule($plaque, $color, $road, $proprio) {
     $voiture = Model::factory('Vehicules')->where('plaque', $plaque)->find_one();
     $voiture->set(array(
                 'couleur' => $color,
                 'en_circulation' => $road,
-                'proprietaire' => $proprio
+                'proprietaire' => $proprio // v1.6.1
     ));
     $voiture->save();
   }

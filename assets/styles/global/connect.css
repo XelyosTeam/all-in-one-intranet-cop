@@ -12,7 +12,7 @@
   display: block;
   margin: 5% 37% 5% 37%;
   border-radius: 10px;
-  background-color: #EDEFF5;
+  background-color: var(--background);
   text-align: center;
   padding-bottom: 2%;
 }
@@ -21,7 +21,7 @@
 {
   padding-top: 7%;
   padding-bottom: 2%;
-  color: #103469;
+  color: var(--Text);
 }
 
 .connexion div input
@@ -31,15 +31,15 @@
   margin-bottom: 5%;
   width: 80%;
   height: 20%;
-  background-color: #EDEFF5;
-  color: #103469;
+  background-color: var(--background);
+  color: var(--Text);
   font-weight: bold;
   font-size: 1.5em;
 }
 
 .connexion div p
 {
-  color: #AE0000;
+  color: var(--textAlert);
   font-weight: bold;
   text-align: left;
   margin-left: 10%;
@@ -51,10 +51,15 @@
   margin-left: 30%;
   border: none;
   border-radius: 10px;
-  background-color: #103469;
-  color: #fff;
+  background-color: var(--Bouton);
+  color: var(--BoutonText);
   padding: 2%;
   font-size: 1.25em;
+}
+
+.connexion button:hover
+{
+  color: var(--BoutonTextHover);
 }
 
 

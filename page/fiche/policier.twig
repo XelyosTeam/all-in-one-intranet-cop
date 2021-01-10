@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Fiche Force de l'ordre #}
 {% extends "_base.twig" %}
 
@@ -27,71 +28,34 @@
   <section class="habilitation">
     <h1>Habilitation</h1>
     <div class="grille">
-      {% if _Hab1 != "" %}
-        <p class="{% if agent.hab_1 == 2 %}green{% elseif agent.hab_1 == 1 %}orange{% else %}red{% endif %}">{{ _Hab1 }}</p>
-      {% endif %}
+      {# Mise en forme variable #}
+      {% set __superListe = [
+          {'type': _Hab1, 'value': agent.hab_1 },
+          {'type': _Hab2, 'value': agent.hab_2 },
+          {'type': _Hab3, 'value': agent.hab_3 },
+          {'type': _Hab4, 'value': agent.hab_4 },
+          {'type': _Hab5, 'value': agent.hab_5 },
+          {'type': _Hab6, 'value': agent.hab_6 },
+          {'type': _Hab7, 'value': agent.hab_7 },
+          {'type': _Hab8, 'value': agent.hab_8 },
+          {'type': _Hab9, 'value': agent.hab_9 },
+          {'type': "vide", 'value': "" },
+          {'type': _Hab10, 'value': agent.hab_10 },
+          {'type': _Hab11, 'value': agent.hab_11 },
+          {'type': _Hab12, 'value': agent.hab_12 },
+          {'type': _Hab13, 'value': agent.hab_13 },
+          {'type': _Hab14, 'value': agent.hab_14 },
+          {'type': _Hab15, 'value': agent.hab_15 }
+        ]
+      %}
 
-      {% if _Hab2 != "" %}
-        <p class="{% if agent.hab_2 == 2 %}green{% elseif agent.hab_2 == 1 %}orange{% else %}red{% endif %}">{{ _Hab2 }}</p>
-      {% endif %}
-
-      {% if _Hab3 != "" %}
-        <p class="{% if agent.hab_3 == 2 %}green{% elseif agent.hab_3 == 1 %}orange{% else %}red{% endif %}">{{ _Hab3 }}</p>
-      {% endif %}
-
-      {% if _Hab4 != "" %}
-        <p class="{% if agent.hab_4 == 2 %}green{% elseif agent.hab_4 == 1 %}orange{% else %}red{% endif %}">{{ _Hab4 }}</p>
-      {% endif %}
-
-      {% if _Hab5 != "" %}
-        <p class="{% if agent.hab_5 == 2 %}green{% elseif agent.hab_5 == 1 %}orange{% else %}red{% endif %}">{{ _Hab5 }}</p>
-      {% endif %}
-
-      {% if _Hab6 != "" %}
-        <p class="{% if agent.hab_6 == 2 %}green{% elseif agent.hab_6 == 1 %}orange{% else %}red{% endif %}">{{ _Hab6 }}</p>
-      {% endif %}
-
-      {% if _Hab7 != "" %}
-        <p class="{% if agent.hab_7 == 2 %}green{% elseif agent.hab_7 == 1 %}orange{% else %}red{% endif %}">{{ _Hab7 }}</p>
-      {% endif %}
-
-      {% if _Hab8 != "" %}
-        <p class="{% if agent.hab_8 == 2 %}green{% elseif agent.hab_8 == 1 %}orange{% else %}red{% endif %}">{{ _Hab8 }}</p>
-      {% endif %}
-
-      {% if _Hab9 != "" %}
-        <p class="{% if agent.hab_9 == 2 %}green{% elseif agent.hab_9 == 1 %}orange{% else %}red{% endif %}">{{ _Hab9 }}</p>
-      {% endif %}
-
-      {# Spécialement pour un fonctionnement à 10 habilitations #}
-      <p></p>
-
-      {% if _Hab10 != "" %}
-        <p class="{% if agent.hab_10 == 2 %}green{% elseif agent.hab_10 == 1 %}orange{% else %}red{% endif %}">{{ _Hab10 }}</p>
-      {% endif %}
-
-      {% if _Hab11 != "" %}
-        <p class="{% if agent.hab_11 == 2 %}green{% elseif agent.hab_11 == 1 %}orange{% else %}red{% endif %}">{{ _Hab11 }}</p>
-      {% endif %}
-
-      {# Spécialement pour un fonctionnement à 10 habilitations #}
-      <p></p>
-
-      {% if _Hab12 != "" %}
-        <p class="{% if agent.hab_12 == 2 %}green{% elseif agent.hab_12 == 1 %}orange{% else %}red{% endif %}">{{ _Hab12 }}</p>
-      {% endif %}
-
-      {% if _Hab13 != "" %}
-        <p class="{% if agent.hab_13 == 2 %}green{% elseif agent.hab_13 == 1 %}orange{% else %}red{% endif %}">{{ _Hab13 }}</p>
-      {% endif %}
-
-      {% if _Hab14 != "" %}
-        <p class="{% if agent.hab_14 == 2 %}green{% elseif agent.hab_14 == 1 %}orange{% else %}red{% endif %}">{{ _Hab14 }}</p>
-      {% endif %}
-
-      {% if _Hab15 != "" %}
-        <p class="{% if agent.hab_15 == 2 %}green{% elseif agent.hab_15 == 1 %}orange{% else %}red{% endif %}">{{ _Hab15 }}</p>
-      {% endif %}
+      {% for __item in __superListe %}
+        {% if __item.type != "" and __item.type != "vide" %}
+          <p class="{% if __item.value == 2 %}green{% elseif __item.value == 1 %}orange{% else %}red{% endif %}">{{ __item.type }}</p>
+        {% elseif __item.type == "vide" %}
+          <p></p>
+        {% endif %}
+      {% endfor %}
     </div>
   </section>
 

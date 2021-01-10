@@ -10,9 +10,8 @@
 @media (max-width:1001px)
 {
 
-  body /* Trouver une solution pour l'améliorer */
+  body
   {
-    /*background: #CACACA;*/
     background-image: url(/assets/img/backgroundPhone.jpg);
   }
 

@@ -1,19 +1,10 @@
 <?php
-  /*
-    Le projet All in One est un produit Xelyos mis à disposition gratuitement
-    pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
-    ne pas supprimer le ou les auteurs du projet.
-    Created by : Xelyos - Aros
-    Edited by :
-  */
   require "vendor/autoload.php";
 
   /* Initialisation des variables de sessions */
-  require __DIR__ . '/vendor/autoload.php';
   use Josantonius\Session\Session;
 
   Session::init();
-
   /* Initialisation des variables de sessions */
 
   /* Associer Flight à Twig */
@@ -194,6 +185,7 @@
 
   Flight::route('/administration/historique/get_info', function()
   {
+    header("Access-Control-Allow-Origin: *");
     verif_connecter();
     verif_admin();
 
@@ -224,13 +216,20 @@
       else {
         $i = 0;
         foreach ($liste as $key => $action) {
-          $data[$key] = [
-            'id' => $action->id,
-            'date' => $action->date_even,
-            'event' => decryptHistorique($action->contenu)
-          ];
-          $i++;
+
+        try {
+          $event = decryptHistorique($action->contenu);
+        } catch (\Exception $e) {
+          $event = $action->contenu;
         }
+
+        $data[$key] = [
+          'id' => $action->id,
+          'date' => $action->date_even,
+          'event' => $event
+        ];
+        $i++;
+      }
 
         $data[$i] = ['etat' => $name];
       }
@@ -241,6 +240,7 @@
 
   Flight::route('/administration/historique_connexion/get_info', function()
   {
+    header("Access-Control-Allow-Origin: *");
     verif_connecter();
     verif_admin();
 
@@ -288,6 +288,7 @@
 
   Flight::route('/administration/historique/get_stats', function()
   {
+    header("Access-Control-Allow-Origin: *");
     verif_connecter();
     verif_admin();
 
@@ -1183,6 +1184,7 @@
 
   Flight::route('/recherche/validiter/plaque', function()
   {
+    header("Access-Control-Allow-Origin: *");
     verif_connecter();
     $plaque = $_POST["plaque"];
 
@@ -1207,6 +1209,7 @@
 
   Flight::route('/recherche/doublon/civil', function()
   {
+    header("Access-Control-Allow-Origin: *");
     verif_connecter();
     $nom = $_POST["nom"];
     $prenom = $_POST["prenom"];
@@ -1228,6 +1231,7 @@
 
   Flight::route('/recherche/info_delit', function()
   {
+    header("Access-Control-Allow-Origin: *");
     verif_connecter();
     verif_admin();
     $nom = $_POST["id_delit"];
@@ -1247,6 +1251,7 @@
   # On pourra tout rassembler en un
   Flight::route('/recherche/photo/arme', function()
   {
+    header("Access-Control-Allow-Origin: *");
     verif_connecter();
     $modele = $_POST["type"];
 
@@ -1262,6 +1267,7 @@
 
   Flight::route('/recherche/photo/cop', function()
   {
+    header("Access-Control-Allow-Origin: *");
     verif_connecter();
     $id = $_POST["id"];
 
@@ -1278,6 +1284,7 @@
 
   Flight::route('/recherche/photo/personne', function()
   {
+    header("Access-Control-Allow-Origin: *");
     verif_connecter();
     $id = $_POST["id"];
 
@@ -1294,6 +1301,7 @@
 
   Flight::route('/recherche/photo/vehicule', function()
   {
+    header("Access-Control-Allow-Origin: *");
     verif_connecter();
     $modele = $_POST["type"];
 
@@ -1309,6 +1317,7 @@
 
   Flight::route('/recherche/photo/plaque', function()
   {
+    header("Access-Control-Allow-Origin: *");
     verif_connecter();
     $plaque = $_POST["type"];
 
@@ -1368,6 +1377,7 @@
   /* Utilisé pour afficher l'état des recrutements */
   Flight::route('/recrutement/etat', function()
   {
+    header("Access-Control-Allow-Origin: *");
     $data = [
       'etat' => serveurIni('Faction', 'etatRecrutement')
     ];
@@ -1401,11 +1411,11 @@
     $enregistreur = Agent::getInfoAgentID($voiture->enregistreur);
 
     Flight::view()->display('edit/vehicule.twig', array(
-      'proprio' => Personne::getinfoPersonne($voiture->proprio),
-      'voiture' => $voiture,
-      'policier' => Agent::getInfoAgentMatricule($enregistreur->matricule),
-      'delits' => Route::getListDelitByV($voiture->v_id),
-      'civils' => Personne::getListPersonne(2)
+      'proprio' => Personne::getinfoPersonne($voiture->proprio), // Information sur le propriétaire véhicule
+      'voiture' => $voiture, // Information sur le véhicule
+      'policier' => Agent::getInfoAgentMatricule($enregistreur->matricule), // Information sur le policier qui a enregistrer le véhicule
+      'delits' => Route::getListDelitByV($voiture->v_id), // Liste des délits routier
+      'civils' => Personne::getListPersonne(2) // v1.6.1
     ));
   });
 
@@ -1432,38 +1442,38 @@
   });
 
   Flight::route('/vehicule/@plaque/modification', function($plaque)
-{
-  verif_connecter();
-  /* Variable récupéré dans le get */
-  $color = $_POST['couleur'];
-  $road = $_POST['circu'];
-  $proprio = $_POST['proprio'];
-  /* Variable récupéré dans le get */
+  {
+    verif_connecter();
+    /* Variable récupéré dans le get */
+    $color = $_POST['couleur'];
+    $road = $_POST['circu'];
+    $proprio = $_POST['proprio']; // v1.6.1
+    /* Variable récupéré dans le get */
 
-  $agent = Agent::getInfoAgent();
-  if ($agent->editer == 0) {
+    $agent = Agent::getInfoAgent();
+    if ($agent->editer == 0) {
+      Flight::redirect("/vehicule/$plaque");
+      exit();
+    }
+
+    $oldinfo = Voiture::getCar($plaque);
+
+    if ($oldinfo->couleur != $color) {
+      addHistorique($agent->matricule, "3¤2¤0¤" . $plaque . "¤" . $oldinfo->couleur . "¤" . $color);
+    }
+
+    if ($oldinfo->circulation != $road) {
+      addHistorique($agent->matricule, "3¤2¤1¤" . $plaque . "¤" . $oldinfo->circulation . "¤" . $road);
+    }
+
+    if ($oldinfo->proprio != $proprio) {  // v1.6.1
+      addHistorique($agent->matricule, "3¤2¤2¤" . $plaque . "¤" . $oldinfo->proprio . "¤" . $proprio);
+    }
+
+    editVehicule($plaque, $color, $road, $proprio); // v1.6.1
+
     Flight::redirect("/vehicule/$plaque");
-    exit();
-  }
-
- $oldinfo = Voiture::getCar($plaque);
-
-  if ($oldinfo->couleur != $color) {
-    addHistorique($agent->matricule, "3¤2¤0¤" . $plaque . "¤" . $oldinfo->couleur . "¤" . $color);
-  }
-
-  if ($oldinfo->circulation != $road) {
-    addHistorique($agent->matricule, "3¤2¤1¤" . $plaque . "¤" . $oldinfo->circulation . "¤" . $road);
-  }
-
-  if ($oldinfo->proprio != $proprio) {
-    addHistorique($agent->matricule, "3¤2¤2¤" . $plaque . "¤" . $oldinfo->proprio . "¤" . $proprio);
-  }
-
-  editVehicule($plaque, $color, $road, $proprio);
-
-   Flight::redirect("/vehicule/$plaque");
-});
+  });
 
   Flight::route('/add/cop', function()
   {
@@ -1923,6 +1933,7 @@
 
   Flight::route('/connect', function()
   {
+    header("Access-Control-Allow-Origin: *");
     /* Variable de POST */
     $matricule = $_POST['user_matricule'];
     $mdp = $_POST['user_mdp'];

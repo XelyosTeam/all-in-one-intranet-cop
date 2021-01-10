@@ -209,7 +209,7 @@ function decryptHistorique($code) {
     case '3¤2¤1':
       return "Modification Fiche - Véhicule n°". $code[3] . " - Etat de circulation => " . getCirculation($code[4]) . " >>> " . getCirculation($code[5]);
       break;
-    case '3¤2¤2':
+    case '3¤2¤2': // v1.6.1
       return "Modification Fiche - Véhicule n°". $code[3] . " - Propriétaire => " . getCivilName($code[4]) . " >>> " . getCivilName($code[5]);
       break;
 
@@ -296,7 +296,7 @@ function getArmeModel($type) {
 }
 
 function getGrade($grade) {
-  $name = Grade::getGrade($grade)->nom;
+  $name = Grade::getGradePosition($grade)->nom;
   if ($name) {
     return $name;
   }

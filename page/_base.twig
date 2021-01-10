@@ -5,12 +5,14 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Modèle de page #}
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
   <head>
     <meta charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="/assets/styles/reset.css">
+    <link rel="stylesheet" type="text/css" href="/assets/styles/color.css">
     <link rel="stylesheet" type="text/css" href="/assets/styles/global/general.css">
     <link rel="stylesheet" type="text/css" href="/assets/styles/phone/general.css">
     <link rel="stylesheet" type="text/css" href="/assets/styles/global/contenu.css">
@@ -19,10 +21,17 @@
     {% block style %}{% endblock %}
     <meta name="description" content="{% block description %}{% endblock %}">
     <meta name="author" content="Xelyos Team - Thomas">
-    <meta name="edited" content="">
     <meta name="keywords" content="{% block key %}{% endblock %}, {{ _nomFaction }}, Site Factice, {{ _jeuServeur }}, {{ _nomServeur }}">
     <title>{{ _nomFaction }} - {% block title %}{% endblock %}</title>
   </head>
+
+  <!--
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+  -->
 
   <body>
     {# Menu de naviguation Ordinateur #}
@@ -180,7 +189,7 @@
     </main>
 
     <footer>
-      <p>{{ _nomcompletFaction }}</p>
+      <p>{{ _nomcompletFaction}}</p>
       <p>2020</p>
       <p>Developped by Xelyos Team</p>
       <p>V {{ _Version }}</p>

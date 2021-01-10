@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Fiche Véhicule #}
 {% extends "_base.twig" %}
 
@@ -21,11 +22,11 @@
 
 {% block main %}
   <section class="info_personne">
-    <h1>Informations Véhicules</h1>
+    <h1>Informations Véhicule</h1>
     <img src="/assets/img/vehicule/{{ voiture.lien }}" alt="Photo {{ voiture.nom|capitalize }}">
-    <p><strong>Modèles :</strong>{{ voiture.nom|capitalize }}</p>
+    <p><strong>Modèle :</strong>{{ voiture.nom|capitalize }}</p>
     <p><strong>Couleur :</strong>{{ voiture.couleur|upper }}</p>
-    <p><strong>Plaques :</strong>{{ voiture.plaque|upper }}</p>
+    <p><strong>Plaque :</strong>{{ voiture.plaque|upper }}</p>
     <p><strong>Propriétaire :</strong><a href="/civil/{{ proprio.id }}">{{ proprio.nom|capitalize }} {{ proprio.prenom|capitalize }}</a></p></p>
     <p><strong>Enregistré Par :</strong><a href="/{{ _membreFaction }}/{{ policier.matricule }}">{{ policier.grade|capitalize }} {{ policier.nom|capitalize }}</a></p></p>
     <p><strong>En circulation :</strong>{% if voiture.circulation == 1 %}Oui{% elseif voiture.circulation == 0 %}Non{% else %}Non{% endif %}</p>
@@ -61,7 +62,5 @@
     {% endfor %}
 
 {% endblock %}
-
-{# Pour continuer, il faut ajouter les délits, et les relier avec les véhicules #}
 
 {% block script %}{% endblock %}

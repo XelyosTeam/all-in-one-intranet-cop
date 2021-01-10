@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Administration - Ajout #}
 {% extends "_base.twig" %}
 
@@ -116,11 +117,14 @@
 
       <div>
         <label>Type d'arme :</label>
+        <!-- v2.0.0 -->
+        {% set __arme = true %}
 
         <select class="short" name="cat_weapon">
           {% for arme in armes %}
             <option value="{{ arme.id }}">{{ arme.nom }} ({{ arme.prefix }})</option>
           {% else %}
+            {% set __arme = false %}
             <option>Aucune catégorie enregistrée</option>
           {% endfor %}
         </select>
@@ -132,9 +136,11 @@
         <input type="hidden" name="MAX_FILE_SIZE" value="5000000"> <!-- Limiteur de taille du fichier ici = 5Mo -->
       </div>
 
-      <div class="btn">
-        <button class="form_button" type="submit" name="button" onclick="addWeapon();">Ajouter</button>
-      </div>
+      {% if __arme %}
+        <div class="btn">
+          <button class="form_button" type="submit" name="button" onclick="addWeapon();">Ajouter</button>
+        </div>
+      {% endif %}
     </form>
   </section>
 
@@ -144,11 +150,14 @@
     <form class="connexion" action="/insert/img/identité" enctype="multipart/form-data" method="post">
       <div>
         <label>Nom de la personne :</label>
+        <!-- v2.0.0 -->
+        {% set __photo = true %}
 
         <select name="nom">
           {% for personne in personnes %}
             <option value="{{ personne.id }}">{{ personne.nom }} {{ personne.prenom }}</option>
           {% else %}
+            {% set __photo = false %}
             <option value="0">Tous les citoyens ont une photo</option>
           {% endfor %}
 
@@ -161,9 +170,11 @@
         <input type="hidden" name="MAX_FILE_SIZE" value="5000000"> <!-- Limiteur de taille du fichier ici = 5Mo -->
       </div>
 
-      <div class="btn">
-        <button class="form_button" type="submit" name="button">Insérer</button>
-      </div>
+      {% if __photo %}
+        <div class="btn">
+          <button class="form_button" type="submit" name="button">Insérer</button>
+        </div>
+      {% endif %}
     </form>
   </section>
 
@@ -175,11 +186,15 @@
       <!-- Division des parties -->
       <section class="div_content_photo">
         <section class="part_add">
+          {% set __prof = true %} <!-- v2.0.0 -->
           <div>
             <label>{{ _BDDFaction }} :</label>
             <select id="cop_type" name="nom_cop" onchange="affiche_photo_cop();">
               {% for agent in agents %}
-              <option value="{{ agent.lspd_id }}">{{ agent.nom|capitalize }} {{ agent.prenom|capitalize }}</option>
+                <option value="{{ agent.lspd_id }}">{{ agent.nom|capitalize }} {{ agent.prenom|capitalize }}</option>
+              {% else %}
+                  {% set __prof = false %}
+                  <option>Tous les {{ _membreFaction|lower }}s sont {{ _Hab1|lower }}</option>
               {% endfor %}
             </select>
           </div>

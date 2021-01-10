@@ -5,6 +5,7 @@
   Created by : Xelyos - Aros
   Edited by :
 #}
+
 {# Détail casier judiciaire #}
 {% extends "_base.twig" %}
 
@@ -34,7 +35,7 @@
     <p><strong>Temps de prison :</strong>{{ delit.prison }} mois</p>
     <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
     <p><strong>Enregistré le :</strong>{{ delit.enregistrer_le|date("d/m/Y") }}</p>
-    <p><strong>Etat :</strong>{% if delit.etat == 2 %}Fermé{% elseif delit.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
+    <p><strong>État :</strong>{% if delit.etat == 2 %}Fermé{% elseif delit.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
     <p><strong>Rapport :</strong></p>
     <p class="remarque">{{ delit.remarque }}</p>
     {% if ((ouvert.matricule == _agent.matricule) or (_agent.hab_1 == 2)) and (delit.etat == 0) %}
