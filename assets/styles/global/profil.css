@@ -179,8 +179,8 @@
   margin-left: 90%;
   font-weight: bold;
   font-size: 1.2em;
-  background: var(--background);
-  color: var(--background);
+  background: var(--Bouton);
+  color: var(--BoutonText);
   padding: 1%
 }
 
