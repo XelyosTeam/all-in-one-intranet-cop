@@ -42,7 +42,7 @@
 
     {% for delit in delits %}
     <div class="content">
-      <p>{{ delit.nom|capitalize }}</p>
+      <p>{{ delit.nom|capitalize|slice(0, 25) }}...</p>
 
       {% if delit.etat == 2 %}
         <p class="">Fermé</p>

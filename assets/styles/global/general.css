@@ -238,3 +238,9 @@ footer p
 {
   color: var(--navBarHover);
 }
+
+/* Ajout pour amélioration */
+.round_profil
+{
+  border-radius: 50%;
+}

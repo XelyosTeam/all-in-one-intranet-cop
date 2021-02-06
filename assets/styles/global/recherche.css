@@ -12,7 +12,7 @@
   margin-top: 1%;
   margin-left : 10%;
   margin-bottom: 2%;
-  width: 70%;
+  width: 80%;
   border-radius: 10px;
   background-color: var(--background);
   padding: 1%;
@@ -46,8 +46,8 @@
 {
   display: block;
   margin-top: 1%;
-  margin-left: 10%;
-  width: 50%;
+  margin-left: 15%;
+  width: 40%;
   border-radius: 10px;
   background-color: var(--background);
   padding-bottom: 0.5%;
@@ -67,7 +67,7 @@
 
 .Resultat2
 {
-  width: 60%;
+  width: 50%;
   grid-template-columns: repeat(4, 1fr);
 }
 
@@ -75,24 +75,21 @@
 {
   width: 40%;
   height: auto;
-  padding-top: 5%;
-  padding-left: 20%;
-  padding-bottom: 5%;
+  margin-top: 10%;
+  margin-left: 30%;
+  margin-bottom: 5%;
 }
 
 .Resultat p, .Resultat1 p, .Resultat2 p
 {
   white-space: nowrap;
-  width: 7%;
-  height: auto;
   padding-left: 20%;
   padding-top: 15%;
+  font-weight: bold;
 }
 
 .Resultat a, .Resultat1 a, .Resultat2 a
 {
-  width: 7%;
-  height: auto;
   padding-top: 20%;
   text-decoration: none;
   color: var(--Text);
@@ -105,14 +102,17 @@
   padding-top: 15%;
 }
 
-.Resultat2 a
+.Resultat2 p
 {
   padding-top: 10%;
+}
+
+.Resultat2 a
+{
+  padding-top: 15%;
 }
 
 .Resultat a:hover, .Resultat1 a:hover, .Resultat2 a:hover
 {
   color: var(--BoutonTextHover);
-  font-size: 2em;
-  margin-top: -0.25em;
 }

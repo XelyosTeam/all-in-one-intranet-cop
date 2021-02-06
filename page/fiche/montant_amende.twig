@@ -28,7 +28,7 @@
 
 <section class="liste">
   <h1>Détail de la peine</h1>
-  <p><strong>Montant de l'amende : </strong>{{ amende }} $</p>
+  <p><strong>Montant de l'amende : </strong>{{ amende|number_format(2, ',', ' ') }} $</p>
   <p><strong>Temps de prison : </strong>{{ prison }} mois</p>
   <p><strong>Temps de prison : </strong>{{ prisonAnnée }}</p>
   {% if prison > _tpsFederal and prison < _tpsFederalVie %}
@@ -42,7 +42,7 @@
   {% endif %}
 
   <h1>Refus de payer</h1>
-  <p><strong>Montant de l'amende : </strong>{{ amende / _divAmende }} $</p>
+  <p><strong>Montant de l'amende : </strong>{{ (amende / _divAmende)|number_format(2, ',', ' ') }} $</p>
   <p><strong>Temps de prison : </strong>{{ prison * _multPrison }} mois</p>
   <p><strong>Temps de prison : </strong>{{ prisonAnnée2 }}</p>
   {% if (prison * _multPrison) > _tpsFederal and (prison * _multPrison) < _tpsFederalVie %}

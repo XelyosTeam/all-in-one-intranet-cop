@@ -39,7 +39,7 @@
       </div>
 
       <div>
-        <label for="mdp">Nouveau mot de passe</label>
+        <label for="mdp">Nouveau mot de passe :</label>
         <input type="text" name="mdp" id="mdp_content" placeholder="Nouveau mot de passe"required>
       </div>
 
@@ -193,7 +193,7 @@
 
         <section class="part_img">
           <div>
-            <img id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+            <img class="round_profil" id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
           </div>
         </section>
       </section>
@@ -232,7 +232,7 @@
 
         <section class="part_img">
           <div>
-            <img id="image_civil2" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+            <img class="round_profil" id="image_civil2" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
           </div>
         </section>
       </section>
@@ -250,6 +250,8 @@
 {% block script %}
 <script src="/assets/script/event_saisie.js"></script>
 <script type="text/javascript">
+  affiche_photo_personne();
+  affiche_photo_personne_2();
   document.getElementById("confirm_edit_mdp").style.display = "none";
   document.getElementById("confirm_edit_delit").style.display = "none";
   document.getElementById("list_route").style.display = "none";

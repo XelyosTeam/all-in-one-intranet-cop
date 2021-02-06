@@ -46,26 +46,24 @@
           </select>
         </div>
 
+        <!-- v2.1.0 -->
+        {# Génération de la variable globale #}
+        {% set __superVar = [] %}
+        {% set __leger = { 'content': leger, 'name' : '----- Délit Léger -----' } %}
+        {% set __moyen = { 'content': moyen, 'name' : '----- Délit Moyen -----' } %}
+        {% set __grave = { 'content': grave, 'name' : '----- Délit Grave -----' } %}
+        {% set __superVar = __superVar|merge([__leger, __moyen, __grave]) %}
+
         <div>
           <label>Délit :</label>
           <select name="delit_name">
             <option value="NULL">Sélectionner un délit</option>
-            <option value="NULL">----- Délit Léger -----</option>
-            {% for delit in leger %}
-              {% set __nbdelit  = true %}
-              <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
-            {% endfor %}
-
-            <option value="NULL">----- Délit Moyen -----</option>
-            {% for delit in moyen %}
-              {% set __nbdelit  = true %}
-              <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
-            {% endfor %}
-
-            <option value="NULL">----- Délit Grave -----</option>
-            {% for delit in grave %}
-              {% set __nbdelit  = true %}
-              <option value="{{ delit.id }}">{{ delit.intitule|capitalize }}</option>
+            {% for __superItem in __superVar %}
+              <option value="NULL">{{ __superItem.name }}</option>
+              {% for delit in __superItem.content %}
+                {% set __nbdelit  = true %}
+                <option value="{{ delit.id }}">{{ delit.intitule|capitalize }} - {{ delit.amende|number_format(2, ',', ' ') }} $</option>
+              {% endfor %}
             {% endfor %}
           </select>
         </div>
@@ -78,7 +76,7 @@
 
       <section class="part_img">
         <div>
-          <img id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+          <img class="round_profil" id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
         </div>
       </section>
     </section>

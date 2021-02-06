@@ -63,7 +63,7 @@
           <select name="delit_name">
             <option value="NULL">Sélectionner un délit</option>
             {% for route in routes %}
-              <option value="{{ route.id }}">{{ route.intitule|capitalize }}</option>
+              <option value="{{ route.id }}">{{ route.intitule|capitalize }} - {{ route.amende|number_format(2, ',', ' ') }} $</option>
             {% else %}
               {% set __nbdelit = false %}
             < option>Aucun délit déclaré</option>
@@ -79,7 +79,7 @@
 
       <section class="part_img">
         <div>
-          <img id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+          <img class="round_profil" id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
         </div>
 
         <div>

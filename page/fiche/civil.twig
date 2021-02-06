@@ -36,12 +36,12 @@
     <h1>Casier Judiciaires</h1>
     {% for casier in casiers %}
     <div class="content">
-      <p>{{ casier.nom }}</p>
+      <p>{{ casier.nom|slice(0, 20) }}...</p>
 
       {% if casier.etat == 2 %}
         <p class="">Fermé</p>
       {% elseif casier.etat == 1 %}
-        <p class="">Charges Abandonnées</p>
+        <p class="">Abandonnées</p>
       {% else %}
         <p class="red">En cours</p>
       {% endif %}
@@ -60,12 +60,12 @@
     <h1>Délits Routiers</h1>
     {% for route in routes %}
     <div class="content">
-      <p>{{ route.nom }}</p>
+      <p>{{ route.nom|slice(0, 20) }}...</p>
 
       {% if route.etat == 2 %}
         <p class="">Fermé</p>
       {% elseif route.etat == 1 %}
-        <p class="">Charges Abandonnées</p>
+        <p class="">Abandonnées</p>
       {% else %}
         <p class="red">En cours</p>
       {% endif %}
@@ -84,12 +84,12 @@
     <h1>Plainte</h1>
     {% for plainte in plaintes %}
     <div class="content">
-      <p>{{ plainte.detail_plainte|slice(0, 20) }} ...</p>
+      <p>{{ plainte.detail_plainte|slice(0, 20) }}...</p>
 
       {% if plainte.etat == 2 %}
         <p class="">Fermé</p>
       {% elseif plainte.etat == 1 %}
-        <p class="">Charges Abandonnées</p>
+        <p class="">Abandonnées</p>
       {% else %}
         <p class="red">En cours</p>
       {% endif %}

@@ -1993,33 +1993,8 @@
   /*      Section sécurité des chemins sur le site     */
   /* ================================================= */
 
-  Flight::route('/@nimportequoi', function($nimportequoi) {
-    verif_connecter();
-    Flight::redirect("/"); // Redirige vers la page
-  });
-
-  Flight::route('/@nimportequoi/@nimportequoi2', function($nimportequoi, $nimportequoi2) {
-    verif_connecter();
-    Flight::redirect("/"); // Redirige vers la page
-  });
-
-  Flight::route('/@nimportequoi/@nimportequoi2/@nimportequoi3', function($nimportequoi, $nimportequoi2, $nimportequoi3) {
-    verif_connecter();
-    Flight::redirect("/"); // Redirige vers la page
-  });
-
-  Flight::route('/@nimportequoi/@nimportequoi2/@nimportequoi3/@nimportequoi4', function($nimportequoi, $nimportequoi2, $nimportequoi3, $nimportequoi4) {
-    verif_connecter();
-    Flight::redirect("/"); // Redirige vers la page
-  });
-
-  Flight::route('/@nimportequoi/@nimportequoi2/@nimportequoi3/@nimportequoi4/@nimportequoi5', function($nimportequoi, $nimportequoi2, $nimportequoi3, $nimportequoi4, $nimportequoi5) {
-    verif_connecter();
-    Flight::redirect("/"); // Redirige vers la page
-  });
-
-  Flight::route('/@nimportequoi/@nimportequoi2/@nimportequoi3/@nimportequoi4/@nimportequoi5/@nimportequoi6', function($nimportequoi, $nimportequoi2, $nimportequoi3, $nimportequoi4, $nimportequoi5, $nimportequoi6) {
-    verif_connecter();
+  Flight::map('notFound', function(){
+    verif_connect();
     Flight::redirect("/"); // Redirige vers la page
   });
 

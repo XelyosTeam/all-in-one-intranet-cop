@@ -20,11 +20,11 @@
       return Agent::where('matricule', $matricule)
                   ->find_one();
     }
-    public static function getInfoAgentID($id_police) { // Informations d'un agent de police avec l'ID
+    public static function getInfoAgentID($id_police) { // Informations d'un agent de police avec l'ID police
       return Agent::where('lspd_id', $id_police)
                   ->find_one();
     }
-    public static function getInfoAgentIDUser($id_police) { // Informations d'un agent de police avec l'ID
+    public static function getInfoAgentIDUser($id_police) { // Informations d'un agent de police avec l'ID utilisateur
       return Agent::where('user_id', $id_police)
                   ->find_one();
     }

@@ -68,12 +68,9 @@
       </div>
     </main>
 
-    <footer>
-      <p>{{ _nomcompletFaction }}</p>
-      <p>2020</p>
-      <p>Developped by Xelyos Team</p>
-      <p>V {{ _Version }}</p>
-    </footer>
+    <!-- v2.1.0 -->
+    {% set __infoFooter = {'nom': _nomcompletFaction, 'version': _Version} %}
+    {% include "/templates/footer.twig" with __infoFooter %}
     <script type="text/javascript" src="/assets/script/connect.js"></script>
   </body>
 

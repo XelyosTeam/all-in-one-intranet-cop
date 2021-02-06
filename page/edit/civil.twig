@@ -24,7 +24,7 @@
   <form action="/civil/{{ perso.id }}/modification" method="POST">
     <section class="info_personne">
       <h1 {% if perso.present == 0 %}style="color:#ff0000"{% endif %}>Fiche Citoyen</h1>
-      <img src="/assets/img/identité/{{ perso.photo }}" alt="Photo {{ perso.nom|capitalize}} {{ perso.prenom|capitalize }}">
+      <img class="round_profil" src="/assets/img/identité/{{ perso.photo }}" alt="Photo {{ perso.nom|capitalize}} {{ perso.prenom|capitalize }}">
       <p><strong>Nom :</strong>{{ perso.nom|capitalize }}</p>
       <p><strong>Prénom :</strong>{{ perso.prenom|capitalize }}</p>
       <p><strong>Date de naissance :</strong>{{ perso.DOB|date("d/m/Y") }}</p>
@@ -72,7 +72,7 @@
     <h1>Casier Judiciaires</h1>
     {% for casier in casiers %}
     <div class="content">
-      <p>{{ casier.nom }}</p>
+      <p>{{ casier.nom|slice(0, 20) }}...</p>
 
       {% if casier.etat == 2 %}
         <p class="">Fermé</p>
@@ -120,7 +120,7 @@
     <h1>Plainte</h1>
     {% for plainte in plaintes %}
     <div class="content">
-      <p>{{ plainte.detail_plainte|slice(0, 20) }} ...</p>
+      <p>{{ plainte.detail_plainte|slice(0, 20) }}...</p>
 
       {% if plainte.etat == 2 %}
         <p class="">Fermé</p>

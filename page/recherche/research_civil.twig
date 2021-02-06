@@ -31,7 +31,7 @@
 
   {% for civil in civils %}
     <div class="Resultat">
-      <img src="/assets/img/identité/{{ civil.photo }}" alt="Photo de {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}">
+      <img class="round_profil" src="/assets/img/identité/{{ civil.photo }}" alt="Photo de {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}">
       <p>{{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</p>
       <a href="/civil/{{ civil.id }}">Consulter</a>
     </div>

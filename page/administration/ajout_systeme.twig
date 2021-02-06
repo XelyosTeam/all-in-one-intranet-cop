@@ -165,8 +165,8 @@
       </div>
 
       <div>
-        <label for="photo">Insérer la photo</label>
-        <input type="file" name="photo">
+        <label for="photo">Insérer la photo :</label>
+        <input type="file" name="photo" accept="image/*">
         <input type="hidden" name="MAX_FILE_SIZE" value="5000000"> <!-- Limiteur de taille du fichier ici = 5Mo -->
       </div>
 
@@ -202,7 +202,7 @@
 
         <section class="part_img">
           <div>
-            <img id="image_cop" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+            <img class="round_profil" id="image_cop" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
           </div>
         </section>
       </section>

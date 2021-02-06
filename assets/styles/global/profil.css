@@ -51,8 +51,7 @@
 
 .info_personne h1
 {
-  padding-top: 2%;
-  padding-bottom: 1%;
+  margin-bottom: 1%;
   color: var(--Text);
   border-bottom: 2px solid var(--Text);
 }
@@ -199,26 +198,27 @@
 
 .liste .content img
 {
-  width: 40%;
+  width: 30%;
   height: auto;
-  padding-left: 20%;
-  padding-bottom: 5%;
+  margin-left: 20%;
+  margin-bottom: 5%;
 }
 
 .liste .content p
 {
-  width: 7%;
+  white-space: nowrap;
+  text-align: center;
   height: auto;
-  padding-left: 20%;
-  padding-top: 5%;
-  font-weight: bold;
+  margin-left: 10%;
+  vertical-align: baseline;
 }
 
 .liste .content a
 {
-  width: 7%;
   height: auto;
-  padding-top: 10%;
+  margin-top: 5%;
+  text-align: right;
+  margin-right: 30%;
   text-decoration: none;
   color: var(--Text);
   font-weight: bold;
@@ -228,60 +228,6 @@
 .liste .content a:hover
 {
   color: var(--BoutonTextHover);
-  font-size: 2em;
-  margin-top: -0.25em;
-}
-
-.liste
-{
-  display: block;
-  margin-top: 2.5%;
-  margin-left: 37%;
-  width: 58%;
-  border-radius: 10px;
-  background-color: var(--background);
-  padding-bottom: 0.5%;
-}
-
-.liste h1
-{
-  padding-top: 2%;
-  color: var(--Text);
-  border-bottom: 2px solid var(--Text);
-  text-align: center;
-}
-
-.liste .content
-{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 2%;
-  border-bottom: 0.5px solid var(--Text);
-}
-
-.liste .content img
-{
-  width: 40%;
-  height: auto;
-  padding-top: 5%;
-  padding-left: 20%;
-  padding-bottom: 5%;
-}
-
-.liste .content p
-{
-  white-space: nowrap;
-  width: 7%;
-  height: auto;
-  padding-left: 20%;
-  padding-top: 5%;
-}
-
-.liste .content a
-{
-  width: 7%;
-  height: auto;
-  padding-top: 10%;
 }
 
 .information_casier
@@ -292,7 +238,7 @@
   width: 58%;
   border-radius: 10px;
   background-color: var(--background);
-  padding-bottom: 0.5%;
+  padding-bottom: 2%;
 }
 
 .information_casier h1
