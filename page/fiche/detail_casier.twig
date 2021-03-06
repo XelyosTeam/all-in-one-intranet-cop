@@ -12,6 +12,7 @@
 {% block style %}
 <link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
 <link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/markdown.css">
 {% endblock %}
 
 {% block description %}Casier Judiciaire{% endblock %}
@@ -37,7 +38,9 @@
     <p><strong>Enregistré le :</strong>{{ delit.enregistrer_le|date("d/m/Y") }}</p>
     <p><strong>État :</strong>{% if delit.etat == 2 %}Fermé{% elseif delit.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
     <p><strong>Rapport :</strong></p>
-    <p class="remarque">{{ delit.remarque }}</p>
+    <div class="markdown-body">
+      {{ delit.remarque|raw }}
+    </div>
     {% if ((ouvert.matricule == _agent.matricule) or (_agent.hab_1 == 2)) and (delit.etat == 0) %}
     <div class="lien">
       <a href="/casier-judiciaire/{{ delit.id_delit }}/edit">Modifier le rapport</a>

@@ -12,6 +12,7 @@
 {% block style %}
 <link rel="stylesheet" type="text/css" href="/assets/styles/global/profil.css">
 <link rel="stylesheet" type="text/css" href="/assets/styles/phone/profil.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/markdown.css">
 {% endblock %}
 
 {% block description %}Détail plainte{% endblock %}
@@ -31,7 +32,9 @@
     <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
     <p><strong>Déposeur :</strong><a href="/civil/{{ deposeur.id }}">{{ deposeur.nom|capitalize }} {{ deposeur.prenom|capitalize }}</a></p>
     <p><strong>Détail de la plainte :</strong></p>
-    <p class="remarque">{{ plainte.detail_plainte }}</p>
+    <div class="markdown-body">
+      {{ plainte.detail_plainte|raw }}
+    </div>
     {% if ((ouvert.matricule == _agent.matricule) or (_agent.hab_1 == 2)) and (plainte.etat == 0) %}
     <div class="lien">
       <a href="/detail-plainte/{{ plainte.id }}/edit">Modifier le rapport</a>

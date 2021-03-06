@@ -15,6 +15,7 @@
       'debug' => true,
   );
 
+  /* Version 2.1.1 */ 
   Flight::register('view', '\Twig\Environment', array($loader, $twigConfig), function ($twig) {
       $twig->addExtension(new \Twig\Extension\DebugExtension()); // Add the debug extension
       $twig->addGlobal('_agent', Agent::getInfoAgent());
@@ -387,6 +388,7 @@
       $personne->date_trad = $value[1];
     }
 
+    $delit->remarque = renderHTMLFromMarkdown(htmlspecialchars(strip_tags($delit->remarque)));
     Flight::view()->display('fiche/detail_casier.twig', array(
       'delit' => $delit, // Info du casier
       'civil' => $personne, // Informations sur la personne
@@ -651,6 +653,7 @@
       $personne->date_trad = $value[1];
     }
 
+    $delit->remarque = renderHTMLFromMarkdown(htmlspecialchars(strip_tags($delit->remarque)));
     Flight::view()->display('fiche/detail_route.twig', array(
       'delit' => $delit, // Info du delit
       'civil' => $personne, // Informations sur la personne
@@ -756,6 +759,7 @@
       $personne->date_trad = $value[1];
     }
 
+    $plainte->detail_plainte = renderHTMLFromMarkdown(htmlspecialchars(strip_tags($plainte->detail_plainte)));
     Flight::view()->display('fiche/detail_plainte.twig', array(
       'civil' => $personne, // Infotmation sur la personne
       'plainte' => $plainte, // Détails de la plainte
@@ -883,6 +887,7 @@
 
     if ($identifiant != NULL) {
       $personne = Candidature::getCandidature($identifiant);
+      $personne->motivation_lspd = renderHTMLFromMarkdown(htmlspecialchars(strip_tags($personne->motivation_lspd)));
       $ecole = explode('-', $personne->detail_ecole);
       $vacance = explode('-', $personne->detail_vacance);
       $travail = explode('-', $personne->detail_travail);
@@ -1153,6 +1158,7 @@
     }
 
     if ($agent->grade_id < serveurIni('Faction', 'gradeLevelBiffure')) {
+      $rapport->contenu = renderHTMLFromMarkdown(htmlspecialchars(strip_tags($rapport->contenu)));
       $rapport->contenu = biffage($rapport->contenu);
     }
 

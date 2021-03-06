@@ -7,6 +7,7 @@
     Edited by :
   */
   use Josantonius\Session\Session; // Pour utiliser les variables de sessions
+  use Michelf\Markdown; // Utiliser pour la translation markdown html
 
   function addCop($id) {
     do {
@@ -205,6 +206,10 @@
     $rapport[$pos+2] = "'";
 
     return $rapport;
+  }
+
+  function renderHTMLFromMarkdown($string_markdown_formatted) {
+    return Markdown::defaultTransform($string_markdown_formatted);
   }
 
 ?>
