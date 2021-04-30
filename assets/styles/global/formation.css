@@ -39,3 +39,9 @@
   color: var(--Text);
   text-decoration: underline;
 }
+
+.contenu img
+{
+  display: block;
+  margin: 0 auto;
+}

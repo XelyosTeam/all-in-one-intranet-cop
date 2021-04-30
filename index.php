@@ -15,7 +15,7 @@
       'debug' => true,
   );
 
-  /* Version 2.1.1 */ 
+  /* Version 2.2.0 */
   Flight::register('view', '\Twig\Environment', array($loader, $twigConfig), function ($twig) {
       $twig->addExtension(new \Twig\Extension\DebugExtension()); // Add the debug extension
       $twig->addGlobal('_agent', Agent::getInfoAgent());
@@ -931,7 +931,26 @@
   Flight::route('/formation', function()
   {
     verif_connecter();
-    Flight::view()->display('page_formation.twig');
+
+    $path = dirname(__FILE__);
+    $struct = getStructure($path);
+
+    $names = new ArrayObject();
+    foreach ($struct->navigation as $value) {
+      $names->append($value);
+    }
+
+    $files = new ArrayObject();
+    foreach ($struct->contenu as $value) {
+      $value->fichier = getFileContent($path, $value->fichier);
+      $value->fichier = renderHTMLFromMarkdown($value->fichier);
+      $files->append($value);
+    }
+
+    Flight::view()->display('page_formation.twig', array(
+      'index' => $names,
+      'content' => $files
+    ));
   });
 
   Flight::route('/nouveau-mot-de-passe', function()

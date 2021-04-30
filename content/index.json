@@ -1,0 +1,110 @@
+{
+  "navigation": [
+    {
+      "nom": "Introduction",
+      "identifiant": "introduction"
+    },
+    {
+      "nom": "Equipement",
+      "identifiant": "equipement"
+    },
+    {
+      "nom": "Organisation",
+      "identifiant": "organisation"
+    },
+    {
+      "nom": "Patrouille",
+      "identifiant": "patrouille"
+    },
+    {
+      "nom": "Contrôle",
+      "identifiant": "controle"
+    },
+    {
+      "nom": "Balisage",
+      "identifiant": "balisage"
+    },
+    {
+      "nom": "Arrestation",
+      "identifiant": "arrestation"
+    },
+    {
+      "nom": "Fuite",
+      "identifiant": "fuite"
+    },
+    {
+      "nom": "Quartiers",
+      "identifiant": "quartiers"
+    },
+    {
+      "nom": "Braquage",
+      "identifiant": "braquage"
+    },
+    {
+      "nom": "Poursuite",
+      "identifiant": "poursuite"
+    },
+    {
+      "nom": "Avocats",
+      "identifiant": "avocats"
+    },
+    {
+      "nom": "Négociation",
+      "identifiant": "negociation"
+    }
+  ],
+  "contenu": [
+    {
+      "identifiant": "introduction",
+      "fichier": "introduction.md"
+    },
+    {
+      "identifiant": "equipement",
+      "fichier": "equipement.md"
+    },
+    {
+      "identifiant": "organisation",
+      "fichier": "organisation.md"
+    },
+    {
+      "identifiant": "patrouille",
+      "fichier": "patrouille.md"
+    },
+    {
+      "identifiant": "controle",
+      "fichier": "controle.md"
+    },
+    {
+      "identifiant": "balisage",
+      "fichier": "balisage.md"
+    },
+    {
+      "identifiant": "arrestation",
+      "fichier": "arrestation.md"
+    },
+    {
+      "identifiant": "fuite",
+      "fichier": "fuite.md"
+    },
+    {
+      "identifiant": "quartiers",
+      "fichier": "quartier.md"
+    },
+    {
+      "identifiant": "braquage",
+      "fichier": "braquage.md"
+    },
+    {
+      "identifiant": "poursuite",
+      "fichier": "poursuite.md"
+    },
+    {
+      "identifiant": "avocats",
+      "fichier": "avocat.md"
+    },
+    {
+      "identifiant": "negociation",
+      "fichier": "negociation.md"
+    }
+  ]
+}
