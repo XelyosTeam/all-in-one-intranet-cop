@@ -1,5 +1,5 @@
 <?php
-include 'src/models.php'; // Utilisation de la base de données
+include 'entity/models.php'; // Utilisation de la base de données
 include 'src/functions.php'; // Fonctions générals d'utilisation
 include 'src/insertion.php'; // Insertion de données dans la base de données
 include 'src/edit.php'; // Edition de données dans la base de données

@@ -14,7 +14,7 @@
     // 'debug' => true,
   );
 
-  /* Version 2.3.0 */
+  /* Version 2.3.1 */
   Flight::register('view', '\Twig\Environment', array($loader, $twigConfig), function ($twig) {
       $twig->addExtension(new \Twig\Extension\DebugExtension()); // Add the debug extension
       $twig->addGlobal('_agent', Agent::getInfoAgent());
