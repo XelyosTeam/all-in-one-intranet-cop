@@ -32,7 +32,7 @@
     <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
     <p><strong>Nom :</strong>{{ delit.nom }}</p>
     <p><strong>Type :</strong>{% if delit.type_d == 3 %}Grave{% elseif delit.type_d == 2 %}Moyen{% else %}Léger{% endif %}</p>
-    <p><strong>Amende :</strong>{{ delit.amende|number_format(2, ',', ' ') }} $</p>
+    <p><strong>Amende :</strong>{{ delit.amende|number_format(2, ',', ' ') }} {{ _Devise }}</p>
     <p><strong>Temps de prison :</strong>{{ delit.prison }} mois</p>
     <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
     <p><strong>Enregistré le :</strong>{{ delit.enregistrer_le|date("d/m/Y") }}</p>

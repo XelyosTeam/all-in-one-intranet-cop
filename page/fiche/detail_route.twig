@@ -35,7 +35,8 @@
     <p><strong>Plaque d'immatriculation :</strong><a href="/vehicule/{{ voiture.plaque }}">{{ voiture.plaque|upper }}</a></p>
     <p><strong>Propriétaire :</strong><a href="/civil/{{ proprio.id }}">{{ proprio.nom|capitalize }} {{ proprio.prenom|capitalize }}</a></p>
     <p><strong>Nom Delit :</strong>{{ delit.nom|capitalize }}</p>
-    <p><strong>Amende :</strong>{{ delit.amende|number_format(2, ',', ' ') }} $</p>
+    <p><strong>Amende :</strong>{{ delit.amende|number_format(2, ',', ' ') }} {{ _Devise }}</p>
+    <p><strong>Point(s) :</strong>{{ delit.retrait }} point(s)</p>
     <p><strong>Temps de prison :</strong>{{ delit.prison }} mois</p>
     <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
     <p><strong>Enregistré le :</strong>{{ delit.date_enregistre|date("d/m/Y") }}</p>

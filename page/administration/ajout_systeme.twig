@@ -32,7 +32,7 @@
 
       <div>
         <label for="img">Sélectionner l'image du véhicule :</label>
-        <input type="file" name="photo">
+        <input id="upload-img" type="file" accept="image/*" name="photo" onchange="actionImgFile()">
         <input type="hidden" name="MAX_FILE_SIZE" value="5000000"> <!-- Limiteur de taille du fichier ici = 5Mo -->
       </div>
 
@@ -61,10 +61,15 @@
         <input type="number" name="delit_prison" id="tps_delit" min="0" placeholder="Temps en mois">
       </div>
 
+      <div id="visibleRetrait">
+        <label for="retrait_point">Retrait des points :</label>
+        <input type="number" name="retrait_point" id="point_retrait" min="0" placeholder="Nombre de points à retirer">
+      </div>
+
       <div>
         <label>Type de délit :</label>
 
-        <select name="delit_type" id="type_delit">
+        <select name="delit_type" id="type_delit" onchange="afficheRetraitPermis();">
           <option value="0">Délit Routier</option>
           <option value="1">Délit Léger</option>
           <option value="2">Délit Moyen</option>
@@ -147,7 +152,7 @@
   <section class="contenu">
     <h1>Ajouter Photo</h1>
 
-    <form class="connexion" action="/insert/img/identité" enctype="multipart/form-data" method="post">
+    <form class="connexion" action="/insert/img/identite" enctype="multipart/form-data" method="post">
       <div>
         <label>Nom de la personne :</label>
         <!-- v2.0.0 -->
@@ -202,7 +207,7 @@
 
         <section class="part_img">
           <div>
-            <img class="round_profil" id="image_cop" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+            <img class="round_profil" id="image_cop" src="/assets/img/identite/temp.png" alt="Photo Inconnu">
           </div>
         </section>
       </section>

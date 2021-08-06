@@ -37,9 +37,11 @@ Flight::route('/rapport/@id_rapport', function($id_rapport) {
   }
 
   if ($agent->grade_id < serveurIni('Faction', 'gradeLevelBiffure')) {
-    $rapport->contenu = renderHTMLFromMarkdown(htmlspecialchars(strip_tags($rapport->contenu)));
+    $rapport->contenu = renderHTMLFromMarkdown(htmlspecialchars(strip_tags(urldecode($rapport->contenu))));
     $rapport->contenu = biffage($rapport->contenu);
   }
+
+  $rapport->titre = urldecode($rapport->titre);
 
   Flight::view()->display('fiche/rapport.twig', array(
     'rapport' => $rapport, // Information sur le rapport

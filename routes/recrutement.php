@@ -18,6 +18,7 @@ Flight::route('/recrutement', function() {
   ));
 });
 
+/* Utilisé pour afficher l'état des recrutements */
 Flight::route('/recrutement/etat', function() {
   header("Access-Control-Allow-Origin: *");
   $data = [
@@ -26,5 +27,4 @@ Flight::route('/recrutement/etat', function() {
 
   Flight::json($data);
 });
-
 ?>

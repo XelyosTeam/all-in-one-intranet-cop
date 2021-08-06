@@ -7,29 +7,24 @@
 */
 
 /* Phone */
-@media (max-width:1001px)
-{
-  .info_personne
-  {
+@media (max-width:1001px) {
+  .info_personne {
     margin-left: 5%;
     width: 30%;
     padding-bottom: 5%;
   }
 
-  .info_personne img
-  {
+  .info_personne img {
     width: 50%;
     height: auto;
   }
 
-  .habilitation p
-  {
+  .habilitation p {
     font-weight: bold;
     font-size: 1.5em;
   }
 
-  .liste .content p
-  {
+  .liste .content p {
     padding-top: 0%;
     padding-left: 10%;
     margin-right: 10%;

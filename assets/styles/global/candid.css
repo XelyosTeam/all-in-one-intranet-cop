@@ -7,13 +7,15 @@
 */
 
 /* Global */
-.contenu div label
-{
+.contenu {
+  padding-bottom: 1%;
+}
+
+.contenu div label {
   margin-top: 2%;
 }
 
-.grille_dispo
-{
+.grille_dispo {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(5,1fr);
@@ -22,21 +24,18 @@
   text-align: center;
 }
 
-.grille_dispo input
-{
+.grille_dispo input {
   margin: auto;
 }
 
-.contenu div p
-{
+.contenu div p {
   margin-left: 4%;
   margin-bottom: 2%;
   color: var(--Text);
   font-size: 1.2em;
 }
 
-.contenu div p strong
-{
+.contenu div p strong {
   font-weight: bold;
   margin-right: 2%;
   font-size: 1.2em;

@@ -29,7 +29,7 @@
 
   {% for plainte in plaintes %}
     <div class="Resultat2">
-      <img class="round_profil" src="/assets/img/identité/{% if plainte.lien == NULL %}temp.png{% else %}{{ plainte.lien }}{% endif %}" alt="Photo de {{ plainte.nom_1|capitalize }} {{ plainte.prenom_1|capitalize }}">
+      <img class="round_profil" src="/assets/img/identite/{% if plainte.lien == NULL %}temp.png{% else %}{{ plainte.lien }}{% endif %}" alt="Photo de {{ plainte.nom_1|capitalize }} {{ plainte.prenom_1|capitalize }}">
       <p>{{ plainte.nom_1|capitalize }} {{ plainte.prenom_1|capitalize }}</p>
       <p>{{ plainte.detail|capitalize|slice(0, 20) }}...</p>
       <a href="/detail-plainte/{{ plainte.p_id }}">Consulter</a>

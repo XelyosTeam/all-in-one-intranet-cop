@@ -81,5 +81,4 @@ Flight::route('/connect', function() {
 
   Flight::json($data);
 });
-
 ?>

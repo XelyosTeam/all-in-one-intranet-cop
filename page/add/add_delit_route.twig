@@ -36,7 +36,7 @@
           <label>Conducteur :</label>
           <select id="personne_type" name="casier_owner" onchange="affiche_photo_personne();">
             {% for personne in personnes %}
-              <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
+              <option value="{{ personne.id }}">{{ personne.nom }} {{ personne.prenom }} - {{ personne.permis }} point{% if personne.permis > 1 %}s{% endif %}</option>
             {% else %}
               {% set __add = false %}
               <option>Aucun conducteur recensé</option>
@@ -46,10 +46,9 @@
 
         <div>
           <label>Véhicule :</label>
-
-          <select  id="car_type" name="vehicule_delit" onchange="affiche_photo_plaque();">
+          <select id="car_type" name="vehicule_delit" onchange="affiche_photo_plaque();">
             {% for voiture in voitures %}
-              <option value="{{ voiture.v_id }}">{{ voiture.plaque|upper }} - {{ voiture.nom|capitalize }}</option>
+              <option value="{{ voiture.v_id }}">{{ voiture.plaque|upper }} - {{ voiture.nom }}</option>
             {% else %}
               {% set __add = false %}
               <option>Aucun véhicule recensé</option>
@@ -57,29 +56,30 @@
           </select>
         </div>
 
-        <div>
+        {% for i in 1..50 %}
+        <div id="saisie_route_{{ i }}">
           <label>Délit :</label>
-
-          <select name="delit_name">
+          <select id="route_value_{{ i }}" name="delit_name" onchange="affiche_suite('saisie_route_{{ i }}', 'route_value_{{ i }}', 'saisie_route_{{ i + 1 }}');">
             <option value="NULL">Sélectionner un délit</option>
             {% for route in routes %}
-              <option value="{{ route.id }}">{{ route.intitule|capitalize }} - {{ route.amende|number_format(2, ',', ' ') }} $</option>
+              <option value="{{ route.id }}">{{ route.intitule|capitalize }} - {{ route.amende|number_format(2, ',', ' ') }} {{ _Devise }} - {{ route.retrait}} point{% if route.retrait > 1 %}s{% endif %}</option>
             {% else %}
               {% set __nbdelit = false %}
-            < option>Aucun délit déclaré</option>
+              <option>Aucun délit déclaré</option>
             {% endfor %}
           </select>
         </div>
+        {% endfor %}
 
         <div>
           <label>Rapport :</label>
-          <textarea name="rapport" placeholder="Insérer un éventuelle rapport"></textarea>
+          <textarea id="route_rapport" name="rapport" placeholder="Insérer un éventuelle rapport"></textarea>
         </div>
       </section>
 
       <section class="part_img">
         <div>
-          <img class="round_profil" id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+          <img class="round_profil" id="image_civil" src="/assets/img/identite/temp.png" alt="Photo Inconnu">
         </div>
 
         <div>
@@ -90,7 +90,7 @@
 
     {% if _agent.ajouter != 0 and __add and __nbdelit %}
     <div class="btn">
-      <button class="form_button" type="submit" name="button">Enregistrer</button>
+      <button class="form_button" type="submit" name="button" onclick="AddRoute();">Enregistrer</button>
     </div>
     {% endif %}
   </form>
@@ -103,5 +103,12 @@
 <script type="text/javascript">
   affiche_photo_plaque();
   affiche_photo_personne();
+
+  for (var i = 2; i <= 50; i++) {
+    let element = document.getElementById(`saisie_route_${i}`);
+    if (element) {
+      element.style.display = "none";
+    }
+  }
 </script>
 {% endblock %}

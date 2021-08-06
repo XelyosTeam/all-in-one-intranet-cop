@@ -1,0 +1,48 @@
+{#
+Le projet All in One est un produit Xelyos mis à disposition gratuitement
+pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+ne pas supprimer le ou les auteurs du projet.
+Created by : Xelyos - Aros
+Edited by :
+#}
+
+<div class="param-folder">
+  {# Close Twig #}
+  {% set _title_ = {'status': true, 'value': _moveInfo_.title} %}
+  {% include "/documents/templates/close.twig" with _title_ %}
+
+  <div class="deplacer-element">
+    <h2>Sélectionner le répertoire</h2>
+
+    <div class="separation">
+      <div class="tree-class">
+        <h3>Nouveau répertoire</h3>
+        {% include "/documents/templates/tree.twig" %}
+      </div>
+
+      <div class="info-tree">
+        <h3>Déplacer le {{ _moveInfo_.name}}</h3>
+
+        <!-- hidden -->
+        <p id="hidden-value-move"></p>
+
+        <div>
+          <p><strong>Déplacer le {{ _moveInfo_.name}} vers :</strong> <span id="move-to"></span></p>
+          <p id="wrong-permissions"><strong>Vous n'avez pas l'autorisation nécessaire dans ce répertoire</strong></p>
+        </div>
+
+        <div class="deplacer-element-button">
+          {% if document %}
+            <button id="submit-button" type="submit" name="button" onclick="moveElementTo('{{_moveInfo_.type}}', {{ document.id }}, {{ document.parent }})">Déplacer le {{ _moveInfo_.name}}</button>
+          {% endif %}
+
+          {% if folder %}
+            <button id="submit-button" type="submit" name="button" onclick="moveElementTo('{{_moveInfo_.type}}', {{ folder.id }}, {{ folder.parent }})">Déplacer le {{ _moveInfo_.name}}</button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

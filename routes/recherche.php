@@ -83,12 +83,14 @@ Flight::route('/recherche/info_delit', function() {
 
   $data = [
     'amende' => $info->amende,
-    'prison' => $info->temps_prison
+    'prison' => $info->temps_prison,
+    'retrait' => $info->retrait
   ];
 
   Flight::json($data);
 });
 
+# On pourra tout rassembler en un
 Flight::route('/recherche/photo/arme', function() {
   header("Access-Control-Allow-Origin: *");
   verif_connecter();
@@ -195,5 +197,4 @@ Flight::route('/recherche/vehicule', function() {
     'couleur' => $couleur
   ));
 });
-
 ?>

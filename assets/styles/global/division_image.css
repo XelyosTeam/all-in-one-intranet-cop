@@ -7,25 +7,21 @@
 */
 
 /* PC */
-.div_content_photo
-{
+.div_content_photo {
   display: grid;
   grid-template-columns: 75% 25% repeat(2,1fr);
   /* grid-template-columns: repeat(1,2fr); */
 }
 
-.part_img
-{
+.part_img {
   text-align: center;
   margin-right: 1%;
 }
 
-.part_img #image_civil, .part_img #image_civil2, .part_img #image_cop, .part_img #image_cop2
-{
+.part_img #image_civil, .part_img #image_civil2, .part_img #image_cop, .part_img #image_cop2 {
   max-width: 60%;
 }
 
-.part_img #image_voiture, .part_img #image_arme
-{
+.part_img #image_voiture, .part_img #image_arme {
   max-width: 80%;
 }

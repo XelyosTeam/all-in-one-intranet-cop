@@ -1,0 +1,8 @@
+[10-Mar-2021 20:26:30 UTC] PHP Fatal error:  Uncaught Error: Class 'Josantonius\Session\Session' not found in /home/u293737435/domains/xelyos.fr/public_html/lspd_lybertalife/Intranet/assets/img/index.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/u293737435/domains/xelyos.fr/public_html/lspd_lybertalife/Intranet/assets/img/index.php on line 3
+[11-Apr-2021 18:25:20 UTC] PHP Fatal error:  Uncaught Error: Class 'Josantonius\Session\Session' not found in /home/u293737435/domains/xelyos.fr/public_html/lspd_lybertalife/Intranet/assets/img/index.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/u293737435/domains/xelyos.fr/public_html/lspd_lybertalife/Intranet/assets/img/index.php on line 3

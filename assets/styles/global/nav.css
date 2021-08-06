@@ -7,8 +7,7 @@
 */
 
 /* PC */
-nav
-{
+nav {
   position: fixed;
   left: 3%;
   top: 47%;
@@ -17,8 +16,7 @@ nav
   padding: 1% 1% 1% 1%;
 }
 
-nav a
-{
+nav a {
   display: block;
   padding-top: 1%;
   text-decoration: none;
@@ -26,13 +24,11 @@ nav a
   font-size: 1.1em;
 }
 
-nav a:hover
-{
+nav a:hover {
   color: var(--Text);
 }
 
-nav p
-{
+nav p {
   font-weight: bold;
   text-decoration: underline;
   color: var(--Text);

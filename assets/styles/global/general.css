@@ -12,48 +12,39 @@
   opacity: 0.5;
 }
 
-.hidden
-{
+.hidden {
   display: none;
 }
 
-a
-{
+a {
   text-decoration: none;
 }
 
-h6
-{
+h6 {
   visibility: hidden;
   margin-bottom: -5%;
 }
 
-body /* Trouver une solution pour l'améliorer */
-{
-  /*background: #CACACA;*/
+body {
   background-image: url(/assets/img/background.png);
   background-attachment: fixed;
 }
 
-header
-{
+header {
   text-align: center;
 }
 
-header img
-{
+header img {
   margin-top: 3%;
   width: 12.5%;
   height: auto;
 }
 
-.croix, .barre
-{
+.croix, .barre {
   display: none;
 }
 
-.nav_bar
-{
+.nav_bar {
   display: grid;
   max-width: 90%;
   grid-template-columns: repeat(8,1fr);
@@ -64,20 +55,17 @@ header img
   background-color: var(--navBarBack);
 }
 
-.nav_bar a
-{
+.nav_bar a {
   color: var(--navBarText);
   text-transform: capitalize;
   font-size: 1.3em;
 }
 
-.nav_bar a:hover
-{
+.nav_bar a:hover {
   color: var(--navBarHover);
 }
 
-footer
-{
+footer {
   margin-top: 2%;
   margin-bottom: 0;
   width: 100%;
@@ -87,8 +75,7 @@ footer
   padding-bottom: 0.25%;
 }
 
-footer p
-{
+footer p {
   color: var(--footerText);
   font-weight: bold;
   font-size: 1.1em;
@@ -97,44 +84,37 @@ footer p
 
 
 /* Menu Déroulant */
-.menu_deroulant, .menu_deroulant ul
-{
+.menu_deroulant, .menu_deroulant ul {
   padding :0;
   margin: 0;
   list-style: none;
   text-align: center;
 }
 
-.menu_deroulant .top
-{
+.menu_deroulant .top {
   margin-top: 5%;
 }
 
-.menu_deroulant li
-{
+.menu_deroulant li {
   display: inline-block;
   position: relative;
   border-radius: 8px 8px 0 0;
 }
 
-.menu_deroulant ul li
-{
+.menu_deroulant ul li {
   display: inherit;
   border-radius: 0;
 }
 
-.menu_deroulant ul li:hover
-{
+.menu_deroulant ul li:hover {
   border-radius: 0;
 }
 
-.menu_deroulant ul li:last-child
-{
+.menu_deroulant ul li:last-child {
   border-radius: 0 0 8px 8px;
 }
 
-.menu_deroulant ul
-{
+.menu_deroulant ul {
   position:absolute;
   z-index: 5;
   max-height: 0;
@@ -146,101 +126,83 @@ footer p
   transition: .8s all .3s;
 }
 
-.menu_deroulant li:hover ul
-{
+.menu_deroulant li:hover ul {
   max-height: 20em;
 }
 
 /* background des liens menus */
-.menu_deroulant li:first-child
-{
+.menu_deroulant li:first-child {
   background-color: var(--navBarBack);
 }
 
-.menu_deroulant li:nth-child(2)
-{
+.menu_deroulant li:nth-child(2) {
   background-color: var(--navBarBack);
 }
 
-.menu_deroulant li:nth-child(3)
-{
+.menu_deroulant li:nth-child(3) {
   background-color: var(--navBarBack);
 }
 
-.menu_deroulant li:last-child
-{
+.menu_deroulant li:last-child {
   background-color: var(--navBarBack);
 }
 
 /* background des liens sous menus */
-.menu_deroulant li:first-child li
-{
+.menu_deroulant li:first-child li {
   background: var(--navBarBack);
 }
 
-.menu_deroulant li:nth-child(2) li
-{
+.menu_deroulant li:nth-child(2) li {
   background: var(--navBarBack);
 }
 
-.menu_deroulant li:nth-child(3) li
-{
+.menu_deroulant li:nth-child(3) li {
   background: var(--navBarBack);
 }
 
-.menu_deroulant li:last-child li
-{
+.menu_deroulant li:last-child li {
   background: var(--navBarBack);
 }
 
 /* background des liens menus et sous menus au survol */
-.menu_deroulant li:first-child:hover, .menu_deroulant li:first-child li:hover
-{
+.menu_deroulant li:first-child:hover, .menu_deroulant li:first-child li:hover {
   background: var(--navBarBack);
 }
 
-.menu_deroulant li:nth-child(2):hover, .menu_deroulant li:nth-child(2) li:hover
-{
+.menu_deroulant li:nth-child(2):hover, .menu_deroulant li:nth-child(2) li:hover {
   background: var(--navBarBack);
 }
 
-.menu_deroulant li:nth-child(3):hover, .menu_deroulant li:nth-child(3) li:hover
-{
+.menu_deroulant li:nth-child(3):hover, .menu_deroulant li:nth-child(3) li:hover {
   background: var(--navBarBack);
 }
 
-.menu_deroulant li:last-child:hover, .menu_deroulant li:last-child li:hover
-{
+.menu_deroulant li:last-child:hover, .menu_deroulant li:last-child li:hover {
   background: var(--navBarBack);
 }
 
 /* les a href */
-.menu_deroulant a
-{
+.menu_deroulant a {
   text-decoration: none;
   display: block;
   padding: 8px 32px;
   color: var(--navBarText);
 }
 
-.menu_deroulant ul a
-{
+.menu_deroulant ul a {
   padding: 8px 0;
 }
 
-.menu_deroulant li:hover li a
-{
+.menu_deroulant li:hover li a {
   color: var(--navBarText);
   text-transform: inherit;
 }
 
-.menu_deroulant li:hover a, .menu_deroulant li li:hover a
-{
+.menu_deroulant li:hover a, .menu_deroulant li li:hover a {
   color: var(--navBarHover);
 }
 
 /* Ajout pour amélioration */
-.round_profil
-{
+.round_profil {
   border-radius: 50%;
 }

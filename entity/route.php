@@ -17,15 +17,18 @@ class Route extends Model {
                 ->order_by_asc('etat')
                 ->find_many();
   }
+
   public static function getListDelitByC($conducteur_id) { // On récupère la liste des délits routier avec l'ID du conducteur
     return Route::where('conducteur_id', $conducteur_id)
                 ->order_by_asc('etat')
                 ->find_many();
   }
+
   public static function getRoute($delit_id) { // On récupère la liste du casier judiciaire avec l'ID de la personne
     return Route::where('delit_id', $delit_id)
                 ->find_one();
   }
+
   public static function getIDRoute($vehicle, $conducteur, $enregistreur) { // Récuparatoin de l'ID d'une personne enfonction de son nom et prénom
     return Route::where(array(
                   'v_id' => $vehicle,
@@ -35,14 +38,22 @@ class Route extends Model {
                 ->order_by_desc('delit_id')
                 ->find_one();
   }
+
   public static function getAmende($id) { // Récuparatoin de l'ID d'une personne enfonction de son nom et prénom
     return Route::where(array('conducteur_id' => $id, 'etat' => '0'))
                 ->sum('amende');
   }
+
+  public static function getRetrait($id) {
+    return Route::where(array('conducteur_id' => $id, 'etat' => '0'))
+                ->sum('retrait');
+  }
+
   public static function getPrison($id) { // Récuparatoin de l'ID d'une personne enfonction de son nom et prénom
     return Route::where(array('conducteur_id' => $id, 'etat' => '0'))
                 ->sum('prison');
   }
+  
   public static function getRouteEnCours($id) { // Récuparatoin de l'ID d'une personne enfonction de son nom et prénom
     return Route::where(array('conducteur_id' => $id, 'etat' => '0'))
                 ->find_many();

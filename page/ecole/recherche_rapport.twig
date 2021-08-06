@@ -23,7 +23,7 @@
 {% block main %}
   {% for rapport in listes %}
     <div class="Resultat">
-      <img class="round_profil" src="/assets/img/identité/{{ rapport.photo}}" alt="Photo de {{ rapport.grade|capitalize }} {{ rapport.nom|capitalize }}">
+      <img class="round_profil" src="/assets/img/identite/{{ rapport.photo}}" alt="Photo de {{ rapport.grade|capitalize }} {{ rapport.nom|capitalize }}">
       <p>{{ rapport.titre|capitalize }}</p>
       <a href="/rapport/{{ rapport.id }}">Consulter</a>
     </div>

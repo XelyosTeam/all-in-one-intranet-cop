@@ -24,7 +24,9 @@ Flight::route('/casier-judiciaire/@id_delit', function($id_delit) {
     $personne->date_trad = $value[1];
   }
 
-  $delit->remarque = renderHTMLFromMarkdown(htmlspecialchars(strip_tags($delit->remarque)));
+  // Traitement inforamtion texte
+  $delit->remarque = renderHTMLFromMarkdown(htmlspecialchars(strip_tags(urldecode($delit->remarque))));
+
   Flight::view()->display('fiche/detail_casier.twig', array(
     'delit' => $delit, // Info du casier
     'civil' => $personne, // Informations sur la personne
@@ -52,6 +54,9 @@ Flight::route('/casier-judiciaire/@id_delit/edit', function($id_delit) {
     }
   }
 
+  // Traitement inforamtion texte
+  $delit->remarque = urldecode($delit->remarque);
+
   Flight::view()->display('edit/casier.twig', array(
     'delit' => $delit, // Info du casier
     'civil' => $personne, // Informations sur la personne
@@ -60,6 +65,30 @@ Flight::route('/casier-judiciaire/@id_delit/edit', function($id_delit) {
     'fermer' => Agent::getInfoAgentID($delit->acquite_par), // Policier ayant fermé le casier
     'policier' => Agent::getInfoAgentIDUser($personne->id)
   ));
+});
+
+Flight::route('/casier-judiciaire/@id_delit/modification', function($id_delit) {
+  verif_connecter();
+  /* Variable récupéré dans le get */
+  $rapport = urlencode($_POST['rapport']);
+  /* Variable récupéré dans le get */
+  $agent = Agent::getInfoAgent();
+  $act = Casier::getDelit($id_delit);
+
+  if ($act->remarque != $rapport) {
+    echo "Ici";
+    addHistorique($agent->matricule, "3¤0¤0¤" . $id_delit . "¤" . $act->remarque . "¤" . $rapport);
+  }
+
+  if ($agent->editer == 0) {
+    echo "La";
+    Flight::redirect("/casier-judiciaire/$id_delit/edit");
+    exit();
+  }
+
+  editRapportCasier((int)$id_delit, $rapport);
+
+  Flight::redirect("/casier-judiciaire/$id_delit");
 });
 
 Flight::route('/casier-judiciaire/@id_delit/@etat', function($id_delit, $etat) {
@@ -73,28 +102,6 @@ Flight::route('/casier-judiciaire/@id_delit/@etat', function($id_delit, $etat) {
 
   closeCasier($id_delit, $etat, $agent->lspd_id);
   addHistorique($agent->matricule, "5¤0¤0¤" . $id_delit . "¤" . $etat);
-
-  Flight::redirect("/casier-judiciaire/$id_delit");
-});
-
-Flight::route('/casier-judiciaire/@id_delit/modification', function($id_delit) {
-  verif_connecter();
-  /* Variable récupéré dans le get */
-  $rapport = $_POST['rapport'];
-  /* Variable récupéré dans le get */
-  $agent = Agent::getInfoAgent();
-  $act = Casier::getDelit($id_delit);
-
-  if ($act->remarque != $rapport) {
-    addHistorique($agent->matricule, "3¤0¤0¤" . $id_delit . "¤" . $act->remarque . "¤" . $rapport);
-  }
-
-  if ($agent->editer == 0) {
-    Flight::redirect("/casier-judiciaire/$id_delit/edit");
-    exit();
-  }
-
-  editRapportCasier((int)$id_delit, $rapport);
 
   Flight::redirect("/casier-judiciaire/$id_delit");
 });

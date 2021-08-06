@@ -7,13 +7,11 @@
 */
 
 /* Global */
-.contenu::-webkit-scrollbar
-{
+.contenu::-webkit-scrollbar {
   display: contents;
 }
 
-.chat
-{
+.chat {
   display: block;
   margin: auto;
   padding: 2%;
@@ -26,22 +24,18 @@
   overflow-y: scroll;
 }
 
-.chat .sender
-{
+.chat .sender {
   text-align: right;
 }
 
-.chat .receiver
-{
+.chat .receiver {
   text-align: left;
 }
 
-.chat .ems p
-{
+.chat .ems p {
   color: var(--secourColor);
 }
 
-.chat .cop p
-{
+.chat .cop p {
   color: var(--copColor);
 }

@@ -14,7 +14,7 @@
     // 'debug' => true,
   );
 
-  /* Version 2.3.1 */
+  /* Version 3.0.0 */
   Flight::register('view', '\Twig\Environment', array($loader, $twigConfig), function ($twig) {
       $twig->addExtension(new \Twig\Extension\DebugExtension()); // Add the debug extension
       $twig->addGlobal('_agent', Agent::getInfoAgent());
@@ -29,10 +29,12 @@
       //Serveur
       $twig->addGlobal('_nomServeur', serveurIni('Serveur', 'nom'));
       $twig->addGlobal('_jeuServeur', serveurIni('Serveur', 'jeu'));
+      $twig->addGlobal('_siteVitrine', serveurIni('Serveur', 'url_vitrine'));
+      $twig->addGlobal('_Version', serveurIni('Serveur', 'version'));
       // Paramètre
       $twig->addGlobal('_typePermis', serveurIni('Parametre', 'permis_type'));
       $twig->addGlobal('_tpsPermis', serveurIni('Parametre', 'permis_time'));
-      $twig->addGlobal('_Version', serveurIni('Serveur', 'version'));
+      $twig->addGlobal('_Devise', serveurIni('Parametre', 'devise'));
       // Habilitation
       $twig->addGlobal('_Hab1', serveurIni('HABILITATION', 'hab_1'));
       $twig->addGlobal('_Hab2', serveurIni('HABILITATION', 'hab_2'));
@@ -69,8 +71,7 @@
   });
   /* Association à la base de donnée */
 
-  Flight::route('/', function()
-  {
+  Flight::route('/', function() {
     verif_connecter();
     $agent = Agent::getInfoAgent();
     $voiture = Voiture::getListCarPolice($agent->user_id);
@@ -81,12 +82,11 @@
     ));
   });
 
-  Flight::route('/formation', function()
-  {
+  Flight::route('/formation', function() {
     verif_connecter();
 
     $path = dirname(__FILE__);
-    $struct = getStructure($path);
+    $struct = getStructure($path, 'index');
 
     $names = new ArrayObject();
     foreach ($struct->navigation as $value) {
@@ -110,8 +110,8 @@
   include "routes.php";
 
   Flight::map('notFound', function(){
-    verif_connect();
-    Flight::redirect("/"); // Redirige vers la page
+    verif_connecter();
+    Flight::view()->display('404.twig');
   });
 
   Flight::start(); // Denrière ligne du fichier

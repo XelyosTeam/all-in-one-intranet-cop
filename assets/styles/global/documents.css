@@ -1,0 +1,526 @@
+/*
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+*/
+
+/* Liste des éléments */
+.engine {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.engine:hover, .param-folder .close:hover, .afficher-image .close:hover, .item:hover {
+  cursor: pointer;
+}
+
+.engine img {
+  max-width: 50px;
+  height: auto;
+}
+
+.liste {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  background-color: var(--docBackgroundListe);
+  border-radius: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.liste h1 {
+  text-align: center;
+  color: var(--docTitle);
+  padding-top: 30px;
+  padding-bottom: 5px;
+}
+
+.liste .description {
+  padding-bottom: 10px;
+  margin-left: 5%;
+}
+
+.galerie {
+  margin: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.goback {
+  max-width: 110px;
+  height: auto;
+}
+
+.item {
+  margin: 2%;
+  position: relative;
+  text-decoration: none;
+  color: black;
+}
+
+.item img {
+  max-width: 150px;
+  height: auto;
+  vertical-align: inherit;
+}
+
+.titre-element, .description-element {
+  font-size: 20px;
+  font-weight: bold;
+  bottom: 0px;
+  left: 15px;
+  text-align: left;
+  position: absolute;
+}
+
+.description-element {
+  font-size: 20px;
+  word-wrap: break-word;
+  display: none;
+}
+
+/* Section ajouter un dossier */
+.black-screen {
+  /* display: flex; */
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 20;
+  align-items: center;
+}
+
+.param-folder {
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  border-radius: 10px;
+  background-color: var(--docFormBackground);
+  position: relative;
+}
+
+.param-folder h1 {
+  text-align: center;
+  color: var(--docTitle);
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.param-folder .close, .afficher-image .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3000;
+}
+
+.param-folder .close img, .afficher-image .close img {
+  max-width: 50px;
+}
+
+.form-folder, .deplacer-element {
+  display: block;
+  top: 0;
+  overflow-y: auto;
+  height: 650px;
+  width: auto;
+}
+
+.petit-form {
+  height: 350px;
+}
+
+.form-folder h2, .deplacer-element h2, .deplacer-element h3 {
+  color: var(--docTitle);
+  margin-left: 60px;
+  text-decoration: underline;
+}
+
+.form-folder h2:after, .deplacer-element h2:after, .deplacer-element h3:after {
+  content: ' :';
+}
+
+.form-folder div {
+  display: grid;
+  grid-template-columns: 40% 60% repeat(2, 1fr);
+  margin: 2%;
+}
+
+.form-folder div label {
+  text-align: right;
+  margin-right: 5%;
+  color: var(--docFormLabel);
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.form-folder div input, .form-folder div textarea {
+  border: none;
+  border-bottom: 1px solid #000;
+  height: 80%;
+  height: 80%;
+  background-color: var(--docFormBackground);
+  color: var(--docFormInput);
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+.form-folder div select {
+  border: none;
+  border-bottom: 1px solid #000;
+  margin-left: 10%;
+  margin-bottom: 2%;
+  width: 75%;
+  height: 80%;
+  background-color: var(--docFormBackground);
+  color: var(--docFormInput);
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+.form-folder .liste-acces {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.form-folder .liste-acces div {
+  display: grid;
+  grid-template-columns: 55% 45% repeat(2, 1fr);
+}
+
+.form-folder .form-folder-button, .form-edit-document  .form-folder-button, .deplacer-element .deplacer-element-button {
+  display: block;
+  text-align: center;
+}
+
+.form-folder .form-folder-button button, .form-edit-document  .form-folder-button button, .deplacer-element button {
+  text-align: center;
+  margin-top: 20px;
+  width: 30%;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--docFormButton);
+  color: var(--docFormTextButton);
+  padding: 10px;
+  font-size: 1.25em;
+}
+
+.form-folder .form-folder-button button:hover, .form-edit-document .form-folder-button button:hover, .deplacer-element .deplacer-element-button button:hover {
+  color: var(--docFormTextButtonHover);
+  cursor: pointer;
+}
+
+.deplacer-element .deplacer-element-button button:disabled, .deplacer-element .deplacer-element-button button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+
+/* Navigation */
+.parent-path {
+  display: block;
+  position: absolute;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.parent-path a {
+  text-decoration: none;
+  color: black;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+.parent-path a:after {
+  content: " >";
+}
+
+
+.parent-path .last, .parent-path a:hover {
+  color: var(--docTitle);
+}
+
+.parent-path .last {
+  cursor: default;
+}
+
+.parent-path .last:after {
+  content: none;
+}
+
+/* Menu action */
+.liste-action {
+  margin: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.liste-action .action {
+  margin: 2%;
+  text-align: center;
+}
+
+.liste-action .action:hover {
+  cursor: pointer;
+}
+
+.liste-action .action:hover p {
+  text-decoration: underline;
+}
+
+.liste-action .action img {
+  max-width: 150px;
+  height: auto;
+}
+
+.liste-action .action p {
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+/* Dépot de fichier */
+
+.center-depot {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  height: auto;
+}
+
+.import-file {
+  position: relative;
+  margin: 0 auto;
+  width: 60%;
+  height: 200px;
+  border: 4px dashed var(--docFormInput);
+  text-align: center;
+}
+
+.import-file:hover {
+  cursor: pointer;
+}
+
+.import-file p {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 170px;
+  color: var(--docFormLabel);
+  font-family: Arial;
+}
+
+.import-file input {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+}
+
+/* Visualisation d'image */
+.afficher-image {
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Affichage du pdf */
+.afficher-image embed {
+  margin-top: 2.5%;
+  width: 50%;
+  height: 90%;
+}
+
+/* Affichage des documents */
+.document-content {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  background-color: var(--docBackgroundListe);
+  border-radius: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.document-content h1, .edit-document h1 {
+  text-align: center;
+  color: var(--docTitle);
+  padding-top: 30px;
+  padding-bottom: 5px;
+}
+
+.document-content h2, .liste h2, .edit-document h2 {
+  color: var(--docTitle);
+  opacity: 0.5;
+  width: 85%;
+  margin: 0 auto;
+  text-align: justify;
+  font-style: italic;
+}
+
+/* Modification sur le markdown */
+.markdown-body {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 2.5%;
+  padding: 20px;
+  border: 3px solid var(--docTitle);
+  border-radius: 10px;
+}
+
+.markdown-body img {
+  display: block;
+  margin: 0 auto;
+}
+
+
+/* Mdofication d'un document */
+.edit-document {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  background-color: var(--docBackgroundListe);
+  border-radius: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.edit-document .separation {
+  display: grid;
+  grid-template-columns: 50% 50% repeat(2, 1fr);
+  text-align: justify;
+}
+
+.edit-document .separation form textarea {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 90%;
+  rows: auto;
+  padding: 10px;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+}
+
+/*
+  Copier le lien de l'image
+  Source : https://codemyui.com/button-morph-email-subscription-form/
+*/
+.copy-link {
+  display: none;
+  width: 25.25em;
+  height: 5em;
+  margin: auto;
+  margin-top: -150px;
+  padding: 1em 0.75em;
+  border: 3px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: width 0.15s ease;
+}
+
+.copy-link input[type="text"] {
+  color: var(--docFormInput);
+  width: 75%;
+  height: 50%;
+  margin-right: 2%;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  font-size: 1rem;
+  border: 0;
+  outline: 0;
+}
+
+.copy-link button {
+  flex-grow: 1;
+  border: 0;
+  border-radius: 4px;
+  height: 50%;
+  background: var(--docFormButton);
+  color: var(--docFormTextButton);
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.copy-link button:hover {
+  color: var(--docFormTextButtonHover);
+}
+
+.copy-link__wrapper {
+  height: 100%;
+  display: flex;
+}
+
+/* Déplacer un document ou un répertoire */
+.deplacer-element .separation {
+  display: grid;
+  grid-template-columns: 55% 45% repeat(2, 1fr);
+  margin: 2%;
+
+}
+
+.deplacer-element .tree-class {
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  margin-left: 10%;
+  height: 450px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.deplacer-element .tree-class .tree a {
+  font-size: 1.2em;
+}
+
+.deplacer-element .tree-class .tree a[value=true] {
+  background-color: #f2a92250;
+}
+
+.deplacer-element .info-tree {
+  display: block;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
+  height: 450px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.deplacer-element .info-tree div p {
+  font-size: 1.25em;
+}
+
+.deplacer-element .info-tree div #wrong-permissions {
+  text-align: center;
+  color: red;
+  display: none;
+}
+
+.deplacer-element .info-tree #hidden-value-move {
+  display: none;
+}

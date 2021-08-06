@@ -18,23 +18,25 @@
     $candid->save();
   }
 
-  function editCivil($id_civil, $phone, $job, $drive, $time) {
+  function editCivil($id_civil, $phone, $job, $drive, $time, $ppa) {
     $civil = Model::factory('Personne')->where('id', $id_civil)->find_one();
     $civil->set(array(
                 'phone' => $phone,
                 'job' => $job,
                 'permis' => $drive,
-                'date_permis' => $time
+                'date_permis' => $time,
+                'ppa' => $ppa
     ));
     $civil->save();
   }
 
-  function editCivil2($id_civil, $phone, $drive, $time) {
+  function editCivil2($id_civil, $phone, $drive, $time, $ppa) {
     $civil = Model::factory('Personne')->where('id', $id_civil)->find_one();
     $civil->set(array(
                 'phone' => $phone,
                 'permis' => $drive,
-                'date_permis' => $time
+                'date_permis' => $time,
+                'ppa' => $ppa
     ));
     $civil->save();
   }
@@ -88,6 +90,12 @@
   function editDelitPrison($id, $tps_delit) {
     $delit = Model::factory('Delit')->where('id', $id)->find_one();
     $delit->set('temps_prison', $tps_delit);
+    $delit->save();
+  }
+
+  function editDelitRetrait($id, $retrait) {
+    $delit = Model::factory('Delit')->where('id', $id)->find_one();
+    $delit->set('retrait', $retrait);
     $delit->save();
   }
 
@@ -162,8 +170,7 @@
     $bye2->save();
   }
 
-  function updateProf($id_cop)
-  {
+  function updateProf($id_cop) {
     $habilitation = Model::factory('Habilitation')->where('matricule', $id_cop)->find_one();
     $habilitation->set('hab_1', 3);
     $habilitation->save();

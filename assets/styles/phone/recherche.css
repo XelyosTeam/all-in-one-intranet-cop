@@ -7,42 +7,35 @@
 */
 
 /* Phone */
-@media (max-width:1001px)
-{
-  .recherche
-  {
+@media (max-width:1001px) {
+  .recherche {
     margin-left : 5%;
     width: 90%;
   }
 
-  .recherche input
-  {
+  .recherche input {
     font-size: 2em;
   }
 
-  .recherche button
-  {
+  .recherche button {
     margin-left: 0%;
     font-size: 1.5em;
   }
 
-  .Resultat, .Resultat1, .Resultat2
-  {
+  .Resultat, .Resultat1, .Resultat2 {
     margin-top: 1%;
     margin-left: 10%;
     width: 80%;
     padding-bottom: 0.5%;
   }
 
-  .Resultat p, .Resultat1 p, .Resultat2 p
-  {
+  .Resultat p, .Resultat1 p, .Resultat2 p {
     padding-left: 0%;
     padding-top: 5%;
     font-size: 1.75em;
   }
 
-  .Resultat a, .Resultat1 a, .Resultat2 a
-  {
+  .Resultat a, .Resultat1 a, .Resultat2 a {
     padding-top: 15%;
     font-size: 1.75em;
   }

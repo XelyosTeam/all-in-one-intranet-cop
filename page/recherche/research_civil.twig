@@ -31,7 +31,7 @@
 
   {% for civil in civils %}
     <div class="Resultat">
-      <img class="round_profil" src="/assets/img/identité/{{ civil.photo }}" alt="Photo de {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}">
+      <img class="round_profil" src="/assets/img/identite/{{ civil.photo }}" alt="Photo de {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}">
       <p>{{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</p>
       <a href="/civil/{{ civil.id }}">Consulter</a>
     </div>
@@ -42,8 +42,6 @@
       <a href="#"></a>
     </div>
   {% endfor %}
-
-
 {% endblock %}
 
 {% block script %}{% endblock %}

@@ -9,9 +9,9 @@ include 'routes/connexion.php';
 include 'routes/cop.php';
 include 'routes/delit-routier.php';
 include 'routes/detail-plainte.php';
+include 'routes/documents.php'; // Documents
 include 'routes/dossier-candidat.php';
 include 'routes/edit.php';
-include 'routes/impression.php';
 include 'routes/insert.php';
 include 'routes/rapport.php';
 include 'routes/recherche.php';

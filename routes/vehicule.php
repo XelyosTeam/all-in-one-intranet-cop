@@ -72,5 +72,4 @@ Flight::route('/vehicule/@plaque/modification', function($plaque) {
 
   Flight::redirect("/vehicule/$plaque");
 });
-
 ?>

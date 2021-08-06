@@ -25,7 +25,7 @@
 <form action="/{{ _membreFaction }}/{{ agent.matricule }}/modification" method="post">
   <section class="info_personne">
     <h1>Fiche {{ _BDDFaction }}</h1>
-    <img src="/assets/img/identité/{{ agent.photo }}" alt="Photo {{ agent.grade }} {{ agent.nom|capitalize }}">
+    <img src="/assets/img/identite/{{ agent.photo }}" alt="Photo {{ agent.grade }} {{ agent.nom|capitalize }}">
     <p><strong>Description :</strong><textarea name="note" rows="1">{{ agent.note }}</textarea></p>
     <p><strong>Nom :</strong>{{ agent.nom|capitalize }}</p>
     <p><strong>Prénom :</strong>{{ agent.prenom|capitalize }}</p>
@@ -298,6 +298,9 @@
             {% endif %}
         </select>
       {% endif %}
+
+      {# Pour fonctionnement sur notre serveur #}
+      <p></p>
 
       {% if _Hab12 != "" %}
         <select name="hab12">

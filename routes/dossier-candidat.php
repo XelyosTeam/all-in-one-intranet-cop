@@ -23,13 +23,42 @@ Flight::route('/dossier-candidat', function() {
   $travail = NULL;
   $concat = NULL;
 
+  $linsting = array('en_attente', 'refusee', 'accepte');
+
+  foreach ($linsting as $element) {
+    $vardin = $element;
+    foreach ($$vardin as $liste) {
+      $liste->nom = urldecode($liste->nom);
+      $liste->prenom = urldecode($liste->prenom);
+    }
+  }
+
+  $contact = new ArrayObject();
+  $path = dirname(dirname(__FILE__));
+  $struct = getStructure($path, 'candidature');
+
   if ($identifiant != NULL) {
     $personne = Candidature::getCandidature($identifiant);
-    $personne->motivation_lspd = renderHTMLFromMarkdown(htmlspecialchars(strip_tags($personne->motivation_lspd)));
+    $personne->discord_id = urldecode($personne->discord_id);
+    $personne->nom = urldecode($personne->nom);
+    $personne->prenom = urldecode($personne->prenom);
+    $personne->phone = urldecode($personne->phone);
+    $personne->detail_flic = urldecode($personne->detail_flic);
+    $personne->objectif_lspd = urldecode($personne->objectif_lspd);
+    $personne->motivation_lspd = renderHTMLFromMarkdown(htmlspecialchars(strip_tags(urldecode($personne->motivation_lspd))));
+    $personne->attachments = explode(",", $personne->attachments);
+
+    /* Traitement concaténation */
+    $personne->reponse_concat = urldecode($personne->reponse_concat);
+    $personne->reponse_concat = explode('¤', $personne->reponse_concat);
+    foreach ($personne->reponse_concat as $reponse) {
+      $contact->append(urldecode($reponse));
+    }
+
+    /* Période de disponibilité */
     $ecole = explode('-', $personne->detail_ecole);
     $vacance = explode('-', $personne->detail_vacance);
     $travail = explode('-', $personne->detail_travail);
-    $concat = explode('-', $personne->concat);
   }
 
   Flight::view()->display('ecole/dossier_candidat.twig', array(
@@ -40,7 +69,8 @@ Flight::route('/dossier-candidat', function() {
     'ecole' => $ecole,
     'vacance' => $vacance,
     'travail' => $travail,
-    'concat' => $concat
+    'reponses' => (array)$contact,
+    'questions' => $struct->questions
   ));
 });
 

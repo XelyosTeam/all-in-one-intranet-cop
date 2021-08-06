@@ -58,6 +58,7 @@ Flight::route("/" . serveurIni('Faction', 'membre') . "/@matricule_policier/modi
   /* Variable récupéré dans le get */
   $grade = $_POST['grade'];
   $note = $_POST['note'];
+
   if (isset($_POST['hab1'])) {
     $hab1 = $_POST['hab1'];
   }
@@ -176,5 +177,4 @@ Flight::route("/" . serveurIni('Faction', 'membre') . "/@matricule_policier/modi
   }
   Flight::redirect("/" . serveurIni('Faction', 'membre') . "/$matricule_policier");
 });
-
 ?>

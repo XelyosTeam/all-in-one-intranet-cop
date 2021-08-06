@@ -39,6 +39,7 @@ Flight::route('/civil/@id_citoyen/calcul-amende', function($id_citoyen) {
   $civil = Personne::getinfoPersonne($id_citoyen);
   $amendeCasier = Casier::getAmende($id_citoyen);
   $amendeRoute = route::getAmende($id_citoyen);
+  $retraitRoute = route::getRetrait($id_citoyen);
   $prisonCasier = Casier::getPrison($id_citoyen);
   $prisonRoute = route::getPrison($id_citoyen);
   $total = traitement_amende($amendeCasier, $amendeRoute, $prisonCasier, $prisonRoute);
@@ -55,7 +56,8 @@ Flight::route('/civil/@id_citoyen/calcul-amende', function($id_citoyen) {
     'prison' => $total[1],
     'amende' => $total[0],
     'prisonAnnée' => $total[2],
-    'prisonAnnée2' => $total[3]
+    'prisonAnnée2' => $total[3],
+    'retrait' => $retraitRoute
   ));
 });
 
@@ -77,6 +79,14 @@ Flight::route('/civil/@id_citoyen/close-casiers', function($id_citoyen) {
 
   foreach ($Route as $variable) {
     closeRoute($variable->delit_id, 3, $agent->lspd_id);
+
+    /* Protocole de perte de point pour le civil */
+    $MyDelit = Route::getRoute($variable->delit_id); // Récupération du délit
+    $civil = Personne::getinfoPersonne($MyDelit->conducteur_id);
+    $diff = $civil->permis - $MyDelit->retrait;
+    if ($diff < 0) { $diff = 0; } // On ne va pas dans le négatif
+    editCivil2($civil->id, $civil->phone, $diff, time(), $civil->ppa);
+
     addHistorique($agent->matricule, "5¤0¤1¤" . $variable->delit_id . "¤" . 2);
   }
   Flight::redirect("/civil/$id_citoyen");
@@ -98,13 +108,14 @@ Flight::route('/civil/@id_citoyen/edit', function($id_citoyen) {
 
 Flight::route('/civil/@id_civil/modification', function($id_civil) {
   verif_connecter();
-  /* Variable récupéré dans le get */
+  /* Variable récupérée dans le get */
   $phone = $_POST['telephone'];
   if (isset($_POST['metier'])) {
     $job = $_POST['metier'];
   }
   $drive = $_POST['permis'];
-  /* Variable récupéré dans le get */
+  $ppa = $_POST['ppa'];
+  /* Variable récupérée dans le get */
 
   $oldinfo = Personne::getinfoPersonne((int)$id_civil); // Ancienne info du civil
   $agent = Agent::getInfoAgent();
@@ -126,19 +137,33 @@ Flight::route('/civil/@id_civil/modification', function($id_civil) {
     $time = $oldinfo->date_permis;
   }
 
+  if (isset($_POST['ppa']) && ($oldinfo->ppa != $ppa)) {
+    addHistorique($agent->matricule, "3¤1¤P1¤" . $id_civil . "¤" . $oldinfo->ppa . "¤" . $ppa);
+  }
+
   if ($agent->editer == 0) {
     Flight::redirect("/civil/$id_civil");
     exit();
   }
 
   if (isset($_POST['metier'])) {
-    editCivil((int)$id_civil, $phone, $job, $drive, $time);
+    editCivil((int)$id_civil, $phone, $job, $drive, $time, $ppa);
   }
   else {
-    editCivil2((int)$id_civil, $phone, $drive, $time);
+    editCivil2((int)$id_civil, $phone, $drive, $time, $ppa);
   }
 
   Flight::redirect("/civil/$id_civil");
 });
 
+Flight::route('/civil/@id_citoyen/impression', function($id_citoyen) {
+  verif_connecter();
+  $impression = new generatePDF();
+  $civil = Personne::getinfoPersonne($id_citoyen);
+  if (!$civil) {
+    Flight::redirect("/civil/$id_citoyen");
+    return;
+  }
+  $impression->civil($civil, $id_citoyen);
+});
 ?>

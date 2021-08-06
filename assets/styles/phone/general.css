@@ -7,29 +7,24 @@
 */
 
 /* Phone */
-@media (max-width:1001px)
-{
+@media (max-width:1001px) {
 
-  body
-  {
+  body {
     background-image: url(/assets/img/backgroundPhone.jpg);
   }
 
-  header img
-  {
+  header img {
     margin-top: 15%;
     width: 35%;
   }
 
-  footer
-  {
+  footer {
     margin-top: 15%;
     padding-top: 0.5%;
     padding-bottom: 0.5%;
   }
 
-  footer p
-  {
+  footer p {
     font-size: 2em;
   }
 }

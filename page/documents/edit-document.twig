@@ -1,0 +1,76 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+
+{# Page vierge pour les twig #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/markdown.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/documents.css">
+{% endblock %}
+
+{% block description %}document, {{ document.title }}{% endblock %}
+
+{% block key %}document, {{ document.title }}{% endblock %}
+
+{% block title %}{{ document.title }}{% endblock %}
+
+{% block main %}
+
+<div class="edit-document">
+  <h1>{{ document.title }}</h1>
+  {% if document.description %}
+    <h2>{{ document.description }}</h2>
+  {% endif %}
+
+  {# Modifier le dossier #}
+  {% set __condition = document.isdeleted == 0 and (_agent.docAccess >= 2 or _agent.admin == 1 or document.createdby == _agent.lspd_id) %}
+
+  {% if __condition %}
+    <div class="engine" onclick="showParamFolder('menu')">
+      <img src="/assets/img/documents/engine.png" alt="Paramètre du dossier">
+    </div>
+  {% endif %}
+
+  <div class="separation">
+    <form class="form-edit-document" action="/documents/page/{{ document.id }}/save" method="post">
+      <textarea id="content-input" name="new-content" rows="20" oninput="tradContent()" required>{{ document.content }}</textarea>
+
+      <div class="form-folder-button">
+        <button type="submit" name="button">Modifier le document</button>
+      </div>
+    </form>
+
+    <div class="document-content">
+      <div id="content-output" class="markdown-body">
+        {{ document.contentPreview|raw }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{# Section des ajouts #}
+{% if __condition %}
+  <div id="menufolder" class="black-screen">
+    {% include "/documents/menu-edit-document.twig" %}
+  </div>
+
+  <div id="imgfolder" class="black-screen">
+    {% include "/documents/add-img-edit-document.twig" %}
+  </div>
+
+  <div id="editdocparam" class="black-screen">
+    {% include "/documents/edit-document-menu.twig" %}
+  </div>
+{% endif %}
+{% endblock %}
+
+{% block script %}
+  <script src="/assets/script/showdown.min.js"></script>
+  <script src="/assets/script/documents.js"></script>
+{% endblock %}

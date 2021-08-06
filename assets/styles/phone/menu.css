@@ -7,10 +7,8 @@
 */
 
 /* Phone */
-@media (max-width:1001px)
-{
-  .croix, .barre
-  {
+@media (max-width:1001px) {
+  .croix, .barre {
     display: block;
     max-width: 20%;
     height: auto;
@@ -20,8 +18,7 @@
     z-index: 15;
   }
 
-  .mobile_phone
-  {
+  .mobile_phone {
     /* Apparence du menu */
     background-color: var(--navBarBack);
     position: fixed;
@@ -37,8 +34,7 @@
     text-align: center;
   }
 
-  .mobile_phone button
-  {
+  .mobile_phone button {
     background-color: var(--navBarBack);
     border: none;
     color: var(--navBarText);

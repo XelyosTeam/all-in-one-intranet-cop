@@ -19,7 +19,10 @@ class Voiture extends Model {
                   ->find_many();
   }
   public static function getListCarPolice($personne) { // Liste des voitures d'une personne
-    return Voiture::where('proprio', $personne)
+    return Voiture::where(array(
+                      'proprio' => $personne,
+                      'couleur' => serveurIni('Faction', 'couleurVehiculeBDD')
+                    ))
                   ->order_by_asc('plaque')
                   ->find_many();
   }

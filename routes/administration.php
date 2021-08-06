@@ -137,19 +137,19 @@ Flight::route('/administration/historique/get_info', function() {
       $i = 0;
       foreach ($liste as $key => $action) {
 
-      try {
-        $event = decryptHistorique($action->contenu);
-      } catch (\Exception $e) {
-        $event = $action->contenu;
-      }
+        try {
+          $event = decryptHistorique($action->contenu);
+        } catch (\Exception $e) {
+          $event = $action->contenu;
+        }
 
-      $data[$key] = [
-        'id' => $action->id,
-        'date' => $action->date_even,
-        'event' => $event
-      ];
-      $i++;
-    }
+        $data[$key] = [
+          'id' => $action->id,
+          'date' => $action->date_even,
+          'event' => $event
+        ];
+        $i++;
+      }
 
       $data[$i] = ['etat' => $name];
     }
@@ -251,6 +251,6 @@ Flight::route('/delete/@adress_ip', function($adresse_ip) {
   $adresse_ip = str_replace('-', '.', $adresse_ip);
   deleteIP($adresse_ip);
   addHistorique(Agent::getInfoAgent()->matricule, "0¤2¤1¤$adresse_ip");
-  Flight::redirect("/administration/modification");
+  Flight::redirect("/administration/modification"); // Redirige vers la page
 });
 ?>

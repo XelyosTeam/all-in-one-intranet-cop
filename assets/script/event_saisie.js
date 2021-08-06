@@ -31,7 +31,7 @@ function affiche_photo_voiture() {
   requeteAjax.send(data);
 
   // On récupère le résultat de la requête
-  requeteAjax.onload = function(){
+  requeteAjax.onload = function() {
     const resultat = JSON.parse(requeteAjax.responseText);
     document.getElementById("image_voiture").setAttribute('src', '/assets/img/vehicule/' + resultat.couleur);
     document.getElementById("image_voiture").setAttribute('alt', 'Photo ' + resultat.modele);
@@ -39,8 +39,7 @@ function affiche_photo_voiture() {
 }
 
 /* On affiche la photo en fonction du modèle de sa plaque */
-function affiche_photo_plaque()
-{
+function affiche_photo_plaque() {
   let modele = document.getElementById("car_type").value;
 
   // On met en forme les données
@@ -53,7 +52,7 @@ function affiche_photo_plaque()
   requeteAjax.send(data);
 
   // On récupère le résultat de la requête
-  requeteAjax.onload = function(){
+  requeteAjax.onload = function() {
     const resultat = JSON.parse(requeteAjax.responseText);
     document.getElementById("image_voiture").setAttribute('src', '/assets/img/vehicule/' + resultat.couleur);
     document.getElementById("image_voiture").setAttribute('alt', 'Photo ' + resultat.modele);
@@ -61,8 +60,7 @@ function affiche_photo_plaque()
 }
 
 /* On affiche la photo de la personne en fonction de son id */
-function affiche_photo_personne()
-{
+function affiche_photo_personne() {
   let civil_id = document.getElementById("personne_type").value;
 
   // On met en forme les données
@@ -75,16 +73,15 @@ function affiche_photo_personne()
   requeteAjax.send(data);
 
   // On récupère le résultat de la requête
-  requeteAjax.onload = function(){
+  requeteAjax.onload = function() {
     const resultat = JSON.parse(requeteAjax.responseText);
-    document.getElementById("image_civil").setAttribute('src', '/assets/img/identité/' + resultat.photo);
+    document.getElementById("image_civil").setAttribute('src', '/assets/img/identite/' + resultat.photo);
     document.getElementById("image_civil").setAttribute('alt', 'Photo ' + resultat.nom + ' ' + resultat.prenom);
   }
 }
 
 /* On affiche la photo de la personne en fonction de son id */
-function affiche_photo_personne_2()
-{
+function affiche_photo_personne_2() {
   let civil_id = document.getElementById("personne_type_2").value;
 
   // On met en forme les données
@@ -97,16 +94,15 @@ function affiche_photo_personne_2()
   requeteAjax.send(data);
 
   // On récupère le résultat de la requête
-  requeteAjax.onload = function(){
+  requeteAjax.onload = function() {
     const resultat = JSON.parse(requeteAjax.responseText);
-    document.getElementById("image_civil2").setAttribute('src', '/assets/img/identité/' + resultat.photo);
+    document.getElementById("image_civil2").setAttribute('src', '/assets/img/identite/' + resultat.photo);
     document.getElementById("image_civil2").setAttribute('alt', 'Photo ' + resultat.nom + ' ' + resultat.prenom);
   }
 }
 
 /* On affiche la photo d'un agent */
-function affiche_photo_cop()
-{
+function affiche_photo_cop() {
   let cop_id = document.getElementById("cop_type").value;
 
   // On met en forme les données
@@ -119,16 +115,15 @@ function affiche_photo_cop()
   requeteAjax.send(data);
 
   // On récupère le résultat de la requête
-  requeteAjax.onload = function(){
+  requeteAjax.onload = function() {
     const resultat = JSON.parse(requeteAjax.responseText);
-    document.getElementById("image_cop").setAttribute('src', '/assets/img/identité/' + resultat.photo);
+    document.getElementById("image_cop").setAttribute('src', '/assets/img/identite/' + resultat.photo);
     document.getElementById("image_cop").setAttribute('alt', 'Photo ' + resultat.grade + ' ' + resultat.nom);
   }
 }
 
 /* On affiche la photo d'un agent */
-function affiche_photo_cop_2()
-{
+function affiche_photo_cop_2() {
   let cop_id = document.getElementById("cop_type_2").value;
 
   // On met en forme les données
@@ -141,16 +136,15 @@ function affiche_photo_cop_2()
   requeteAjax.send(data);
 
   // On récupère le résultat de la requête
-  requeteAjax.onload = function(){
+  requeteAjax.onload = function() {
     const resultat = JSON.parse(requeteAjax.responseText);
-    document.getElementById("image_cop2").setAttribute('src', '/assets/img/identité/' + resultat.photo);
+    document.getElementById("image_cop2").setAttribute('src', '/assets/img/identite/' + resultat.photo);
     document.getElementById("image_cop2").setAttribute('alt', 'Photo ' + resultat.grade + ' ' + resultat.nom);
   }
 }
 
 /* Vérification que la plaque ne soit pas enregistrer */
-function verif_plaque()
-{
+function verif_plaque() {
   // On récupère la valeur de la plaque
   let plaque = document.getElementById("plaque_value").value;
 
@@ -164,7 +158,7 @@ function verif_plaque()
   requeteAjax.send(data);
 
   // On récupère le résultat de la requête
-  requeteAjax.onload = function(){
+  requeteAjax.onload = function() {
     const resultat = JSON.parse(requeteAjax.responseText);
     if (resultat.etat == 1) { // La plaque existe
       document.getElementById("alerte_message").innerHTML = "Le véhicule est déjà enregistré au nom de " + resultat.nom.toUpperCase() + " " + resultat.prenom.toUpperCase();
@@ -181,8 +175,7 @@ function verif_plaque()
 }
 
 /* On vérifie qsi qqn possède le même nom */
-function alerte_citoyennete()
-{
+function alerte_citoyennete() {
   let nom = document.getElementById("name").value;
   let prenom = document.getElementById("firstname").value;
 
@@ -197,7 +190,7 @@ function alerte_citoyennete()
   requeteAjax.send(data);
 
   // On récupère le résultat de la requête
-  requeteAjax.onload = function(){
+  requeteAjax.onload = function() {
     const resultat = JSON.parse(requeteAjax.responseText);
     if (resultat.etat == 1) { // Une personne est enreistré sous ce nom
       alert("Attention!\nUne personne est déjà enregistrée sous ce nom.")
@@ -226,8 +219,8 @@ function editPassWord() {
 function AddDelitAdmin() {
   event.preventDefault(); // Arret du formulaire
 
-  let var_tab = ['nom', 'amende', 'temps', 'type'];
-  let var_tab2 = ['name_delit', 'amd_delit', 'tps_delit', 'type_delit'];
+  let var_tab = ['nom', 'amende', 'temps', 'retrait', 'type'];
+  let var_tab2 = ['name_delit', 'amd_delit', 'tps_delit', 'point_retrait', 'type_delit'];
   const data = createData(var_tab, var_tab2);
 
   // On envoi le modèle
@@ -294,6 +287,7 @@ function AfficheMenuModDelit() {
   document.getElementById("dtls_prison").style.display = "none";
   document.getElementById("confirm_edit_delit").style.display = "none";
   document.getElementById("button_delit").style.display = "none";
+  document.getElementById("visibleRetrait").style.display = "none";
 
   switch (document.getElementById("delit_type").value) {
     case "1":
@@ -319,8 +313,7 @@ function AfficheMenuModDelit() {
 }
 
 /* Aficher les informations en fonction du délit */
-function EditMenuModDelit(value_this)
-{
+function EditMenuModDelit(value_this) {
   if (value_this == 0) {
   document.getElementById("dtls_amende").style.display = "none";
   document.getElementById("dtls_prison").style.display = "none";
@@ -328,6 +321,7 @@ function EditMenuModDelit(value_this)
   document.getElementById("amd_delit").value = '';
   document.getElementById("tps_delit").value = '';
   document.getElementById("button_delit").style.display = "none";
+  document.getElementById("visibleRetrait").style.display = "none";
   return;
   }
 
@@ -339,6 +333,9 @@ function EditMenuModDelit(value_this)
   document.getElementById("button_delit").setAttribute('value', value_this);
   document.getElementById("button_delit").style.display = "initial";
 
+  if (document.getElementById("list_route").style.display != "none") {
+    document.getElementById("visibleRetrait").style.display = "block";
+  }
 
   // On met en forme les données
   const data = new FormData();
@@ -350,10 +347,17 @@ function EditMenuModDelit(value_this)
   requeteAjax.send(data);
 
   // On récupère le résultat de la requête
-  requeteAjax.onload = function(){
+  requeteAjax.onload = function() {
     const resultat = JSON.parse(requeteAjax.responseText);
     document.getElementById("amd_delit").placeholder = resultat.amende;
     document.getElementById("tps_delit").placeholder = resultat.prison;
+
+    if (resultat.retrait) {
+      document.getElementById("point_retrait").placeholder = resultat.retrait;
+    }
+    else {
+      document.getElementById("point_retrait").placeholder = 0;
+    }
   }
 }
 
@@ -365,6 +369,7 @@ function updateDelitAdmin() {
   data.append('id_delit', document.getElementById('button_delit').value);
   data.append('amd_delit', document.getElementById('amd_delit').value);
   data.append('tps_delit', document.getElementById('tps_delit').value);
+  data.append('retrait', document.getElementById('point_retrait').value);
 
   // On envoi le modèle
   const requeteAjax = new XMLHttpRequest();
@@ -393,8 +398,7 @@ function addWeaponCategorie() {
 }
 
 /* On affiche la photo de l'arme en fonction du modèle de son id */
-function affiche_photo_arme()
-{
+function affiche_photo_arme() {
   // On met en forme les données
   const data = new FormData();
   data.append('type', document.getElementById("weapon_type").value);
@@ -405,9 +409,133 @@ function affiche_photo_arme()
   requeteAjax.send(data);
 
   // On récupère le résultat de la requête
-  requeteAjax.onload = function(){
+  requeteAjax.onload = function() {
     const resultat = JSON.parse(requeteAjax.responseText);
     document.getElementById("image_arme").setAttribute('src', '/assets/img/arme/' + resultat.couleur);
     document.getElementById("image_arme").setAttribute('alt', 'Photo ' + resultat.modele);
+  }
+}
+
+/* Afficher la visibilité des retraits de points */
+function afficheRetraitPermis() {
+  var delit = document.getElementById("type_delit").value;
+
+  if (delit === "0") {
+    document.getElementById("visibleRetrait").style.display = "block";
+  }
+  else {
+    document.getElementById("visibleRetrait").style.display = "none";
+  }
+}
+
+/* Suppression d'une arme dans la BDD */
+function confirmSuppressionArme(numSerie) {
+  var value = confirm("Supprimer l'arme ?");
+
+  if (value) {
+    window.location.replace(`${window.location.href}/delete`);
+  }
+}
+
+/* Ajout automatique du nom de l'image administration */
+function actionImgFile() {
+  var myFile = document.getElementById('upload-img').files[0];
+  var fileName = document.getElementById('name');
+
+  if (fileName.value == "") {
+    fileName.value = myFile.name.split('.').slice(0, myFile.name.split('.').length - 1).join('.');
+  }
+}
+
+/* Aficher la liste box suivante */
+function affiche_suite(actuel, contentValue, suivant) {
+  var act = document.getElementById(actuel);
+  var actValue = document.getElementById(contentValue);
+  if (act && actValue) {
+    if (actValue.value) {
+      var next = document.getElementById(suivant);
+      if (next) {
+        next.style.display = "block";
+      }
+    }
+  }
+}
+
+/* Ajouter les délits casier dans la BDD */
+function AddCasier() {
+  event.preventDefault(); // Arret du formulaire
+
+  cpt = 0;
+
+  for (var i = 0; i <= 50; i++) {
+    let element = document.getElementById(`saisie_casier_${i}`);
+    if (element) {
+      let content = document.getElementById(`casier_value_${i}`);
+      if (content.value != 'NULL') {
+        // On ajoute le délit
+        let entete = ['delit_name', 'rapport', 'casier_owner'];
+        let contentEntete = [
+          `casier_value_${i}`, 'casier_rapport',
+          'personne_type',
+        ];
+        let data = createData(entete, contentEntete);
+        cpt += 1;
+
+        // On envoi le modèle
+        var requeteAjax = new XMLHttpRequest();
+        requeteAjax.open('POST', '/insert/casier');
+        requeteAjax.send(data);
+      }
+    }
+  }
+
+  if (cpt > 0) {
+    if (cpt == 1) {
+      alert("Le délit a été ajouté");
+    }
+    else {
+      alert(`Les ${cpt} délits ont été ajoutés !`);
+    }
+
+    window.location.replace(`/civil/${document.getElementById('personne_type').value}`);
+  }
+}
+
+/* Ajouter les délits routiers dans la BDD */
+function AddRoute() {
+  event.preventDefault(); // Arret du formulaire
+
+  cpt = 0;
+
+  for (var i = 0; i <= 50; i++) {
+    let element = document.getElementById(`saisie_route_${i}`);
+    if (element) {
+      let content = document.getElementById(`route_value_${i}`);
+      if (content.value != 'NULL') {
+        // On ajoute le délit
+        let entete = ['casier_owner', 'vehicule_delit', 'delit_name', 'rapport'];
+        let contentEntete = [
+          `personne_type`, 'car_type', `route_value_${i}`, 'route_rapport'
+        ];
+        let data = createData(entete, contentEntete);
+        cpt += 1;
+
+        // On envoi le modèle
+        var requeteAjax = new XMLHttpRequest();
+        requeteAjax.open('POST', '/insert/routier');
+        requeteAjax.send(data);
+      }
+    }
+  }
+
+  if (cpt > 0) {
+    if (cpt == 1) {
+      alert("Le délit a été ajouté");
+    }
+    else {
+      alert(`Les ${cpt} délits routiers ont été ajoutés !`);
+    }
+
+    window.location.replace(`/civil/${document.getElementById('personne_type').value}`);
   }
 }

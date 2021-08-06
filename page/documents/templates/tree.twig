@@ -1,0 +1,52 @@
+{#
+Le projet All in One est un produit Xelyos mis à disposition gratuitement
+pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+ne pas supprimer le ou les auteurs du projet.
+Created by : Xelyos - Aros
+Edited by :
+#}
+
+{% macro recursiveTree(myTree) %}
+
+  {% if myTree %}
+    {% for data in myTree %}
+
+      {% if _moveInfo_.type == 'document' %}
+        {% set __autorisation = 2 %}
+      {% else %}
+        {% set __autorisation = 3 %}
+      {% endif %}
+
+      <li id="menu{{ data.id }}">
+        {% if data.subfolders %}
+          <label for="menu{{ data.id }}">
+            <a id="menu{{ data.id }}_selected"
+             permission="{% if data.agentAutorisation >= __autorisation or _agent.admin == 1 %}1{% else %}0{% endif %}"
+             value="false"
+             onclick="setSelected('menu{{ data.id }}_selected', {{ data.id }}, '{{ data.title|url_encode }}')">
+               {{ data.title }}
+            </a>
+          </label>
+          <input id="menu{{ data.id }}" type="checkbox" value="">
+          <ul>
+            {{ _self.recursiveTree(data.subfolders) }}
+          </ul>
+        {% else %}
+        <a id="menu{{ data.id }}_selected"
+         permission="{% if data.agentAutorisation >= __autorisation or _agent.admin == 1 %}1{% else %}0{% endif %}"
+         value="false"
+         onclick="setSelected('menu{{ data.id }}_selected', {{ data.id }}, '{{ data.title|url_encode }}')">
+          <label for="menu{{ data.id }}">{{ data.title }}</label>
+          <input checked="" id="menu{{ data.id }}" value="" type="checkbox">
+        </a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
+
+<ul class="tree">
+  {% if files %}
+    {{ _self.recursiveTree(files) }}
+  {% endif %}
+</ul>

@@ -25,7 +25,9 @@ Flight::route('/delit-routier/@id_delit', function($id_delit) {
     $personne->date_trad = $value[1];
   }
 
-  $delit->remarque = renderHTMLFromMarkdown(htmlspecialchars(strip_tags($delit->remarque)));
+  // Traitement texte
+  $delit->remarque = renderHTMLFromMarkdown(htmlspecialchars(strip_tags(urldecode($delit->remarque))));
+
   Flight::view()->display('fiche/detail_route.twig', array(
     'delit' => $delit, // Info du delit
     'civil' => $personne, // Informations sur la personne
@@ -57,6 +59,9 @@ Flight::route('/delit-routier/@id_delit/edit', function($id_delit) {
     }
   }
 
+  // Traitement texte
+  $delit->remarque = urldecode($delit->remarque);
+
   Flight::view()->display('edit/route.twig', array(
     'delit' => $delit, // Info du delit
     'civil' => $personne, // Informations sur la personne
@@ -72,7 +77,7 @@ Flight::route('/delit-routier/@id_delit/edit', function($id_delit) {
 Flight::route('/delit-routier/@id_delit/modification', function($id_delit) {
   verif_connecter();
   /* Variable récupéré dans le get */
-  $rapport = $_POST['rapport'];
+  $rapport = urlencode($_POST['rapport']);
   /* Variable récupéré dans le get */
   $agent = Agent::getInfoAgent();
 
@@ -101,9 +106,19 @@ Flight::route('/delit-routier/@id_delit/@etat', function($id_delit, $etat) {
     exit();
   }
   closeRoute($id_delit, $etat, $agent->lspd_id);
+
+  /* Protocole de perte de point pour le civil */
+  if ($etat == 2) {
+    /* Action sur le permis */
+    $MyDelit = Route::getRoute($id_delit); // Récupération du délit
+    $civil = Personne::getinfoPersonne($MyDelit->conducteur_id);
+    $diff = $civil->permis - $MyDelit->retrait;
+    if ($diff < 0) { $diff = 0; } // On ne va pas dans le négatif
+    editCivil2($civil->id, $civil->phone, $diff, time(), $civil->ppa);
+  }
+
   addHistorique($agent->matricule, "5¤0¤1¤" . $id_delit . "¤" . $etat);
 
   Flight::redirect("/delit-routier/$id_delit");
 });
-
 ?>

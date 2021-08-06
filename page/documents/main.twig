@@ -1,0 +1,190 @@
+{#
+Le projet All in One est un produit Xelyos mis à disposition gratuitement
+pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+ne pas supprimer le ou les auteurs du projet.
+Created by : Xelyos - Aros
+Edited by :
+#}
+
+{# Page vierge pour les twig #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/treeview.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/viewer.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/documents.css">
+{% endblock %}
+
+{% block description %}Documents{% endblock %}
+
+{% block key %}Documents{% endblock %}
+
+{% block title %}Documents{% endblock %}
+
+{% block main %}
+<div class="liste">
+  {# Chemin complet #}
+  {% include "/documents/templates/route-parent.twig" %}
+
+
+  {# Infos dossier #}
+  <h1>{{ folder.title }}</h1>
+  {% if folder.description %}
+    <h2>{{ folder.description }}</h2>
+  {% endif %}
+
+  {# Modifier le dossier #}
+  {% if _agent.admin == 1 or folder.id != 1 %}
+    {% if _agent.docAccess >= 2 or _agent.admin == 1 %}
+      <div class="engine" onclick="showParamFolder('menu')">
+        <img src="/assets/img/documents/engine.png" alt="Paramètre du dossier">
+      </div>
+    {% endif %}
+  {% endif %}
+
+  {# Liste des documents #}
+  <div class="galerie">
+
+    {% if folder.id != 1 %}
+      <a href="{{ back|join('/') }}" class="item">
+        <img src="/assets/img/documents/folder_return.png" alt="Retourner en arrière">
+        <span class="titre-element">Précédent</span>
+      </a>
+    {% endif %}
+
+    {% set __limit = 10 %}
+
+    {% if _agent.docAccess >= 1 or _agent.admin == 1 %}
+      {# Liste des sous dossier #}
+      {% for key, subfolder in subfolders %}
+        {% if subfolder.id != folder.id %}
+          <a id="{{ key }}" href="{{ route }}/{{ subfolder.id }}" class="item" title="{{ subfolder.title }}" {% if subfolder.description %}onmouseover="showDescription({{ key }})" onmouseout="showTitle({{ key }})"{% endif %}>
+            <img id="img_{{ key }}" src="/assets/img/documents/folder_lspd.png" alt="{{ subfolder.title }}">
+
+            {% if subfolder.title|length > __limit %}
+              <span id="title_{{ key }}" class="titre-element">{{ subfolder.title|slice(0, __limit) }}...</span>
+            {% else %}
+              <span id="title_{{ key }}" class="titre-element">{{ subfolder.title }}</span>
+            {% endif %}
+
+            {% if subfolder.description %}
+              {% if subfolder.description|length > __limit %}
+                <span id="description_{{ key }}" class="description-element">{{ subfolder.description|slice(0, __limit) }}...</span>
+              {% else %}
+                <span id="description_{{ key }}" class="description-element">{{ subfolder.description }}</span>
+              {% endif %}
+            {% endif %}
+          </a>
+        {% endif %}
+      {% endfor %}
+
+      {# Liste des documents présents dans le dossier #}
+      {% for key, document in documents %}
+        {% if document.type == "image" %}
+          <a id="doc_{{ key }}" class="item" title="{{ document.title }}" {% if document.description %}onmouseover="showDescription('doc_{{ key }}')" onmouseout="showTitle('doc_{{ key }}')"{% endif %} onclick="showImage('/assets/img/documents/content/{{ document.content }}')">
+        {% endif %}
+
+        {% if document.type == "pdf" %}
+          <a id="doc_{{ key }}" class="item" title="{{ document.title }}" {% if document.description %}onmouseover="showDescription('doc_{{ key }}')" onmouseout="showTitle('doc_{{ key }}')"{% endif %} onclick="showPdf('/assets/img/documents/content/{{ document.content }}')">
+        {% endif %}
+
+        {% if document.type == "document" %}
+          <a id="doc_{{ key }}" href="/documents/page/{{ document.id }}" class="item" title="{{ document.title }}" {% if document.description %}onmouseover="showDescription('doc_{{ key }}')" onmouseout="showTitle('doc_{{ key }}')"{% endif %}>
+        {% endif %}
+
+          {% if document.type == "image" %}
+            <img id="img_{{ key }}" src="/assets/img/documents/content/{{ document.content }}" alt="{{ document.description }}">
+          {% else %}
+            <img id="img_{{ key }}" src="/assets/img/documents/doc_{{ document.type }}.png" alt="{{ document.description }}">
+          {% endif %}
+
+          {% if document.title|length > __limit %}
+            <span id="title_doc_{{ key }}" class="titre-element">{{ document.title|slice(0, __limit) }}...</span>
+          {% else %}
+            <span id="title_doc_{{ key }}" class="titre-element">{{ document.title }}</span>
+          {% endif %}
+
+          {% if document.description %}
+            {% if document.description|length > __limit %}
+              <span id="description_doc_{{ key }}" class="description-element">{{ document.description|slice(0, __limit) }}...</span>
+            {% else %}
+              <span id="description_doc_{{ key }}" class="description-element">{{ document.description }}</span>
+            {% endif %}
+          {% endif %}
+        </a>
+      {% endfor %}
+    {% endif %}
+
+    {% if _agent.admin == 1 %}
+      {% for key, document in deleted %}
+        <a id="doc_{{ key }}" href="/documents/page/{{ document.id }}" class="item" title="{{ document.title }}" {% if document.description %}onmouseover="showDescription('doc_{{ key }}')" onmouseout="showTitle('doc_{{ key }}')"{% endif %}>
+          <img id="img_{{ key }}" src="/assets/img/documents/doc_delete.png" alt="{{ document.description }}">
+
+          {% if document.title|length > __limit %}
+            <span id="title_doc_{{ key }}" class="titre-element">{{ document.title|slice(0, __limit) }}...</span>
+          {% else %}
+            <span id="title_doc_{{ key }}" class="titre-element">{{ document.title }}</span>
+          {% endif %}
+
+          {% if document.description %}
+            {% if document.description|length > __limit %}
+              <span id="description_doc_{{ key }}" class="description-element">{{ document.description|slice(0, __limit) }}...</span>
+            {% else %}
+              <span id="description_doc_{{ key }}" class="description-element">{{ document.description }}</span>
+            {% endif %}
+          {% endif %}
+        </a>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{# Section des ajouts #}
+<div id="menufolder" class="black-screen">
+  {% include "/documents/menu-folder.twig" %}
+</div>
+
+<div id="addfolder" class="black-screen">
+  {% include "/documents/add-folder.twig" %}
+</div>
+
+<div id="movefolder" class="black-screen">
+  {% set _moveInfo_ = {'title': "Déplacer le répertoire", 'name': 'répertoire', 'type': 'folder'} %}
+  {% include "/documents/move-document.twig" %}
+</div>
+
+<div id="adddocument" class="black-screen">
+  {% include "/documents/add-document.twig" %}
+</div>
+
+<div id="editfolder" class="black-screen">
+  {% include "/documents/edit-folder.twig" %}
+</div>
+
+<div id="pdffolder" class="black-screen">
+  {% include "/documents/add-pdf.twig" %}
+</div>
+
+<div id="imgfolder" class="black-screen">
+  {% include "/documents/add-img.twig" %}
+</div>
+
+<div id="show-content" class="black-screen">
+  {% include "/documents/show-content.twig" %}
+</div>
+
+<div id="show-pdf" value="false" class="black-screen">
+  {% include "/documents/show-pdf.twig" %}
+</div>
+{# Section des ajouts #}
+
+{% endblock %}
+
+{% block script %}
+<script src="/assets/script/viewer.min.js"></script>
+<script src="/assets/script/documents.js"></script>
+<script type="text/javascript">
+  var submitButton = document.getElementById(`submit-button`);
+  submitButton.disabled = true;
+</script>
+{% endblock %}

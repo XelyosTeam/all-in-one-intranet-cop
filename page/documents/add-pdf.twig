@@ -1,0 +1,38 @@
+{#
+Le projet All in One est un produit Xelyos mis à disposition gratuitement
+pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+ne pas supprimer le ou les auteurs du projet.
+Created by : Xelyos - Aros
+Edited by :
+#}
+
+<div class="param-folder">
+  {# Close Twig #}
+  {% set _title_ = {'status': true, 'value': "Importer un pdf"} %}
+  {% include "/documents/templates/close.twig" with _title_ %}
+
+  <form class="form-folder petit-form" action="/documents/add/pdf/{{ folder.id }}" enctype="multipart/form-data" method="post">
+
+    <div>
+      <label for="import_pdf_name">Entrer le nom du document :</label>
+      <input type="text" name="import_pdf_name" id="import_pdf_name" placeholder="Nom du document" required>
+    </div>
+
+    <div>
+      <label for="import_pdf_description">Entrer la description du document :</label>
+      <textarea type="text" name="import_pdf_description" id="import_pdf_description" placeholder="Nom du document"></textarea>
+    </div>
+
+    <div>
+      <label for="upload-pdf">Sélectionner le document :</label>
+      <input id="upload-pdf" type="file" name="pdf" accept="application/pdf" onchange="actionPdfFile('pdf')">
+      <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
+    </div>
+
+    <div class="form-folder-button">
+      <button type="submit" value="upload" name="button">Importer le documents</button>
+    </div>
+
+  </form>
+
+</div>

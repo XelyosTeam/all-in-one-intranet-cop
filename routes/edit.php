@@ -150,6 +150,9 @@ Flight::route('/delit/edit/value', function() {
   $id = $_POST['id_delit'];
   $amd_delit = $_POST['amd_delit'];
   $tps_delit = $_POST['tps_delit'];
+  $retrait = $_POST['retrait'];
+
+  if ($retrait == 0) { $retrait = null; }
 
   $info = Delit::getinfoDelit($id);
 
@@ -162,6 +165,11 @@ Flight::route('/delit/edit/value', function() {
     editDelitPrison($id, $tps_delit);
     addHistorique(Agent::getInfoAgent()->matricule, "0¤3¤1¤" . $id . "¤" . $info->temps_prison . "¤" . $tps_delit);
   }
-});
 
+  if (($info->retrait != $retrait) and ($retrait != '')) {
+    editDelitRetrait($id, $retrait);
+    if ($info->retrait == null) { $info->retrait = 0; }
+    addHistorique(Agent::getInfoAgent()->matricule, "0¤3¤2¤" . $id . "¤" . $info->retrait . "¤" . $retrait);
+  }
+});
 ?>

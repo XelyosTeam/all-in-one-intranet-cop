@@ -10,7 +10,9 @@
 {% extends "_base.twig" %}
 
 {% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/documents.css">
 <link rel="stylesheet" type="text/css" href="/assets/styles/global/candid.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/viewer.min.css">
 <link rel="stylesheet" type="text/css" href="/assets/styles/global/markdown.css">
 {% endblock %}
 
@@ -83,7 +85,7 @@
             <option value="{{ personne.id }}">{{ personne.nom|capitalize }} {{ personne.prenom|capitalize }}</option>
           {% else %}
             {% set __accept = false %}
-            <option value="">Aucune candidature acceptée pour le moment</option>
+            <option>Aucune candidature acceptée pour le moment</option>
           {% endfor %}
         </select>
       </div>
@@ -97,198 +99,178 @@
   </form>
 
   {% if personne == NULL %}
-  <section class="contenu">
-    <h1>Selectionner un candidat</h1>
-  </section>
+    <section class="contenu">
+      <h1>Selectionner un candidat</h1>
+    </section>
   {% else %}
-  <section class="contenu">
-    <h1>Inscription Civil</h1>
-      <div>
-        <p><strong>Identifiant Discord : </strong>{{ personne.discord_id }}</p>
-      </div>
-      <div>
-        <p><strong>Téléphone :</strong>{{ personne.phone }}</p>
-      </div>
-  </section>
-
-  <section class="contenu">
-    <h1>Présentation</h1>
-    <div>
-      <p><strong>Nom :</strong>{{ personne.nom|capitalize }}</p>
-    </div>
-    <div>
-      <p><strong>Prénom :</strong>{{ personne.prenom|capitalize }}</p>
-    </div>
-    <div>
-      <p><strong>Age (IG) :</strong>{{ personne.age_IG }}</p>
-    </div>
-    <div>
-      <p><strong>Age (IRL) :</strong>{{ personne.age_IRL }}</p>
-    </div>
-  </section>
-
-  <section class="contenu">
-    <h1>Information</h1>
-    <div>
-      <p><strong>Temps de jeu sur le serveur :</strong>{{ personne.tmps_serveur }}</p>
-    </div>
-    <div>
-      <p><strong>Temps de jeu GTA RP :</strong>{{ personne.tmps_life }}</p>
-    </div>
-    <div>
-      <p><strong>Ancien membre des forces de l'odre :</strong>{% if personne.ancien_flic == 1 %}Oui{% else %}Non{% endif %}</p>
-    </div>
-    {% if personne.ancien_flic == 1 %}
-    <div>
-      <p><strong>Poste : </strong>{{ personne.detail_flic }}</p>
-    </div>
-    {% endif %}
-  </section>
-
-  <section class="contenu">
-    <h1>Disponibilité</h1>
-    <!-- v2.0.0 -->
-    {# Génération de la variable globale #}
-    {% set __superVar = [] %}
-
-    {% set __ecole = { 'status': personne.dispo_ecole, 'content': ecole, 'name' : 'scolaire/alternance' } %}
-    {% set __vacance = { 'status': personne.dispo_vacance, 'content': vacance, 'name' : 'de vacances' } %}
-    {% set __travail = { 'status': personne.dispo_travail, 'content': travail, 'name' : 'de travail' } %}
-
-    {% set __superVar = __superVar|merge([__ecole, __vacance, __travail]) %}
-
-    {% for __superItem in __superVar %}
-      {% if __superItem.status == 1 %}
+    <section class="contenu">
+      <h1>Inscription Civil</h1>
         <div>
-          <p><strong>Periode {{ __superItem.name }} :</strong></p>
+          <p><strong>Identifiant Discord : </strong>{{ personne.discord_id }}</p>
         </div>
+        <div>
+          <p><strong>Téléphone :</strong>{{ personne.phone }}</p>
+        </div>
+    </section>
 
-        <section class="grille_dispo"> <!-- A améliorer -->
-          <p></p>
-          <p>Matin</p>
-          <p>Après-midi</p>
-          <p>Soir</p>
-          <p>Nuit</p>
-          <p>Lundi</p>
-          {% if __superItem.content[0] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[1] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[2] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[3] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          <p>Mardi</p>
-          {% if __superItem.content[4] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[5] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[6] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[7] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          <p>Mercredi</p>
-          {% if __superItem.content[8] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[9] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[10] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[11] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          <p>Jeudi</p>
-          {% if __superItem.content[12] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[13] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[14] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[15] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          <p>Vendredi</p>
-          {% if __superItem.content[16] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[17] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[18] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[19] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          <p>Samedi</p>
-          {% if __superItem.content[20] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[21] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[22] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[23] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          <p>Dimanche</p>
-          {% if __superItem.content[24] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[25] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[26] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-          {% if __superItem.content[27] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
-        </section>
-      {% endif %}
-    {% endfor %}
-
-  </section>
-
-  <section class="contenu">
-    <h1>Objectifs au sein de la police</h1>
-
-    <div>
-      <p><strong>Unités souhaitées :</strong>{{ personne.objectif_lspd }}</p>
-    </div>
-
-    <div>
-      <p><strong>Motivations :</strong></p>
-      <div class="markdown-body">
-        {{ personne.motivation_lspd|raw }}
+    <section class="contenu">
+      <h1>Présentation</h1>
+      <div>
+        <p><strong>Nom :</strong>{{ personne.nom }}</p>
       </div>
-    </div>
-  </section>
+      <div>
+        <p><strong>Prénom :</strong>{{ personne.prenom }}</p>
+      </div>
+      <div>
+        <p><strong>Age (IG) :</strong>{{ personne.age_IG }}</p>
+      </div>
+      <div>
+        <p><strong>Age (IRL) :</strong>{{ personne.age_IRL }}</p>
+      </div>
+    </section>
 
-  <section class="contenu">
-    <h1>Test de connaissance</h1>
+    <section class="contenu">
+      <h1>Information</h1>
+      <div>
+        <p><strong>Temps de jeu sur le serveur :</strong>{{ personne.tmps_serveur }}</p>
+      </div>
+      <div>
+        <p><strong>Temps de jeu GTA RP :</strong>{{ personne.tmps_life }}</p>
+      </div>
+      <div>
+        <p><strong>Ancien membre des forces de l'odre :</strong>{% if personne.ancien_flic == 1 %}Oui{% else %}Non{% endif %}</p>
+      </div>
+      {% if personne.ancien_flic == 1 %}
+        <div>
+          <p><strong>Poste : </strong>{{ personne.detail_flic }}</p>
+        </div>
+      {% endif %}
+    </section>
 
-    <div>
-      <p><strong>Force d'intervention :</strong>
-        {% if personne.reponse_intervention == 0 %}GIGN{% endif %}
-        {% if personne.reponse_intervention == 1 %}NOOSE{% endif %}
-        {% if personne.reponse_intervention == 2 %}RAID{% endif %}
-        {% if personne.reponse_intervention == 3 %}SWAT{% endif %}
-        {% if personne.reponse_intervention == 4 %}Force d'intervention{% endif %}
-      </p>
-    </div>
+    <section class="contenu">
+      <h1>Disponibilité</h1>
+      <!-- v2.0.0 -->
+      {# Génération de la variable globale #}
+      {% set __superVar = [] %}
 
-    <div>
-      <p><strong>Unité K9 :</strong>{{ personne.reponse_k9 }}</p>
-    </div>
+      {% set __ecole = { 'status': personne.dispo_ecole, 'content': ecole, 'name' : 'scolaire/alternance' } %}
+      {% set __travail = { 'status': personne.dispo_travail, 'content': travail, 'name' : 'de travail' } %}
+      {% set __vacance = { 'status': personne.dispo_vacance, 'content': vacance, 'name' : 'de vacances' } %}
 
-    <div>
-      <p><strong>Meilleur Arme :</strong>
-        {% if concat[0] == 0 %}Fusil d'assault{% endif %}
-        {% if concat[0] == 1 %}Parole{% endif %}
-        {% if concat[0] == 2 %}Tazer{% endif %}
-        {% if concat[0] == 3 %}Sniper{% endif %}
-        {% if concat[0] == 4 %}Batteuse{% endif %}
-        {% if concat[0] == 5 %}Camion anti-émeute{% endif %}
-      </p>
-    </div>
+      {% set __superVar = __superVar|merge([__ecole, __travail, __vacance]) %}
 
-    <div>
-      <p><strong>Lieu de vie :</strong>
-        {% if concat[1] == 0 %}Un régiment{% endif %}
-        {% if concat[1] == 1 %}Une brigade{% endif %}
-        {% if concat[1] == 2 %}Un commissariat{% endif %}
-      </p>
-    </div>
+      {% for __superItem in __superVar %}
+        {% if __superItem.status == 1 %}
+          <div>
+            <p><strong>Periode {{ __superItem.name }} :</strong></p>
+          </div>
 
-    <div>
-      <p><strong>Code de la route :</strong>
-        {% if concat[2] == 0 %}Non{% endif %}
-        {% if concat[2] == 1 %}Oui{% endif %}
-      </p>
-    </div>
+          <section class="grille_dispo"> <!-- A améliorer -->
+            <p></p>
+            <p>Matin</p>
+            <p>Après-midi</p>
+            <p>Soir</p>
+            <p>Nuit</p>
+            <p>Lundi</p>
+            {% if __superItem.content[0] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[1] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[2] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[3] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            <p>Mardi</p>
+            {% if __superItem.content[4] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[5] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[6] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[7] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            <p>Mercredi</p>
+            {% if __superItem.content[8] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[9] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[10] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[11] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            <p>Jeudi</p>
+            {% if __superItem.content[12] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[13] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[14] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[15] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            <p>Vendredi</p>
+            {% if __superItem.content[16] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[17] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[18] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[19] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            <p>Samedi</p>
+            {% if __superItem.content[20] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[21] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[22] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[23] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            <p>Dimanche</p>
+            {% if __superItem.content[24] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[25] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[26] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+            {% if __superItem.content[27] == 1 %}<p>X</p>{% else %}<p></p>{% endif %}
+          </section>
+        {% endif %}
+      {% endfor %}
+    </section>
 
-    <div>
-      <p><strong>Ordre dangereux :</strong>
-        {% if concat[3] == 0 %}Je le fais{% endif %}
-        {% if concat[3] == 1 %}Je refuse{% endif %}
-        {% if concat[3] == 2 %}J'en discute avec lui{% endif %}
-      </p>
-    </div>
-  </section>
+    <section class="contenu">
+      <h1>Objectifs au sein de la police</h1>
 
-  {% if personne.etat_act == 0 %}
-  <section class="contenu">
-    <h1>Accepter/Refuser</h1>
-    <div class="Selection">
-      <a href="/dossier-candidat/accepter/{{ personne.id }}">Accepter</a>
-      <a href="/dossier-candidat/refuser/{{ personne.id }}">Refuser</a>
-    </div>
-  </section>
+      <div>
+        <p><strong>Unités souhaitées :</strong>{{ personne.objectif_lspd }}</p>
+      </div>
+
+      <div>
+        <p><strong>Motivations :</strong></p>
+        <div class="markdown-body">
+          {{ personne.motivation_lspd|raw }}
+        </div>
+      </div>
+    </section>
+
+    <section class="contenu">
+      <h1>Test de connaissance</h1>
+
+      {% for q, question in questions %}
+        <div>
+          <p><strong>{{ question.ecole }} :</strong>
+            {% if question.type == "list" %}
+              {{ question.responses[reponses[q]] }}
+            {% elseif question.type == "text" %}
+              {{ reponses[q] }}
+            {% endif %}
+          </p>
+        </div>
+      {% endfor %}
+    </section>
+
+    <section class="contenu">
+      <h1>Documents</h1>
+      <div class="galerie">
+        {% for attachment in personne.attachments %}
+          <div title="{{ attachment }}" class="item" onclick="showPdf('http://{{ _siteVitrine}}/assets/documents/{{ attachment }}')">
+            <img src="/assets/img/documents/doc_pdf.png" alt="PDF {{ attachment }}">
+            <span class="titre-element">{{ attachment|slice(0, 10) }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    {% if personne.etat_act == 0 %}
+      <section class="contenu">
+        <h1>Accepter/Refuser</h1>
+        <div class="Selection">
+          <a href="/dossier-candidat/accepter/{{ personne.id }}">Accepter</a>
+          <a href="/dossier-candidat/refuser/{{ personne.id }}">Refuser</a>
+        </div>
+      </section>
+    {% endif %}
   {% endif %}
 
-  {% endif %}
-
+  <div id="show-pdf" value="false" class="black-screen">
+    {% include "/documents/show-pdf.twig" %}
+  </div>
 {% endblock %}
 
-{% block script %}{% endblock %}
+{% block script %}
+<script src="/assets/script/viewer.min.js"></script>
+<script src="/assets/script/documents.js"></script>
+{% endblock %}

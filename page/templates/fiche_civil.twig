@@ -8,7 +8,7 @@
 
 <section class="info_personne">
   <h1 {% if civil.present == 0 %}style="color:var(--nonHabilite);"{% endif %}>Fiche Citoyen</h1>
-  <img class="round_profil" src="/assets/img/identité/{{ civil.photo }}" alt="Photo {{ civil.nom|capitalize}} {{ civil.prenom|capitalize }}">
+  <img class="round_profil" src="/assets/img/identite/{{ civil.photo }}" alt="Photo {{ civil.nom|capitalize}} {{ civil.prenom|capitalize }}">
   <p><strong>Nom :</strong>{{ civil.nom|capitalize }}</p>
   <p><strong>Prénom :</strong>{{ civil.prenom|capitalize }}</p>
   <p><strong>Date de naissance :</strong>{{ civil.DOB|date("d/m/Y") }}</p>
@@ -23,7 +23,7 @@
   {% endif %}
 
   <p><strong>PPA :</strong>{% if civil.ppa == 1  %}Oui{% else %}Non{% endif %}</p>
-  <p><strong>Permis :</strong>{% if civil.permis == 1  %}Oui{% else %}Non{% endif %}</p>
+  <p><strong>Permis :</strong>{{ civil.permis }} points</p>
   {% if civil.date_permis <= _tpsPermis %}
   <p><strong>Retrait :</strong>{{ civil.date_trad }}</p>
   {% endif %}
@@ -38,7 +38,7 @@
         <a href="/civil/{{ civil.id }}/calcul-amende">Calculer l'amende</a>
       </div>
       <div class="lien">
-        <a href="/impression/civil/{{ civil.id }}">Imprimer Casier</a>
+        <a href="/civil/{{ civil.id }}/impression">Imprimer Casier</a>
       </div>
     {% endif %}
 

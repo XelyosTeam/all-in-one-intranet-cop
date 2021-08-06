@@ -29,6 +29,13 @@
   <section class="information_casier">
     <h1>Informations Arme</h1>
     <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
+
+    {% if _agent.supprimer > 0 %}
+      <div class="delete-arme" onclick="confirmSuppressionArme('{{ arme.numero }}')">
+        <img src="/assets/img/icon/deletearme.png" alt="Suppression arme">
+      </div>
+    {% endif %}
+
     <p><strong>Nom :</strong>{{ arme.nom }}</p>
     <p><strong>Catégorie :</strong>{{ arme.categorie }}</p>
     <p><strong>Numéro de série :</strong>{{ arme.prefix }}{{ arme.numero }}</p>
@@ -38,4 +45,6 @@
 
 {% endblock %}
 
-{% block script %}{% endblock %}
+{% block script %}
+  <script src="/assets/script/event_saisie.js"></script>
+{% endblock %}

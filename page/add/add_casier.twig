@@ -54,36 +54,38 @@
         {% set __grave = { 'content': grave, 'name' : '----- Délit Grave -----' } %}
         {% set __superVar = __superVar|merge([__leger, __moyen, __grave]) %}
 
-        <div>
-          <label>Délit :</label>
-          <select name="delit_name">
-            <option value="NULL">Sélectionner un délit</option>
-            {% for __superItem in __superVar %}
-              <option value="NULL">{{ __superItem.name }}</option>
-              {% for delit in __superItem.content %}
-                {% set __nbdelit  = true %}
-                <option value="{{ delit.id }}">{{ delit.intitule|capitalize }} - {{ delit.amende|number_format(2, ',', ' ') }} $</option>
+        {% for i in 1..50 %}
+          <div id="saisie_casier_{{ i }}">
+            <label>Délit :</label>
+            <select id="casier_value_{{ i }}" name="delit_name_{{ i }}" onchange="affiche_suite('saisie_casier_{{ i }}', 'casier_value_{{ i }}', 'saisie_casier_{{ i + 1 }}');">
+              <option value="NULL">Sélectionner un délit</option>
+              {% for __superItem in __superVar %}
+                <option value="NULL">{{ __superItem.name }}</option>
+                {% for delit in __superItem.content %}
+                  {% set __nbdelit  = true %}
+                  <option value="{{ delit.id }}">{{ delit.intitule|capitalize }} - {{ delit.amende|number_format(2, ',', ' ') }} {{ _Devise }}</option>
+                {% endfor %}
               {% endfor %}
-            {% endfor %}
-          </select>
-        </div>
+            </select>
+          </div>
+        {% endfor %}
 
         <div>
           <label>Rapport : {{ _stat }}</label>
-          <textarea name="rapport" placeholder="Insérer un éventuelle rapport"></textarea>
+          <textarea id="casier_rapport" name="rapport" placeholder="Insérer un éventuelle rapport"></textarea>
         </div>
       </section>
 
       <section class="part_img">
         <div>
-          <img class="round_profil" id="image_civil" src="/assets/img/identité/temp.png" alt="Photo Inconnu">
+          <img class="round_profil" id="image_civil" src="/assets/img/identite/temp.png" alt="Photo Inconnu">
         </div>
       </section>
     </section>
 
     {% if _agent.ajouter != 0 and __add and __nbdelit %}
     <div class="btn">
-      <button class="form_button" type="submit" name="button">Enregistrer</button>
+      <button class="form_button" type="submit" name="button" onclick="AddCasier();">Enregistrer</button>
     </div>
     {% endif %}
   </form>
@@ -94,6 +96,13 @@
 {% block script %}
 <script src="/assets/script/event_saisie.js"></script>
 <script type="text/javascript">
-affiche_photo_personne();
+  affiche_photo_personne();
+
+  for (var i = 2; i <= 50; i++) {
+    let element = document.getElementById(`saisie_casier_${i}`);
+    if (element) {
+      element.style.display = "none";
+    }
+  }
 </script>
 {% endblock %}

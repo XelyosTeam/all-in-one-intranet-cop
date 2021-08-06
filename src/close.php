@@ -41,4 +41,8 @@
     $adresse = Model::factory('Historique')->where_equal(array('adresse_ip' => $ip, 'etat' => 'Echec'))->delete_many();
   }
 
+  function deleteArme($numeroSerie) {
+    $adresse = Model::factory('listeArme')->where_equal('numero', $numeroSerie)->delete_many();
+  }
+
 ?>

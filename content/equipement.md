@@ -40,3 +40,22 @@ Les agents de police portent tous un gilet pare-balle de type III, et peuvent, s
 
 ###X - La lampe torche
 La Maglite est la lampe-torche par excellence de la police américaine. Celle-ci est lourde (Environ 1kg) mais a en contre-parti une grande portée et peut-être utilisée comme matraque en cas d'extrême urgence.
+
+
+##L'équipement en patrouille
+
+###Équipement de l'agent
+* Matraque
+* Tazer (Pistolet à impulsion électrique)
+* Radio
+* Gillet pare-balle
+* Paire de menottes
+* Pistolet de combat
+* Nourritures et boissons (pour vous et les personnes que vous arrêtez)
+
+###Équipement des véhicules
+* 3 Kits de réparation
+* 1 Jerrican
+* 1 SMG (uniquement pour les dodges et les x6)
+* 1 Tenue de plongée
+* 3 Kits de premier secours

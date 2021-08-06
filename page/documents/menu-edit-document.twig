@@ -1,0 +1,30 @@
+{#
+Le projet All in One est un produit Xelyos mis à disposition gratuitement
+pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+ne pas supprimer le ou les auteurs du projet.
+Created by : Xelyos - Aros
+Edited by :
+#}
+
+<div class="param-folder">
+  {# Close Twig #}
+  {% set _title_ = {'status': true, 'value': "Selectionner une action"} %}
+  {% include "/documents/templates/close.twig" with _title_ %}
+
+  {% set _actionListe_ = [
+    {
+      'name': 'Modifier les propriétés',
+      'shortcut': 'file_edit_propriety',
+      'img': 'file_edit.png',
+      'access': [2, 3],
+    },
+    {
+      'name': 'Ajouter une image',
+      'shortcut': 'file_add_img',
+      'img': 'file_img.png',
+      'access': [2, 3],
+    }
+  ] %}
+  {% include "/documents/templates/menu.twig" with _title_ %}
+
+</div>

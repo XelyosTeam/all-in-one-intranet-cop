@@ -7,23 +7,19 @@
 */
 
 /* Phone */
-@media (max-width:1001px)
-{
-  .contenu
-  {
+@media (max-width:1001px) {
+  .contenu {
     margin-top: 5%;
     margin-left: 10%;
     margin-right: 10%;
   }
 
-  .contenu div label
-  {
+  .contenu div label {
     margin-left: 1.5%;
     font-size: 1.75em;
   }
 
-  .contenu div input, .contenu div select, .contenu div textarea, .contenu .btn button
-  {
+  .contenu div input, .contenu div select, .contenu div textarea, .contenu .btn button {
     font-size: 1.75em;
   }
 }

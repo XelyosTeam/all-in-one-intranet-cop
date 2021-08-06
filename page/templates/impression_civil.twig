@@ -11,4 +11,4 @@
 <p><strong>Prénom :</strong> {{ civil.prenom|capitalize }}</p>
 <p><strong>Date de naissance :</strong> {{ civil.DOB|date("d/m/Y") }}</p>
 <p><strong>PPA :</strong> {% if civil.ppa == 1  %}Oui{% else %}Non{% endif %}</p>
-<p><strong>Permis :</strong> {% if civil.permis == 1  %}Oui{% else %}Non{% endif %}</p>
+<p><strong>Permis :</strong>{{ civil.permis }} points</p>

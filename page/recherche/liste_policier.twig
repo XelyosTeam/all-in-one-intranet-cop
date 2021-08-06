@@ -30,7 +30,7 @@
 
   {% for policier in policiers %}
     <div class="Resultat">
-      <img class="round_profil" src="/assets/img/identité/{{ policier.photo}}" alt="Photo de {{ policier.nom|capitalize }} {{ policier.prenom|capitalize }}">
+      <img class="round_profil" src="/assets/img/identite/{{ policier.photo}}" alt="Photo de {{ policier.nom|capitalize }} {{ policier.prenom|capitalize }}">
       <p>{{ policier.nom|capitalize }} {{ policier.prenom|capitalize }}</p>
       <a href="/{{ _membreFaction }}/{{ policier.matricule }}">Consulter</a>
     </div>

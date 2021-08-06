@@ -17,9 +17,12 @@
   include 'casier-table.php';
   include 'chat.php';
   include 'delit.php';
+  include 'document.php'; // Documents
+  include 'folder.php'; // Documents
   include 'grade.php';
   include 'habilitation.php';
   include 'historique.php';
+  include 'historique-document.php'; // Documents
   include 'historique-lspd.php';
   include 'personne.php';
   include 'plainte.php';

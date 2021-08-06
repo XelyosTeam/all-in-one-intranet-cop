@@ -14,12 +14,20 @@ class generatePDF {
 
   private $html = "<h1>Null</h1>";
   private $nomDossier = null;
+  private $impression_left = "droite.png";
+  private $impression_centre = "centre.png";
+  private $impression_right = "droite.png";
 
-  private function encodeIMG() {
-    $path = "http://" . serveurIni('Serveur', 'url') . "/assets/img/impression.png";
-    $type = pathinfo($path, PATHINFO_EXTENSION);
-    $data = file_get_contents($path);
-    return 'data:image/' . $type . ';base64,' . base64_encode($data);
+  private function encodeIMG($name) {
+    if ($name) {
+      $path = "http://" . serveurIni('Serveur', 'url') . "/assets/img/impression/$name";
+      $type = pathinfo($path, PATHINFO_EXTENSION);
+      $data = file_get_contents($path);
+      return 'data:image/' . $type . ';base64,' . base64_encode($data);
+    }
+    else {
+      return null;
+    }
   }
 
   private function general() {
@@ -52,7 +60,9 @@ class generatePDF {
       'routes' => Route::getListDelitByC($numero),
       'casiers' => Casier::getListCasier($numero),
       'plaintes' => Plainte::getListPlainte($numero),
-      'img' => $this->encodeIMG()
+      'impression_left' => $this->encodeIMG($this->impression_left),
+      'impression_centre' => $this->encodeIMG($this->impression_centre),
+      'impression_right' => $this->encodeIMG($this->impression_right),
     ));
     $this->html = ob_get_clean();
     $this->nomDossier = "Extrait Casier " . $civil->nom . " " . $civil->prenom . ".pdf";
