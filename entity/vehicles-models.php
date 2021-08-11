@@ -16,6 +16,7 @@ class ModelesV extends Model {
     return ModelesV::order_by_asc('nom')
                    ->find_many();
   }
+  
   public static function getImage($modele) { // On récupère l'image du véhicule en fonction du modèle
     return ModelesV::where('id', $modele)
                    ->find_one();

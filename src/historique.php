@@ -188,7 +188,7 @@ function decryptHistorique($code) {
     /* Changement Information */
     // Casier Civil
     case '3¤0¤0':
-      return "Modification Casier Civil - Délit n°" . $code[3] . " || " . $code[4] . " >>> " . $code[5];
+      return "Modification Casier Civil - Délit n°" . $code[3] . " || " . urldecode($code[4]) . " >>> " . urldecode($code[5]);
       break;
 
     // Fichie Civil
@@ -200,7 +200,7 @@ function decryptHistorique($code) {
       break;
     case '3¤1¤2':
       return "Modification Fiche - Civil n°" . $code[3] . " - Permis => " . getCivilName($code[3]) . " || " . decryptPermis($code[4]) . " >>> " . decryptPermis($code[5]);
-      break;
+  	  break;
 
     // Fichie Véhicule
     case '3¤2¤0':
@@ -215,12 +215,12 @@ function decryptHistorique($code) {
 
     // Casier Routier
     case '3¤3¤0':
-      return "Modification Casier Routier - Délit n°" . $code[3] . " || " . $code[4] . " >>> " . $code[5];
+      return "Modification Casier Routier - Délit n°" . $code[3] . " || " . urldecode($code[4]) . " >>> " . urldecode($code[5]);
       break;
 
     // Détails Plainte
     case '3¤4¤0':
-      return "Modification Détails Plainte - Plainte n°" . $code[3] . " - Plainte sur " . getCivilName($code[4]) . " || " . $code[5] . " >>> " . $code[6];
+      return "Modification Détails Plainte - Plainte n°" . $code[3] . " - Plainte sur " . getCivilName($code[4]) . " || " . urldecode($code[5]) . " >>> " . urldecode($code[6]);
       break;
 
     /* Ajout dans les registres */
@@ -241,7 +241,7 @@ function decryptHistorique($code) {
       return "Ajout Délit Routier - Délit : " . $code[3] . " - Civil : " . getCivilName($code[4]) . " - Civil : " . $code[5];
       break;
     case '4¤0¤5':
-      return "Ajout Véhicule : " . $code[3] . " - Propriétaire : " . getCivilName($code[4]);
+      return "Ajout Véhicule : " . urldecode($code[3]) . " - Propriétaire : " . getCivilName($code[4]);
       break;
     case '4¤0¤6':
       return "Ajout Arme : " . getArmeModel($code[3]) . " - Propriétaire : " . getCivilName($code[4]);
@@ -256,6 +256,48 @@ function decryptHistorique($code) {
       break;
     case '5¤0¤2':
       return "Plainte n°" . $code[3] . " - " . getEtatDelit($code[4]);
+      break;
+
+    /* Historique documents */
+    case '6¤0¤0':
+      return "Documents - Création dossier - " . $code[3] . " => " . $code[4];
+      break;
+    case '6¤0¤1':
+      return "Documents - Création document - " . $code[3] . " => " . $code[4];
+      break;
+    case '6¤0¤2':
+      return "Documents - Ajout image dans document - " . $code[3] . " => " . $code[4];
+      break;
+    case '6¤0¤3':
+      return "Documents - Création image - " . $code[3] . " => " . $code[4];
+      break;
+    case '6¤0¤4':
+      return "Documents - Création PDF - " . $code[3] . " => " . $code[4];
+      break;
+
+    case '6¤1¤0':
+      return "Documents - Modification Dossier - " . $code[3] . " => " . $code[4];
+      break;
+    case '6¤1¤1':
+      return "Documents - Modification Document Paramètres - " . $code[3] . " => " . $code[4];
+      break;
+    case '6¤1¤2':
+      return "Documents - Modification Document Texte - " . $code[3] . " => " . $code[4];
+      break;
+
+    case '6¤2¤0':
+      return "Documents - Suppression Document - " . $code[3] . " => " . $code[4];
+      break;
+
+    case '6¤3¤0':
+      return "Documents - Déplacement Document - " . $code[3] . " - " . $code[4]. " => " . $code[5];
+      break;
+    case '6¤3¤1':
+      return "Documents - Déplacement Répertoire - " . $code[3] . " - " . $code[4]. " => " . $code[5];
+      break;
+
+    case '7¤0¤0':
+      return "Suppression - Arme - " . $code[4] . " (" . $code[3] . ")" . " => " .  $code[6] . " " .  $code[7] . " (" . $code[5] . ")";
       break;
 
     default:

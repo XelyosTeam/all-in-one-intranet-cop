@@ -29,15 +29,15 @@
 
   <section class="information_casier">
     <h1>Informations délit</h1>
-    <img src="/assets/img/vehicule/{{ voiture.lien }}" alt="Photo véhicule type {{ voiture.nom|capitalize }}">
-    <p><strong>Modèle :</strong>{{ voiture.nom|capitalize }}</p>
+    <img src="/assets/img/vehicule/{{ voiture.lien }}" alt="Photo véhicule type {{ voiture.nom }}">
+    <p><strong>Modèle :</strong>{{ voiture.nom }}</p>
     <p><strong>Couleur :</strong>{{ voiture.couleur }}</p>
     <p><strong>Plaque d'immatriculation :</strong><a href="/vehicule/{{ voiture.plaque }}">{{ voiture.plaque|upper }}</a></p>
-    <p><strong>Propriétaire :</strong><a href="/civil/{{ proprio.id }}">{{ proprio.nom|capitalize }} {{ proprio.prenom|capitalize }}</a></p>
-    <p><strong>Nom Delit :</strong>{{ delit.nom|capitalize }}</p>
-    <p><strong>Amende :</strong>{{ delit.amende|number_format(2, ',', ' ') }} $</p>
+    <p><strong>Propriétaire :</strong><a href="/civil/{{ proprio.id }}">{{ proprio.nom }} {{ proprio.prenom }}</a></p>
+    <p><strong>Nom Delit :</strong>{{ delit.nom }}</p>
+    <p><strong>Amende :</strong>{{ delit.amende|number_format(2, ',', ' ') }} {{ _Devise }}</p>
     <p><strong>Temps de prison :</strong>{{ delit.prison }} mois</p>
-    <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
+    <p><strong>Enregistrer par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{% if delit.enregistreur_name %}{{ delit.enregistreur_name }}{% else %}{{ ouvert.grade }} {{ ouvert.nom }}{% endif %}</a></p>
     <p><strong>Enregistré le :</strong>{{ delit.date_enregistre|date("d/m/Y") }}</p>
     <p><strong>État :</strong>{% if delit.etat == 2 %}Fermé{% elseif delit.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
     <p><strong>Rapport :</strong></p>
@@ -50,7 +50,7 @@
     </div>
     {% endif %}
     <p><strong>Fermé le :</strong>{% if delit.acquite_le != NULL %}{{ delit.acquite_le|date("d/m/Y") }}{% endif %}</p>
-    <p><strong>Fermé par :</strong><a href="/{{ _membreFaction }}/{{ fermer.matricule }}">{{ fermer.grade }} {{ fermer.nom|capitalize }}</a></p>
+    <p><strong>Fermé par :</strong><a href="/{{ _membreFaction }}/{{ fermer.matricule }}">{% if delit.acquite_name %}{{ delit.acquite_name }}{% else %}{{ fermer.grade }} {{ fermer.nom }}{% endif %}</a></p>
     {% if delit.etat == 0 and _agent.supprimer != 0 %}
     <div class="lien">
       <a class="ferm" href="/delit-routier/{{ delit.delit_id }}/1">Classé sans suite</a>

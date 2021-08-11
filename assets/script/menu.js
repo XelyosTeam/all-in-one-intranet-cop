@@ -119,6 +119,9 @@ function redirectionButton(id, section)
     case 31:
       document.location.href="/formation";
       break;
+    case 32:
+      document.location.href="/documents";
+      break;
 
     /* Registre */
     case 40:

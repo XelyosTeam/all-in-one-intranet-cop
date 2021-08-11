@@ -1,0 +1,33 @@
+{#
+Le projet All in One est un produit Xelyos mis à disposition gratuitement
+pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+ne pas supprimer le ou les auteurs du projet.
+Created by : Xelyos - Aros
+Edited by :
+#}
+
+{# Chemin complet #}
+{% set __pathParent = "/documents" %}
+{% set __pathComplet = [] %}
+
+{% for key, parent in parents|reverse %}
+  {% set __pathParent = __pathParent ~ "/" ~ parent.id %}
+
+  {% set __tempPath = { 'link': __pathParent, 'title': parent.title } %}
+
+  {% set __pathComplet = __pathComplet|merge([__tempPath]) %}
+{% endfor %}
+
+{% if __pathComplet|length > 0 %}
+  <div class="parent-path">
+    {% set __cut = false %}
+    {% if __pathComplet|length > 3 %}
+      {% set __pathComplet = __pathComplet|slice(length - 4, length) %}
+      {% set __cut = true %}
+    {% endif %}
+
+    {% for key, path in __pathComplet %}
+      <a {% if key == __pathComplet|length - 1 %}class="last"{% endif %} href="{{ path.link }}" title="{{ path.title }}">{% if key == 0 and __cut %}...{% else %}{{ path.title }}{% endif %}</a>
+    {% endfor %}
+  </div>
+{% endif %}

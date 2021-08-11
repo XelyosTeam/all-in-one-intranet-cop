@@ -21,22 +21,9 @@
 {% block title %}Modification Casier de {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}{% endblock %}
 
 {% block main %}
-  <section class="info_personne">
-    <h1 {% if civil.present == 0 %}style="color:#ff0000"{% endif %}>Fiche Citoyen</h1>
-    <img src="/assets/img/identité/{{ civil.photo }}" alt="Photo Civil">
-    <p><strong>Nom :</strong>{{ civil.nom|capitalize }}</p>
-    <p><strong>Prénom :</strong>{{ civil.prenom|capitalize }}</p>
-    <p><strong>Date de naissance :</strong>{{ civil.DOB|date("d/m/Y") }}</p>
-    <p><strong>Téléphone :</strong>{{ civil.phone }}</p>
-    <p><strong>Nationalité :</strong>{{ civil.nationality|upper }}</p>
-    <p><strong>Sexe :</strong>{{ civil.sexe }}</p>
-    <p><strong>Job :</strong><a href="{% if civil.job == _BDDFaction  %}/{{ _membreFaction }}/{{ policier.matricule }}{% endif %}">{{ civil.job }}</a></p>
-    <p><strong>PPA :</strong>{% if civil.ppa == 1  %}Oui{% else %}Non{% endif %}</p>
-    <p><strong>Permis :</strong>{% if civil.permis == 1  %}Oui{% else %}Non{% endif %}</p>
-    <div class="lien">
-      <a href="/civil/{{ civil.id }}">Retourner sur la fiche de {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</a>
-    </div>
-  </section>
+  {# Fiche Civil #}
+  {% set _etat_ = {'goBack': 1} %}
+  {% include "/templates/fiche_civil.twig" with _etat_ %}
 
   <form action="/casier-judiciaire/{{ delit.id_delit }}/modification" method="post">
     <section class="information_casier">
@@ -44,9 +31,9 @@
       <img src="/assets/img/logo.png" alt="">
       <p><strong>Nom :</strong>{{ detail.intitule }}</p>
       <p><strong>Type :</strong>{% if detail.type_delit == 3 %}Grave{% elseif detail.type_delit == 2 %}Moyen{% else %}Léger{% endif %}</p>
-      <p><strong>Amende :</strong>{{ detail.amende|number_format(2, ',', ' ') }} $</p>
+      <p><strong>Amende :</strong>{{ detail.amende|number_format(2, ',', ' ') }} {{ _Devise }}</p>
       <p><strong>Temps de prison :</strong>{{ detail.temps_prison }} mois</p>
-      <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
+      <p><strong>Enregistrer par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{% if delit.enregistrer_name %}{{ delit.enregistrer_name }}{% else %}{{ ouvert.grade }} {{ ouvert.nom }}{% endif %}</a></p>
       <p><strong>Enregistré le :</strong>{{ delit.enregistrer_le|date("d/m/Y") }}</p>
       <p><strong>État :</strong>{% if delit.etat == 2 %}Fermé{% elseif delit.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
       <p><strong>Rapport :</strong></p>

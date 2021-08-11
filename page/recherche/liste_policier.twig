@@ -22,16 +22,16 @@
 
 {% block main %}
   <form class="recherche" action="/{{ _membreFaction }}" method="GET">
-    <input type="search" name="flic_name"placeholder="{% if nom == NULL %}Nom{% else %}{{ nom|capitalize }}{% endif %}">
-    <input type="search" name="flic_firstname" placeholder="{% if prenom == NULL %}Prénom{% else %}{{ prenom|capitalize }}{% endif %}">
+    <input type="search" name="flic_name"placeholder="{% if nom == NULL %}Nom{% else %}{{ nom }}{% endif %}">
+    <input type="search" name="flic_firstname" placeholder="{% if prenom == NULL %}Prénom{% else %}{{ prenom }}{% endif %}">
     <input type="search" name="flic_matricule" placeholder="{% if matricule == NULL %}Matricule{% else %}{{ matricule }}{% endif %}">
     <button>Search</button>
   </form>
 
   {% for policier in policiers %}
     <div class="Resultat">
-      <img class="round_profil" src="/assets/img/identité/{{ policier.photo}}" alt="Photo de {{ policier.nom|capitalize }} {{ policier.prenom|capitalize }}">
-      <p>{{ policier.nom|capitalize }} {{ policier.prenom|capitalize }}</p>
+      <img class="round_profil" src="/assets/img/identite/{{ policier.photo}}" alt="Photo de {{ policier.nom }} {{ policier.prenom }}">
+      <p>{{ policier.nom }} {{ policier.prenom }}</p>
       <a href="/{{ _membreFaction }}/{{ policier.matricule }}">Consulter</a>
     </div>
   {% else %}

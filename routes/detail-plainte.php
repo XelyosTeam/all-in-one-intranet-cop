@@ -29,7 +29,10 @@ Flight::route('/detail-plainte/@id_plainte', function($id_plainte) {
     $personne->date_trad = $value[1];
   }
 
+  // Traitement du détails de la plainte
+  $plainte->detail_plainte = urldecode($plainte->detail_plainte);
   $plainte->detail_plainte = renderHTMLFromMarkdown(htmlspecialchars(strip_tags($plainte->detail_plainte)));
+
   Flight::view()->display('fiche/detail_plainte.twig', array(
     'civil' => $personne, // Infotmation sur la personne
     'plainte' => $plainte, // Détails de la plainte
@@ -63,6 +66,10 @@ Flight::route('/detail-plainte/@id_plainte/edit', function($id_plainte) {
     $personne = inconnu($plainte->plainte_sur_2); // On intègre des valeurs par défauts si nécessaires
   }
 
+  // Traitement texte
+  $plainte->detail_plainte = urldecode($plainte->detail_plainte);
+
+
   Flight::view()->display('edit/plainte.twig', array(
     'personne' => $personne, // Infotmation sur la personne
     'plainte' => $plainte, // Détails de la plainte
@@ -75,10 +82,11 @@ Flight::route('/detail-plainte/@id_plainte/edit', function($id_plainte) {
 
 Flight::route('/detail-plainte/@id_plainte/modification', function($id_plainte) {
   verif_connecter();
-  /* Variable récupéré dans le get */
-  $rapport = $_POST['rapport'];
-  /* Variable récupéré dans le get */
   $agent = Agent::getInfoAgent();
+
+  /* Variable récupéré dans le get */
+  $rapport = urlencode($_POST['rapport']);
+  /* Variable récupéré dans le get */
 
   if ($agent->editer == 0) {
     Flight::redirect("/detail-plainte/$id_plainte/edit");
@@ -87,7 +95,7 @@ Flight::route('/detail-plainte/@id_plainte/modification', function($id_plainte) 
 
   $oldinfo = Plainte::getPlainte($id_plainte);
 
-  if ($oldinfo->remarque != $rapport) {
+  if ($oldinfo->detail_plainte != $rapport) {
     addHistorique($agent->matricule, "3¤4¤0¤" . $id_plainte . "¤" . $oldinfo->plainte_sur . "¤" . $oldinfo->detail_plainte . "¤" . $rapport);
   }
 
@@ -105,10 +113,9 @@ Flight::route('/detail-plainte/@id_plainte/@etat', function($id_plainte, $etat) 
     exit();
   }
 
-  closePlainte($id_plainte, $etat, $agent->lspd_id);
+  closePlainte($id_plainte, $etat, $agent);
   addHistorique($agent->matricule, "5¤0¤2¤" . $id_plainte . "¤" . $etat);
 
   Flight::redirect("/detail-plainte/$id_plainte");
 });
-
 ?>

@@ -1,0 +1,51 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+
+{# Modèle de page #}
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Fiche Civil">
+    <meta name="author" content="Xelyos Team - Thomas">
+    <meta name="keywords" content="Fiche civil, {{ _nomFaction }}, Site Factice, {{ _jeuServeur }}, {{ _nomServeur }}">
+    <title>{% block title %}{% endblock %}</title>
+    {% include "/impression/_style.twig"%}
+  </head>
+
+  <body>
+    {% if impression_left %}
+      <div class="left">
+        <img src="{{ impression_left }}" alt="Logo gauche">
+      </div>
+    {% endif %}
+
+    {% if impression_centre %}
+      <div class="centre">
+        <img src="{{ impression_centre }}" alt="Logo centre">
+      </div>
+    {% endif %}
+
+    {% if impression_right %}
+      <div class="right">
+        <img src="{{ impression_right }}" alt="Logo gauche">
+      </div>
+    {% endif %}
+
+    <h1>{% block titre %}{% endblock %}</h1>
+    {% include "/templates/impression_civil.twig"%}
+
+    {% block main %}{% endblock %}
+
+    <div class="signature">
+      <p><i>{{ _agent.nom }}</i></p>
+    </div>
+
+  </body>
+
+</html>

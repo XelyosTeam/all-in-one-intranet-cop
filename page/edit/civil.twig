@@ -24,7 +24,7 @@
   <form action="/civil/{{ perso.id }}/modification" method="POST">
     <section class="info_personne">
       <h1 {% if perso.present == 0 %}style="color:#ff0000"{% endif %}>Fiche Citoyen</h1>
-      <img class="round_profil" src="/assets/img/identité/{{ perso.photo }}" alt="Photo {{ perso.nom|capitalize}} {{ perso.prenom|capitalize }}">
+      <img class="round_profil" src="/assets/img/identite/{{ perso.photo }}" alt="Photo {{ perso.nom|capitalize}} {{ perso.prenom|capitalize }}">
       <p><strong>Nom :</strong>{{ perso.nom|capitalize }}</p>
       <p><strong>Prénom :</strong>{{ perso.prenom|capitalize }}</p>
       <p><strong>Date de naissance :</strong>{{ perso.DOB|date("d/m/Y") }}</p>
@@ -32,16 +32,17 @@
       <p><strong>Nationalité :</strong>{{ perso.nationality|upper }}</p>
       <p><strong>Sexe :</strong>{{ perso.sexe }}</p>
       <p><strong>Job :</strong>{% if perso.job == _BDDFaction  %}{{ perso.job }}{% else %}<textarea name="metier" rows="1">{{ perso.job }}</textarea>{% endif %}</p>
+
       <p><strong>PPA :</strong>{% if perso.ppa == 1  %}Oui{% else %}Non{% endif %}</p>
 
       <p><strong>Permis :</strong>
         <select name="permis">
           {% if perso.permis == 1 %}
-          <option value="1">Oui</option>
-          <option value="0">Non</option>
+            <option value="1">Oui</option>
+            <option value="0">Non</option>
           {% else %}
-          <option value="0">Non</option>
-          <option value="1">Oui</option>
+            <option value="0">Non</option>
+            <option value="1">Oui</option>
           {% endif %}
         </select>
       </p>
@@ -96,7 +97,7 @@
     <h1>Délits Routiers</h1>
     {% for route in routes %}
     <div class="content">
-      <p>{{ route.nom }}</p>
+      <p>{{ route.nom|slice(0, 20) }}...</p>
 
       {% if route.etat == 2 %}
         <p class="">Fermé</p>

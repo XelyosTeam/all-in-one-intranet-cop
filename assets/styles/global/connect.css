@@ -7,8 +7,7 @@
 */
 
 /* PC */
-.connexion
-{
+.connexion {
   display: block;
   margin: 5% 37% 5% 37%;
   border-radius: 10px;
@@ -17,15 +16,13 @@
   padding-bottom: 2%;
 }
 
-.connexion h1
-{
+.connexion h1 {
   padding-top: 7%;
   padding-bottom: 2%;
   color: var(--Text);
 }
 
-.connexion div input
-{
+.connexion div input {
   border: none;
   border-bottom: 1px solid #000;
   margin-bottom: 5%;
@@ -37,8 +34,7 @@
   font-size: 1.5em;
 }
 
-.connexion div p
-{
+.connexion div p {
   color: var(--textAlert);
   font-weight: bold;
   text-align: left;
@@ -46,8 +42,7 @@
   margin-top: -3%;
 }
 
-.connexion button
-{
+.connexion button {
   margin-left: 30%;
   border: none;
   border-radius: 10px;
@@ -57,15 +52,13 @@
   font-size: 1.25em;
 }
 
-.connexion button:hover
-{
+.connexion button:hover {
   color: var(--BoutonTextHover);
 }
 
 
 /* Configuration de l'animation */
-.animation_connect
-{
+.animation_connect {
   background-color: #000;
   position: fixed;
   top: 0px;
@@ -76,8 +69,7 @@
   height: 100%;
 }
 
-.animation_connect p
-{
+.animation_connect p {
   font-size: 2em;
   margin-left: 3%;
 }

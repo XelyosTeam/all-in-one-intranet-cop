@@ -1,0 +1,79 @@
+{#
+Le projet All in One est un produit Xelyos mis à disposition gratuitement
+pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+ne pas supprimer le ou les auteurs du projet.
+Created by : Xelyos - Aros
+Edited by :
+#}
+
+<div class="param-folder">
+  {# Close Twig #}
+  {% set _title_ = {'status': true, 'value': "Créer un document"} %}
+  {% include "/documents/templates/close.twig" with _title_ %}
+
+  <form class="form-folder" action="/documents/add/document/{{ folder.id }}" method="post">
+    {# Informations générales #}
+    <h2>Informations générales</h2>
+    <div>
+      <label for="title">Nom du document :</label>
+      <input type="text" name="subfolder_title" id="title" placeholder="Entrer le nom du document" required>
+    </div>
+
+    <div>
+      <label for="description">Description :</label>
+      <textarea type="text" name="subfolder_description" id="description" placeholder="Description du document" rows="3"></textarea>
+    </div>
+
+    {# Accès Habilitations #}
+    <h2>Accès Habilitations</h2>
+    <div class="form-folder-button">
+      <button type="button" name="button" onclick="addAccessAll('document_hab_')">Accès pour tous</button>
+    </div>
+    {% set __tabHab = [ _Hab1, _Hab2, _Hab3, _Hab4, _Hab5, _Hab6, _Hab7, _Hab8, _Hab9, _Hab10, _Hab11, _Hab12, _Hab13, _Hab14, _Hab15, ] %}
+    {% set __valueSelect = ['Aucun', 'Accéder', 'Accéder/Modifier', 'Accéder/Modifier/Supprimer', 'Accéder/Modifier/Supprimer/Déplacer'] %}
+    <div class="liste-acces">
+      {% for h, hab in __tabHab %}
+        {% if hab %}
+          <div>
+            <label for="document_hab_{{ h }}">{{ hab }} :</label>
+            <select name="document_hab_{{ h }}" id="document_hab_{{ h }}">
+              {% for h, item in __valueSelect %}
+                {% if h <= _agent.docAccess or _agent.admin == 1 %}
+                  <option value="{{ h }}"> {{ item }}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {# Accès grade #}
+    <h2>Accès grades</h2>
+    <div class="form-folder-button">
+      <button type="button" name="button" onclick="addAccessAll('document_grade_')">Accès pour tous</button>
+    </div>
+    <div class="liste-acces">
+      {% for grade in grades %}
+        {% if grade and grade.position != 1 %}
+          <div>
+            <label for="document_grade_{{ grade.position }}">{{ grade.nom }} :</label>
+            <select name="document_grade_{{ grade.position }}" id="document_grade_{{ grade.position }}">
+              {% for i, item in __valueSelect %}
+                {% if i <= _agent.docAccess or _agent.admin == 1 %}
+                  <option value="{{ i }}"> {{ item }}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="form-folder-button">
+      <button type="submit" name="button">Créer le document</button>
+    </div>
+  </form>
+
+
+</div>

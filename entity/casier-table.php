@@ -16,6 +16,7 @@ class Casier_t extends Model {
     return Casier_t::where('enregistrer_par', $id_cop)
                    ->count();
   }
+  
   public static function getCasierClose($id_cop) {
     return Casier_t::where('acquite_par', $id_cop)
                     ->count();

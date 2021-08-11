@@ -32,9 +32,9 @@
     <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
     <p><strong>Nom :</strong>{{ delit.nom }}</p>
     <p><strong>Type :</strong>{% if delit.type_d == 3 %}Grave{% elseif delit.type_d == 2 %}Moyen{% else %}Léger{% endif %}</p>
-    <p><strong>Amende :</strong>{{ delit.amende|number_format(2, ',', ' ') }} $</p>
+    <p><strong>Amende :</strong>{{ delit.amende|number_format(2, ',', ' ') }} {{ _Devise }}</p>
     <p><strong>Temps de prison :</strong>{{ delit.prison }} mois</p>
-    <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
+    <p><strong>Enregistrer par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{% if delit.enregistrer_name %}{{ delit.enregistrer_name }}{% else %}{{ ouvert.grade }} {{ ouvert.nom }}{% endif %}</a></p>
     <p><strong>Enregistré le :</strong>{{ delit.enregistrer_le|date("d/m/Y") }}</p>
     <p><strong>État :</strong>{% if delit.etat == 2 %}Fermé{% elseif delit.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
     <p><strong>Rapport :</strong></p>
@@ -47,7 +47,7 @@
     </div>
     {% endif %}
     <p><strong>Fermé le :</strong>{% if delit.acquite_le != NULL %}{{ delit.acquite_le|date("d/m/Y") }}{% endif %}</p>
-    <p><strong>Fermé par :</strong><a href="/{{ _membreFaction }}/{{ fermer.matricule }}">{{ fermer.grade}} {{ fermer.nom|capitalize }}</a></p>
+    <p><strong>Enregistrer par :</strong><a href="/{{ _membreFaction }}/{{ cop.matricule }}">{% if delit.acquite_name %}{{ delit.acquite_name }}{% else %}{{ fermer.grade}} {{ fermer.nom }}{% endif %}</a></p>
     {% if delit.etat == 0 and _agent.supprimer != 0 %}
     <div class="lien">
       <a class="ferm" href="/casier-judiciaire/{{ delit.id_delit }}/1">Classé sans suite</a>

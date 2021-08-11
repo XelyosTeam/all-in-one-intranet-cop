@@ -30,7 +30,7 @@
   <section class="information_casier">
     <h1>Informations sur la plainte</h1>
     <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
-    <p><strong>Déposeur :</strong><a href="/civil/{{ deposeur.id }}">{{ deposeur.nom|capitalize }} {{ deposeur.prenom|capitalize }}</a></p>
+    <p><strong>Déposeur :</strong><a href="/civil/{{ deposeur.id }}">{{ deposeur.nom }} {{ deposeur.prenom }}</a></p>
     <p><strong>Détail de la plainte :</strong></p>
     <div class="markdown-body">
       {{ plainte.detail_plainte|raw }}
@@ -40,11 +40,11 @@
       <a href="/detail-plainte/{{ plainte.id }}/edit">Modifier le rapport</a>
     </div>
     {% endif %}
-    <p><strong>Enregistré par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{{ ouvert.grade }} {{ ouvert.nom|capitalize }}</a></p></p>
+    <p><strong>Enregistrer par :</strong><a href="/{{ _membreFaction }}/{{ ouvert.matricule }}">{% if plainte.enregistrer_name %}{{ plainte.enregistrer_name }}{% else %}{{ ouvert.grade }} {{ ouvert.nom }}{% endif %}</a></p>
     <p><strong>Enregistré le :</strong>{% if plainte.enregistrer_le != NULL %}{{ plainte.enregistrer_le|date("d/m/Y") }}{% endif %}</p>
     <p><strong>État :</strong>{% if plainte.etat == 2 %}Fermé{% elseif plainte.etat == 1 %}Charges Abandonnées{% else %}En cours{% endif %}</p>
     <p><strong>Fermé le :</strong>{{ plainte.fermer_le}}</p>
-    <p><strong>Fermé par :</strong><a href="/{{ _membreFaction }}/{{ fermer.matricule }}">{{ fermer.grade }} {{ fermer.nom|capitalize }}</a></p></p>
+    <p><strong>Fermé par :</strong><a href="/{{ _membreFaction }}/{{ fermer.matricule }}">{% if plainte.fermer_name %}{{ plainte.fermer_name }}{% else %}{{ fermer.grade }} {{ fermer.nom }}{% endif %}</a></p>
     {% if plainte.etat == 0 and _agent.supprimer != 0 %}
     <div class="lien">
       <a class="ferm" href="/detail-plainte/{{ plainte.id }}/1">Classé sans suite</a>

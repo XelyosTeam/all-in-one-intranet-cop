@@ -163,5 +163,4 @@ Flight::route('/delit/edit/value', function() {
     addHistorique(Agent::getInfoAgent()->matricule, "0¤3¤1¤" . $id . "¤" . $info->temps_prison . "¤" . $tps_delit);
   }
 });
-
 ?>

@@ -1,0 +1,89 @@
+{#
+  Le projet All in One est un produit Xelyos mis à disposition gratuitement
+  pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+  ne pas supprimer le ou les auteurs du projet.
+  Created by : Xelyos - Aros
+  Edited by :
+#}
+
+{# Page vierge pour les twig #}
+{% extends "_base.twig" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/markdown.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/documents.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/global/treeview.css">
+{% endblock %}
+
+{% block description %}document, {{ document.title }}{% endblock %}
+
+{% block key %}document, {{ document.title }}{% endblock %}
+
+{% block title %}{{ document.title }}{% endblock %}
+
+{% block main %}
+<div class="document-content">
+  {# Chemin complet #}
+  {% include "/documents/templates/route-parent.twig" %}
+
+  {% set __condition = document.isdeleted == 0 and (_agent.docAccess >= 2 or _agent.admin == 1 or document.createdby == _agent.lspd_id) %}
+  {% set __conditionMove = document.isdeleted == 0 and (_agent.docAccess == 4 or _agent.admin == 1 or document.createdby == _agent.lspd_id) %}
+
+  {# Modifier le dossier #}
+  {% if __condition %}
+    <div class="engine" onclick="showParamFolder('menu')">
+      <img src="/assets/img/documents/engine.png" alt="Paramètre du dossier">
+    </div>
+  {% endif %}
+
+  <h1 {% if document.isdeleted == 1 %}style="color: #B81600 "{% endif %} >{{ document.title }}</h1>
+
+  {% if document.description %}
+    <h2>{{ document.description }}</h2>
+  {% endif %}
+
+  <div class="markdown-body">
+    {{ document.content|raw }}
+  </div>
+
+  {% if _agent.admin == 1 %}
+    {% if document.isdeleted == 1 %}
+      <h2>Supprimer par : {{ document.deletedAgent.grade }} {{ document.deletedAgent.nom }} ({{ document.deletedAgent.matricule }})</h2>
+      <h2>Supprimer le : {{ document.deletedat }}</h2>
+    {% else %}
+      {% if document.updateby %}
+        <h2>Modifié par : {{ document.updatedAgent.grade }} {{ document.updatedAgent.nom }} ({{ document.updatedAgent.matricule }})</h2>
+        <h2>Modifié le : {{ document.updateat }}</h2>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+</div>
+
+
+{# Section des ajouts #}
+{% if __condition %}
+  <div id="menufolder" class="black-screen">
+    {% include "/documents/menu-document.twig" %}
+  </div>
+{% endif %}
+
+{% if __conditionMove %}
+  <div id="move-document" class="black-screen">
+    {% set _moveInfo_ = {'title': "Déplacer le document", 'name': 'document', 'type': 'document'} %}
+    {% include "/documents/move-document.twig" %}
+  </div>
+{% endif %}
+
+<div id="show-content" class="black-screen">
+  {% include "/documents/show-content.twig" %}
+</div>
+{% endblock %}
+
+{% block script %}
+  <script src="/assets/script/viewer.min.js"></script>
+  <script src="/assets/script/documents.js"></script>
+  <script type="text/javascript">
+    var submitButton = document.getElementById(`submit-button`);
+    submitButton.disabled = true;
+  </script>
+{% endblock %}

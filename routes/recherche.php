@@ -83,12 +83,14 @@ Flight::route('/recherche/info_delit', function() {
 
   $data = [
     'amende' => $info->amende,
-    'prison' => $info->temps_prison
+    'prison' => $info->temps_prison,
+    'retrait' => $info->retrait
   ];
 
   Flight::json($data);
 });
 
+# On pourra tout rassembler en un
 Flight::route('/recherche/photo/arme', function() {
   header("Access-Control-Allow-Origin: *");
   verif_connecter();
@@ -173,8 +175,13 @@ Flight::route('/recherche/plainte', function() {
   $prenom = $_GET['civil_firstname'];
   /* Variable récupéré dans le get */
 
+  $plaintes = InfoPlainte::getListPlainte($nom, $prenom);
+  foreach ($plaintes as $plainte) {
+    $plainte->detail = urldecode($plainte->detail);
+  }
+
   Flight::view()->display('recherche/research_plainte.twig', array(
-    'plaintes' => InfoPlainte::getListPlainte($nom, $prenom),
+    'plaintes' => $plaintes,
     'nom' => $nom,
     'prenom' => $prenom
   ));
@@ -195,5 +202,4 @@ Flight::route('/recherche/vehicule', function() {
     'couleur' => $couleur
   ));
 });
-
 ?>

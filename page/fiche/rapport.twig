@@ -33,10 +33,10 @@
     <section class="information_casier">
       <h1>{{ rapport.titre }}</h1>
       <img src="/assets/img/logo.png" alt="Logo {{ _nomFaction }}">
-      <p><strong>Déposeur :</strong><a href="/{{ _membreFaction }}/{{ deposeur.matricule }}">{{ deposeur.grade }} {{ deposeur.nom|capitalize }}</a></p>
+      <p><strong>Déposeur :</strong><a href="/{{ _membreFaction }}/{{ deposeur.matricule }}">{% if rapport.editeur_name %}{{ rapport.editeur_name }}{% else %}{{ deposeur.grade }} {{ deposeur.nom }}{% endif %}</a></p>
       <p><strong>Détail sur le rapport :</strong></p>
       <div class="markdown-body">
-        {{ rapport.contenu|capitalize|raw }}
+        {{ rapport.contenu|raw }}
       </div>
       <p><strong>Enregistré le :</strong>{{ rapport.ecrit_le|date("d/m/Y") }}</p>
     </section>

@@ -7,8 +7,7 @@
 */
 
 /* PC */
-.contenu
-{
+.contenu {
   display: block;
   margin-top: 2%;
   margin-left: 25%;
@@ -17,8 +16,7 @@
   background-color: var(--background);
 }
 
-.contenu h1
-{
+.contenu h1 {
   text-align: center;
   padding-top: 1%;
   padding-bottom: 1%;
@@ -26,33 +24,28 @@
   border-bottom: 2px solid var(--Text);
 }
 
-.contenu h2, .contenu h3
-{
+.contenu h2, .contenu h3 {
   padding-left: 2%;
 }
 
-.contenu h2
-{
+.contenu h2 {
   text-align: left;
   padding-top: 1%;
   color: var(--Text);
   text-decoration: underline;
 }
 
-.contenu h3
-{
+.contenu h3 {
   text-align: left;
   margin-bottom: -2%;
   text-decoration: underline;
 }
 
-.contenu  div
-{
+.contenu  div {
   margin-top: 2%;
 }
 
-.contenu div label
-{
+.contenu div label {
   margin-left: 3%;
   text-align: left;
   font-weight: bold;
@@ -60,8 +53,7 @@
   font-size: 1.25em;
 }
 
-.contenu div input
-{
+.contenu div input {
   border: none;
   border-bottom: 1px solid #000;
   margin-left: 5%;
@@ -74,8 +66,7 @@
   font-size: 1.5em;
 }
 
-.contenu div select
-{
+.contenu div select {
   border: none;
   border-bottom: 1px solid #000;
   margin-left: 5%;
@@ -88,8 +79,7 @@
   font-size: 1.5em;
 }
 
-.contenu div textarea
-{
+.contenu div textarea {
   border: none;
   border-bottom: 1px solid #000;
   text-align: justify;
@@ -102,8 +92,7 @@
   font-size: 1.5em;
 }
 
-.contenu div p
-{
+.contenu div p {
   color: var(--textAlert);
   font-weight: bold;
   font-size: 1.2em;
@@ -111,18 +100,15 @@
   margin-left: 5%;
 }
 
-.contenu .short
-{
+.contenu .short {
   width: 30%;
 }
 
-.contenu .btn
-{
+.contenu .btn {
   text-align: right;
 }
 
-.contenu .btn button
-{
+.contenu .btn button {
   text-align: right;
   margin-right: 5%;
   margin-bottom: 2%;
@@ -132,10 +118,14 @@
   color: var(--BoutonText);
   padding: 2%;
   font-size: 1.25em;
+  cursor: pointer;
 }
 
-.contenu .Selection
-{
+.contenu .btn button:hover {
+  color: var(--BoutonTextHover);
+}
+
+.contenu .Selection {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(2,1fr);
@@ -144,8 +134,7 @@
   text-align: center;
 }
 
-.contenu a
-{
+.contenu a {
   text-align: center;
   margin-right: 25%;
   margin-left: 25%;
@@ -158,7 +147,6 @@
   font-size: 1.25em;
 }
 
-.contenu a:hover
-{
+.contenu a:hover {
   color: var(--BoutonTextHover);
 }

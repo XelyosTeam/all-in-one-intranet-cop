@@ -17,6 +17,7 @@ class Delit extends Model {
                 ->order_by_asc('intitule')
                 ->find_many();
   }
+  
   public static function getinfoDelit($delit_id) { // On récupère les infos d'un délit
     return Delit::where('id', $delit_id)
                 ->find_one();

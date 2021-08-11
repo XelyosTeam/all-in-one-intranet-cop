@@ -39,4 +39,13 @@
   --footerBack: #103469; /* Couleur de fond */
   --footerText: #fff; /* Couleur des textes */
 
+  /* Documents */
+  --docTitle: #103469;
+  --docBackgroundListe: #f7f7f7;
+  --docFormBackground: #f7f7f7;
+  --docFormLabel: #103469;
+  --docFormInput: #103469;
+  --docFormButton: #103469;
+  --docFormTextButton: #f7f7f7;
+  --docFormTextButtonHover: #d7be03;
 }

@@ -55,7 +55,7 @@ Flight::route('/civil/@id_citoyen/calcul-amende', function($id_citoyen) {
     'prison' => $total[1],
     'amende' => $total[0],
     'prisonAnnée' => $total[2],
-    'prisonAnnée2' => $total[3]
+    'prisonAnnée2' => $total[3],
   ));
 });
 
@@ -71,14 +71,15 @@ Flight::route('/civil/@id_citoyen/close-casiers', function($id_citoyen) {
   $Casier = Casier::getCasierEnCours($id_citoyen);
   $Route = Route::getRouteEnCours($id_citoyen);
   foreach ($Casier as $variable) {
-    closeCasier($variable->id_delit, 3, $agent->lspd_id);
+    closeCasier($variable->id_delit, 3, $agent);
     addHistorique($agent->matricule, "5¤0¤0¤" . $variable->id_delit . "¤" . 2);
   }
 
   foreach ($Route as $variable) {
-    closeRoute($variable->delit_id, 3, $agent->lspd_id);
+    closeRoute($variable->delit_id, 3, $agent);
     addHistorique($agent->matricule, "5¤0¤1¤" . $variable->delit_id . "¤" . 2);
   }
+
   Flight::redirect("/civil/$id_citoyen");
 });
 
@@ -98,13 +99,13 @@ Flight::route('/civil/@id_citoyen/edit', function($id_citoyen) {
 
 Flight::route('/civil/@id_civil/modification', function($id_civil) {
   verif_connecter();
-  /* Variable récupéré dans le get */
+  /* Variable récupérée dans le get */
   $phone = $_POST['telephone'];
   if (isset($_POST['metier'])) {
     $job = $_POST['metier'];
   }
   $drive = $_POST['permis'];
-  /* Variable récupéré dans le get */
+  /* Variable récupérée dans le get */
 
   $oldinfo = Personne::getinfoPersonne((int)$id_civil); // Ancienne info du civil
   $agent = Agent::getInfoAgent();
@@ -127,18 +128,28 @@ Flight::route('/civil/@id_civil/modification', function($id_civil) {
   }
 
   if ($agent->editer == 0) {
-    Flight::redirect("/civil/$id_civil");
-    exit();
+   Flight::redirect("/civil/$id_civil");
+   exit();
   }
 
   if (isset($_POST['metier'])) {
-    editCivil((int)$id_civil, $phone, $job, $drive, $time);
+   editCivil((int)$id_civil, $phone, $job, $drive, $time);
   }
   else {
-    editCivil2((int)$id_civil, $phone, $drive, $time);
+   editCivil2((int)$id_civil, $phone, $drive, $time);
   }
 
   Flight::redirect("/civil/$id_civil");
 });
 
+Flight::route('/civil/@id_citoyen/impression', function($id_citoyen) {
+  verif_connecter();
+  $impression = new generatePDF();
+  $civil = Personne::getinfoPersonne($id_citoyen);
+  if (!$civil) {
+    Flight::redirect("/civil/$id_citoyen");
+    return;
+  }
+  $impression->civil($civil, $id_citoyen);
+});
 ?>

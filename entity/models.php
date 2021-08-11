@@ -32,4 +32,7 @@
   include 'vehicles.php';
   include 'vehicles-models.php';
   include 'vehicles-table.php';
+  include 'document.php'; // Documents
+  include 'folder.php'; // Documents
+  include 'historique-document.php'; // Documents
 ?>

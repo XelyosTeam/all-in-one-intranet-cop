@@ -77,7 +77,7 @@ function affiche_photo_personne()
   // On récupère le résultat de la requête
   requeteAjax.onload = function(){
     const resultat = JSON.parse(requeteAjax.responseText);
-    document.getElementById("image_civil").setAttribute('src', '/assets/img/identité/' + resultat.photo);
+    document.getElementById("image_civil").setAttribute('src', '/assets/img/identite/' + resultat.photo);
     document.getElementById("image_civil").setAttribute('alt', 'Photo ' + resultat.nom + ' ' + resultat.prenom);
   }
 }
@@ -99,7 +99,7 @@ function affiche_photo_personne_2()
   // On récupère le résultat de la requête
   requeteAjax.onload = function(){
     const resultat = JSON.parse(requeteAjax.responseText);
-    document.getElementById("image_civil2").setAttribute('src', '/assets/img/identité/' + resultat.photo);
+    document.getElementById("image_civil2").setAttribute('src', '/assets/img/identite/' + resultat.photo);
     document.getElementById("image_civil2").setAttribute('alt', 'Photo ' + resultat.nom + ' ' + resultat.prenom);
   }
 }
@@ -121,7 +121,7 @@ function affiche_photo_cop()
   // On récupère le résultat de la requête
   requeteAjax.onload = function(){
     const resultat = JSON.parse(requeteAjax.responseText);
-    document.getElementById("image_cop").setAttribute('src', '/assets/img/identité/' + resultat.photo);
+    document.getElementById("image_cop").setAttribute('src', '/assets/img/identite/' + resultat.photo);
     document.getElementById("image_cop").setAttribute('alt', 'Photo ' + resultat.grade + ' ' + resultat.nom);
   }
 }
@@ -143,7 +143,7 @@ function affiche_photo_cop_2()
   // On récupère le résultat de la requête
   requeteAjax.onload = function(){
     const resultat = JSON.parse(requeteAjax.responseText);
-    document.getElementById("image_cop2").setAttribute('src', '/assets/img/identité/' + resultat.photo);
+    document.getElementById("image_cop2").setAttribute('src', '/assets/img/identite/' + resultat.photo);
     document.getElementById("image_cop2").setAttribute('alt', 'Photo ' + resultat.grade + ' ' + resultat.nom);
   }
 }
@@ -319,8 +319,7 @@ function AfficheMenuModDelit() {
 }
 
 /* Aficher les informations en fonction du délit */
-function EditMenuModDelit(value_this)
-{
+function EditMenuModDelit(value_this) {
   if (value_this == 0) {
   document.getElementById("dtls_amende").style.display = "none";
   document.getElementById("dtls_prison").style.display = "none";
@@ -393,8 +392,7 @@ function addWeaponCategorie() {
 }
 
 /* On affiche la photo de l'arme en fonction du modèle de son id */
-function affiche_photo_arme()
-{
+function affiche_photo_arme() {
   // On met en forme les données
   const data = new FormData();
   data.append('type', document.getElementById("weapon_type").value);
@@ -409,5 +407,115 @@ function affiche_photo_arme()
     const resultat = JSON.parse(requeteAjax.responseText);
     document.getElementById("image_arme").setAttribute('src', '/assets/img/arme/' + resultat.couleur);
     document.getElementById("image_arme").setAttribute('alt', 'Photo ' + resultat.modele);
+  }
+}
+
+/* Suppression d'une arme dans la BDD */
+function confirmSuppressionArme(numSerie) {
+  var value = confirm("Supprimer l'arme ?");
+
+  if (value) {
+    window.location.replace(`${window.location.href}/delete`);
+  }
+}
+
+/* Ajout automatique du nom de l'image administration */
+function actionImgFile() {
+  var myFile = document.getElementById('upload-img').files[0];
+  var fileName = document.getElementById('name');
+
+  if (fileName.value == "") {
+    fileName.value = myFile.name.split('.').slice(0, myFile.name.split('.').length - 1).join('.');
+  }
+}
+
+/* Aficher la liste box suivante */
+function affiche_suite(actuel, contentValue, suivant) {
+  var act = document.getElementById(actuel);
+  var actValue = document.getElementById(contentValue);
+  if (act && actValue) {
+    if (actValue.value) {
+      var next = document.getElementById(suivant);
+      if (next) {
+        next.style.display = "block";
+      }
+    }
+  }
+}
+
+/* Ajouter les délits casier dans la BDD */
+function AddCasier() {
+  event.preventDefault(); // Arret du formulaire
+
+  cpt = 0;
+  for (var i = 0; i <= 50; i++) {
+    let element = document.getElementById(`saisie_casier_${i}`);
+    if (element) {
+      let content = document.getElementById(`casier_value_${i}`);
+      if (content.value != 'NULL') {
+        // On ajoute le délit
+        let entete = ['delit_name', 'rapport', 'casier_owner'];
+        let contentEntete = [
+          `casier_value_${i}`, 'casier_rapport',
+          'personne_type',
+        ];
+        let data = createData(entete, contentEntete);
+        cpt += 1;
+
+        // On envoi le modèle
+        var requeteAjax = new XMLHttpRequest();
+        requeteAjax.open('POST', '/insert/casier');
+        requeteAjax.send(data);
+      }
+    }
+  }
+
+  if (cpt > 0) {
+    if (cpt == 1) {
+      alert("Le délit a été ajouté");
+    }
+    else {
+      alert(`Les ${cpt} délits ont été ajoutés !`);
+    }
+
+    window.location.replace(`/civil/${document.getElementById('personne_type').value}`);
+  }
+}
+
+/* Ajouter les délits routiers dans la BDD */
+function AddRoute() {
+  event.preventDefault(); // Arret du formulaire
+
+  cpt = 0;
+  for (var i = 0; i <= 50; i++) {
+    let element = document.getElementById(`saisie_route_${i}`);
+    if (element) {
+      let content = document.getElementById(`route_value_${i}`);
+      if (content.value != 'NULL') {
+        // On ajoute le délit
+        let entete = ['casier_owner', 'vehicule_delit', 'delit_name', 'rapport'];
+        let contentEntete = [
+          `personne_type`, 'car_type', `route_value_${i}`, 'route_rapport'
+        ];
+        let data = createData(entete, contentEntete);
+        cpt += 1;
+
+        // On envoi le modèle
+        var requeteAjax = new XMLHttpRequest();
+        requeteAjax.open('POST', '/insert/routier');
+        requeteAjax.send(data);
+      }
+    }
+  }
+
+  if (cpt > 0) {
+    if (cpt == 1) {
+      alert("Le délit a été ajouté");
+    }
+    else {
+      alert(`Les ${cpt} délits routiers ont été ajoutés !`);
+    }
+
+    window.location.replace(`/civil/${document.getElementById('personne_type').value}`);
   }
 }

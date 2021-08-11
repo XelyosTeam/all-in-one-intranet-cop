@@ -22,8 +22,8 @@
 
 {% block main %}
   <form class="recherche" action="/recherche/civil" method="GET">
-    <input type="search" name="civil_name"placeholder="{% if nom != NULL %}{{ nom|capitalize }}{% else %}Nom{% endif %}">
-    <input type="search" name="civil_firstname" placeholder="{% if prenom != NULL %}{{ prenom|capitalize }}{% else %}Prénom{% endif %}">
+    <input type="search" name="civil_name"placeholder="{% if nom != NULL %}{{ nom }}{% else %}Nom{% endif %}">
+    <input type="search" name="civil_firstname" placeholder="{% if prenom != NULL %}{{ prenom }}{% else %}Prénom{% endif %}">
     <input type="search" name="civil_phone" placeholder="{% if phone != NULL %}{{ phone }}{% else %}Téléphone{% endif %}">
     <input type="search" name="civil_job" placeholder="{% if job != NULL %}{{ job|upper }}{% else %}Métier{% endif %}">
     <button>Search</button>
@@ -31,8 +31,8 @@
 
   {% for civil in civils %}
     <div class="Resultat">
-      <img class="round_profil" src="/assets/img/identité/{{ civil.photo }}" alt="Photo de {{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}">
-      <p>{{ civil.nom|capitalize }} {{ civil.prenom|capitalize }}</p>
+      <img class="round_profil" src="/assets/img/identite/{{ civil.photo }}" alt="Photo de {{ civil.nom }} {{ civil.prenom }}">
+      <p>{{ civil.nom }} {{ civil.prenom }}</p>
       <a href="/civil/{{ civil.id }}">Consulter</a>
     </div>
   {% else %}

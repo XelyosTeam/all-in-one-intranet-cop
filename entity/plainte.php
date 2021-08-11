@@ -17,10 +17,12 @@ class Plainte extends Model {
                   ->order_by_asc('etat')
                   ->find_many();
   }
+  
   public static function getPlainte($plainte_id) { // On récupère la liste du casier judiciaire avec l'ID de la personne
     return Plainte::where('id', $plainte_id)
                   ->find_one();
   }
+  
   public static function getIDPlainte($deposeur, $citoyen, $agent) { // On récupère la liste du casier judiciaire avec l'ID de la personne
     return Plainte::where(
                       array(
@@ -31,10 +33,12 @@ class Plainte extends Model {
                    ->order_by_desc('id')
                    ->find_one();
   }
+  
   public static function getPlainteOpen($id_cop) {
     return Plainte::where('enregistrer_par', $id_cop)
                   ->count();
   }
+  
   public static function getPlainteClose($id_cop) {
     return Plainte::where('fermer_par', $id_cop)
                   ->count();

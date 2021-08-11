@@ -23,12 +23,12 @@
 {% block main %}
   <section class="info_personne">
     <h1>Informations Véhicule</h1>
-    <img src="/assets/img/vehicule/{{ voiture.lien }}" alt="Photo {{ voiture.nom|capitalize }}">
-    <p><strong>Modèle :</strong>{{ voiture.nom|capitalize }}</p>
+    <img src="/assets/img/vehicule/{{ voiture.lien }}" alt="Photo {{ voiture.nom }}">
+    <p><strong>Modèle :</strong>{{ voiture.nom }}</p>
     <p><strong>Couleur :</strong>{{ voiture.couleur|upper }}</p>
     <p><strong>Plaque :</strong>{{ voiture.plaque|upper }}</p>
-    <p><strong>Propriétaire :</strong><a href="/civil/{{ proprio.id }}">{{ proprio.nom|capitalize }} {{ proprio.prenom|capitalize }}</a></p></p>
-    <p><strong>Enregistré Par :</strong><a href="/{{ _membreFaction }}/{{ policier.matricule }}">{{ policier.grade|capitalize }} {{ policier.nom|capitalize }}</a></p></p>
+    <p><strong>Propriétaire :</strong><a href="/civil/{{ proprio.id }}">{{ proprio.nom }} {{ proprio.prenom }}</a></p></p>
+    <p><strong>Enregistrer par :</strong><a href="/{{ _membreFaction }}/{{ policier.matricule }}">{% if voiture.enregistreur_name %}{{ voiture.enregistreur_name }}{% else %}{{ policier.grade }} {{ policier.nom }}{% endif %}</a></p>
     <p><strong>En circulation :</strong>{% if voiture.circulation == 1 %}Oui{% elseif voiture.circulation == 0 %}Non{% else %}Non{% endif %}</p>
     {% if _agent.editer != 0 %}
     <div class="lien">
@@ -42,7 +42,7 @@
 
     {% for delit in delits %}
     <div class="content">
-      <p>{{ delit.nom|capitalize|slice(0, 25) }}...</p>
+      <p>{{ delit.nom|slice(0, 25) }}...</p>
 
       {% if delit.etat == 2 %}
         <p class="">Fermé</p>

@@ -17,6 +17,7 @@ class Historique_LSPD extends Model {
                           ->order_by_desc('id')
                           ->find_many();
   }
+  
   public static function getNbAction($matricule) {
     return Historique_LSPD::where('matricule', $matricule)
                           ->count();

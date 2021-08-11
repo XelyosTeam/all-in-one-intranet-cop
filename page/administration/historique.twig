@@ -26,7 +26,7 @@
   <section>
     {% for cop in cops %}
       <div onclick="protocoleHistorique('{{ cop.matricule }}');">
-        <img class="round_profil" src="/assets/img/identité/{{ cop.photo}}" alt="Photo de {{ cop.nom|capitalize }} {{ cop.prenom|capitalize }}">
+        <img class="round_profil" src="/assets/img/identite/{{ cop.photo}}" alt="Photo de {{ cop.nom|capitalize }} {{ cop.prenom|capitalize }}">
         <p>{{ cop.grade}} {{ cop.nom}}</p>
       </div>
     {% else %}
@@ -38,7 +38,7 @@
 
     {% for cop in oldcops %}
       <div class="old" onclick="protocoleHistorique('{{ cop.matricule }}');">
-        <img class="round_profil" src="/assets/img/identité/{{ cop.photo}}" alt="Photo de {{ cop.nom|capitalize }} {{ cop.prenom|capitalize }}">
+        <img class="round_profil" src="/assets/img/identite/{{ cop.photo}}" alt="Photo de {{ cop.nom|capitalize }} {{ cop.prenom|capitalize }}">
         <p>{{ cop.nom}} {{ cop.prenom}}</p>
       </div>
     {% endfor %}

@@ -1,0 +1,55 @@
+{#
+Le projet All in One est un produit Xelyos mis à disposition gratuitement
+pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+ne pas supprimer le ou les auteurs du projet.
+Created by : Xelyos - Aros
+Edited by :
+#}
+
+<div class="param-folder">
+  {# Close Twig #}
+  {% set _title_ = {'status': true, 'value': "Sélectionner une action"} %}
+  {% include "/documents/templates/close.twig" with _title_ %}
+
+  {% set _actionListe_ = [
+    {
+      'name': 'Créer un dossier',
+      'shortcut': 'add',
+      'img': 'folder_add.png',
+      'access': [3, 4, 5],
+    },
+    {
+      'name': 'Modifier le dossier',
+      'shortcut': 'edit',
+      'img': 'folder_edit.png',
+      'access': [4, 5],
+    },
+    {
+      'name': 'Déplacer le dossier',
+      'shortcut': 'move',
+      'img': 'folder_move.png',
+      'access': [5],
+    },
+    {
+      'name': 'Créer un document',
+      'shortcut': 'document',
+      'img': 'file_add.png',
+      'access': [2, 3, 4, 5],
+    },
+    {
+      'name': 'Importer un pdf',
+      'shortcut': 'pdf',
+      'img': 'file_pdf.png',
+      'access': [2, 3, 4, 5],
+    },
+    {
+      'name': 'Importer une image',
+      'shortcut': 'img',
+      'img': 'file_img.png',
+      'access': [2, 3, 4, 5],
+    }
+  ] %}
+  
+  {% include "/documents/templates/menu.twig" with _actionListe_ %}
+
+</div>

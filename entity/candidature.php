@@ -17,6 +17,7 @@ class Candidature extends Model {
                       ->order_by_asc(array('nom', 'prenom'))
                       ->find_many();
   }
+  
   public static function getCandidature($id_candid) { // On récupère la liste du casier judiciaire avec l'ID de la personne
     return Candidature::where('id', $id_candid)
                       ->find_one();

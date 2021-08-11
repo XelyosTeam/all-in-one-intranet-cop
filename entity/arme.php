@@ -17,6 +17,7 @@ class Arme extends Model {
                ->order_by_asc(array('prefix', 'numero'))
                ->find_many();
   }
+  
   public static function getInfoNumero($numero) {
     return Arme::where('numero', $numero)
                ->find_one();

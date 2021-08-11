@@ -16,6 +16,7 @@ class Route_t extends Model {
     return Route_t::where('enregistrer_par', $id_cop)
                   ->count();
   }
+  
   public static function getRouteClose($id_cop) {
     return Route_t::where('acquite_par', $id_cop)
                   ->count();

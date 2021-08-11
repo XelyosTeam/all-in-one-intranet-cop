@@ -16,6 +16,7 @@ class modelArme extends Model {
     return modelArme::order_by_asc('nom')
                     ->find_many();
   }
+  
   public static function getInfo($modele) { // On récupère l'image du véhicule en fonction du modèle
     return modelArme::where('id', $modele)
                     ->find_one();

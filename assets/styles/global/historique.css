@@ -7,14 +7,12 @@
 */
 
 /* PC */
-.list_agent::-webkit-scrollbar
-{
+.list_agent::-webkit-scrollbar {
   display: contents;
 }
 
 /* Partie de Gauche - Liste des agents */
-.list_agent
-{
+.list_agent {
   float: left;
   display: block;
   margin-left: 5%;
@@ -25,28 +23,24 @@
   padding-bottom: 2%;
 }
 
-.list_agent section, .information_historique section
-{
+.list_agent section, .information_historique section {
   max-height: 700px;
   overflow-x: hidden;
   overflow-y: scroll;
 }
 
-.information_historique section
-{
+.information_historique section {
   max-height: 300px;
 }
 
-.list_agent h1
-{
+.list_agent h1 {
   padding-top: 2%;
   padding-bottom: 1%;
   color: var(--Text);
   border-bottom: 2px solid var(--Text);
 }
 
-.list_agent div, .information_historique div
-{
+.list_agent div, .information_historique div {
   display: grid;
   max-width: 100%;
   grid-template-columns: 25% 75% repeat(2, 1fr);
@@ -56,27 +50,23 @@
   padding: 1%;
 }
 
-.list_agent div:hover, .information_historique div:hover, .list_agent .old:hover
-{
+.list_agent div:hover, .information_historique div:hover, .list_agent .old:hover {
   border-top: 2px solid var(--Text);
   border-bottom: 2px solid var(--Text);
   cursor: pointer;
 }
 
-.list_agent .old
-{
+.list_agent .old {
   background-color: var(--oldAgent);
 }
 
-.list_agent div img
-{
+.list_agent div img {
   max-width: 50%;
   height: auto;
   margin-left: 50%;
 }
 
-.list_agent div p
-{
+.list_agent div p {
   font-weight: bold;
   margin: auto 0;
   font-size: 1.25em;
@@ -84,8 +74,7 @@
 
 /* Partie de droite - Affichage de l'historique */
 
-.information_historique, .information_stats
-{
+.information_historique, .information_stats {
   display: block;
   margin-top: 2.5%;
   margin-left: 37%;
@@ -95,45 +84,39 @@
   padding-bottom: 0.5%;
 }
 
-.information_historique h1, .information_stats h1
-{
+.information_historique h1, .information_stats h1 {
   padding-top: 2%;
   color: var(--Text);
   border-bottom: 2px solid var(--Text);
   text-align: center;
 }
 
-.date, .vide
-{
+.date, .vide {
   text-align: center;
   font-weight: bold;
   color: var(--textAlert);
 }
 
 /* Partie de droite - Stats */
-.information_stats section
-{
+.information_stats section {
   width: 90%;
   margin-left: 5%;
   margin-right: 5%;
   text-align: center;
 }
 
-.information_stats section div
-{
+.information_stats section div {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
 
-strong
-{
+strong {
   color: var(--Text);
   font-size: 1.25em;
   margin-right: 3%;
 }
 
-.information_stats p
-{
+.information_stats p {
   margin-left: 3%;
   font-weight: bold;
   font-size: 1.2em;

@@ -18,11 +18,16 @@ class Voiture extends Model {
                   ->order_by_asc('plaque')
                   ->find_many();
   }
-  public static function getListCarPolice($personne) { // Liste des voitures d'une personne
-    return Voiture::where('proprio', $personne)
+
+  public static function getListCarPolice($personne) { // Liste des voitures d'une
+    return Voiture::where(array(
+                      'proprio' => $personne,
+                      'couleur' => serveurIni('Faction', 'couleurVehiculeBDD')
+                    ))
                   ->order_by_asc('plaque')
                   ->find_many();
   }
+
   public static function getListCarTri($modele, $plaque, $couleur) { // Liste des voitures en fonction d'un tri
     return Voiture::where_like(array(
                     'nom' => "%$modele%",
@@ -34,12 +39,15 @@ class Voiture extends Model {
                   ->order_by_asc('plaque')
                   ->find_many();
   }
+
   public static function getCar($plaque) { // Information d'une voiture avec la plaque
     return Voiture::where('plaque', $plaque)->find_one();
   }
+
   public static function getListCar() { // Information d'une voiture avec la plaque
     return Voiture::order_by_asc(array('plaque', 'nom'))->find_many();
   }
+
   public static function getCarID($id_v) { // Information d'une voiture avec l(ID)
     return Voiture::where('v_id', $id_v)->find_one();
   }

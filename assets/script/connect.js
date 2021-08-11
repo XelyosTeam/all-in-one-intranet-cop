@@ -163,7 +163,8 @@ async function programmeAnimation(tab_phrase, etat) {
   await sleep(500);
 
   if (etat == 1) {
-    document.location.href="/";
+    var urlParams = new URLSearchParams(window.location.search);
+    document.location.href=decodeURI(urlParams.get('url'));
   }
   else {
     document.getElementById("formulaire_connexion").style.display = "block";

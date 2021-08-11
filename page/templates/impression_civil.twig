@@ -7,8 +7,8 @@
 #}
 
 <h2>Information Civil</h2>
-<p><strong>Nom :</strong> {{ civil.nom|capitalize }}</p>
-<p><strong>Prénom :</strong> {{ civil.prenom|capitalize }}</p>
+<p><strong>Nom :</strong> {{ civil.nom }}</p>
+<p><strong>Prénom :</strong> {{ civil.prenom }}</p>
 <p><strong>Date de naissance :</strong> {{ civil.DOB|date("d/m/Y") }}</p>
 <p><strong>PPA :</strong> {% if civil.ppa == 1  %}Oui{% else %}Non{% endif %}</p>
-<p><strong>Permis :</strong> {% if civil.permis == 1  %}Oui{% else %}Non{% endif %}</p>
+<p><strong>Permis :</strong>{% if civil.permis == 1  %}Oui{% else %}Non{% endif %}</p>

@@ -19,18 +19,22 @@ class Historique extends Model {
                      ->group_by('adresse_ip')
                      ->find_many();
   }
+  
   public static function getNbConnect($matricule) {
     return Historique::where(array('etat' => 'Réussite', 'matricule_utilise' => $matricule))
                      ->count();
   }
+  
   public static function getNbEchec($ip) {
     return Historique::where(array('etat' => 'echec', 'adresse_ip' => $ip))
                      ->count();
   }
+  
   public static function getEchecAdresse($ip) {
     return Historique::where(array('etat' => 'echec', 'adresse_ip' => $ip))
                      ->find_many();
   }
+  
   public static function getListMatricule($matricule) {
     return Historique::where('matricule_utilise', $matricule)
                      ->order_by_desc('id')

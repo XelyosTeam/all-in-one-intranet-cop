@@ -7,41 +7,35 @@
 */
 
 /* PC */
-.contenu
-{
+.contenu {
   margin-left: 20%;
   margin-right: 20%;
   text-align: center;
 }
 
-.contenu h1
-{
+.contenu h1 {
   padding-left: 2%;
 }
 
-.contenu p
-{
+.contenu p {
   padding: 0 4% 2% 4%;
   text-align: justify;
   font-size: 1.5em;
 }
 
-.contenu a
-{
+.contenu a {
   padding: 0% 2% 2% 2%;
   text-align: center;
   font-size: 1.25em;
   color: #000;
 }
 
-.contenu a:hover
-{
+.contenu a:hover {
   color: var(--Text);
   text-decoration: underline;
 }
 
-.contenu img
-{
+.contenu img {
   display: block;
   margin: 0 auto;
 }

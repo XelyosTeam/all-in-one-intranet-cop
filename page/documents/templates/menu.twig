@@ -1,0 +1,18 @@
+{#
+Le projet All in One est un produit Xelyos mis à disposition gratuitement
+pour tous les serveurs de jeux Role Play. En échange nous vous demandons de
+ne pas supprimer le ou les auteurs du projet.
+Created by : Xelyos - Aros
+Edited by :
+#}
+
+<div class="liste-action">
+  {% for action in _actionListe_ %}
+    {% if _agent.docAccess in action.access or _agent.admin == 1 or (document and document.createdby == _agent.lspd_id) %}
+      <div class="action" onclick="showParamFolder('{{ action.shortcut }}')">
+        <img src="/assets/img/documents/{{ action.img }}" alt="">
+        <p>{{ action.name }}</p>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
