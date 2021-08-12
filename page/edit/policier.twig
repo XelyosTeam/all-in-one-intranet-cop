@@ -18,17 +18,17 @@
 
 {% block key %}Edition Fiche{% endblock %}
 
-{% block title %}Edition {{ agent.grade }} {{ agent.nom|capitalize }}{% endblock %}
+{% block title %}Edition {{ agent.grade }} {{ agent.nom }}{% endblock %}
 
 {% block main %}
 
 <form action="/{{ _membreFaction }}/{{ agent.matricule }}/modification" method="post">
   <section class="info_personne">
     <h1>Fiche {{ _BDDFaction }}</h1>
-    <img src="/assets/img/identite/{{ civil.photo }}" alt="Photo {{ civil.nom }} {{ civil.prenom }}">
+    <img src="/assets/img/identite/{{ agent.photo }}" alt="Photo {{ agent.nom }} {{ agent.prenom }}">
     <p><strong>Description :</strong><textarea name="note" rows="1">{{ agent.note }}</textarea></p>
-    <p><strong>Nom :</strong>{{ agent.nom|capitalize }}</p>
-    <p><strong>Prénom :</strong>{{ agent.prenom|capitalize }}</p>
+    <p><strong>Nom :</strong>{{ agent.nom }}</p>
+    <p><strong>Prénom :</strong>{{ agent.prenom }}</p>
     <p><strong>Grade :</strong>
     <select name="grade">
       {% for grade in grades %}
