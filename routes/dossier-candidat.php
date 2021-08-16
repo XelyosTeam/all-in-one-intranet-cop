@@ -11,25 +11,24 @@ use Josantonius\Session\Session;
 Flight::route('/dossier-candidat', function() {
   verif_connecter();
   verif_enseignant(); // Vérifie que la personne soit bien un enseignant
+
   /* Variable récupéré dans le get */
-  $identifiant = $_GET['identifiant'];
+  $identifiant = NULL;
+  if (isset($_GET['identifiant'])) {
+    $identifiant = $_GET['identifiant'];
+  }
+
   /* Variable récupéré dans le get */
   $en_attente = Candidature::getListCandidature(1);
   $refusee = Candidature::getListCandidature(2);
   $accepte = Candidature::getListCandidature(3);
   $personne = NULL;
-  $ecole = NULL;
-  $vacance = NULL;
-  $travail = NULL;
-  $concat = NULL;
 
-  $linsting = array('en_attente', 'refusee', 'accepte');
-
-  foreach ($linsting as $element) {
+  $listing = array('en_attente', 'refusee', 'accepte');
+  foreach ($listing as $element) {
     $vardin = $element;
     foreach ($$vardin as $liste) {
-      $liste->nom = urldecode($liste->nom);
-      $liste->prenom = urldecode($liste->prenom);
+      $liste->info = urldecode(array_values(json_decode($liste->formulaires, true))[0]);
     }
   }
 
@@ -39,26 +38,14 @@ Flight::route('/dossier-candidat', function() {
 
   if ($identifiant != NULL) {
     $personne = Candidature::getCandidature($identifiant);
-    $personne->discord_id = urldecode($personne->discord_id);
-    $personne->nom = urldecode($personne->nom);
-    $personne->prenom = urldecode($personne->prenom);
-    $personne->phone = urldecode($personne->phone);
-    $personne->detail_flic = urldecode($personne->detail_flic);
-    $personne->objectif_lspd = urldecode($personne->objectif_lspd);
-    $personne->motivation_lspd = renderHTMLFromMarkdown(htmlspecialchars(strip_tags(urldecode($personne->motivation_lspd))));
-    $personne->attachments = explode(",", $personne->attachments);
-
-    /* Traitement concaténation */
-    $personne->reponse_concat = urldecode($personne->reponse_concat);
-    $personne->reponse_concat = explode('¤', $personne->reponse_concat);
-    foreach ($personne->reponse_concat as $reponse) {
-      $contact->append(urldecode($reponse));
+    $personne->formulaires = json_decode($personne->formulaires, true);
+    $personne->info = urldecode(array_values($personne->formulaires)[0]);
+    $array = new ArrayObject();
+    foreach ($personne->formulaires as $key => $value) {
+      $array[$key] = urldecode($value);
     }
-
-    /* Période de disponibilité */
-    $ecole = explode('-', $personne->detail_ecole);
-    $vacance = explode('-', $personne->detail_vacance);
-    $travail = explode('-', $personne->detail_travail);
+    $personne->formulaires = $array;
+    $personne->attachments = explode(",", $personne->attachments);
   }
 
   Flight::view()->display('ecole/dossier_candidat.twig', array(
@@ -66,11 +53,7 @@ Flight::route('/dossier-candidat', function() {
     'refuser' => $refusee,
     'accepter' => $accepte,
     'personne' => $personne,
-    'ecole' => $ecole,
-    'vacance' => $vacance,
-    'travail' => $travail,
-    'reponses' => (array)$contact,
-    'questions' => $struct->questions
+    'formulaires' => $struct
   ));
 });
 
