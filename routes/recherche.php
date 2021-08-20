@@ -84,7 +84,6 @@ Flight::route('/recherche/info_delit', function() {
   $data = [
     'amende' => $info->amende,
     'prison' => $info->temps_prison,
-    'retrait' => $info->retrait
   ];
 
   Flight::json($data);

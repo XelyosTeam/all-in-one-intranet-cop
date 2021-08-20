@@ -67,8 +67,6 @@ Flight::route('/insert/delit', function() {
   $prison = $_POST['temps'];
   $type = $_POST['type'];
 
-  if ($retrait == 0) { $retrait = null; }
-
   $agent = Agent::getInfoAgent();
   addDelit($nom, $montant, $prison, $type);
   addHistorique($agent->matricule, "0¤1¤" . ($type+1) . "¤" . $nom);
