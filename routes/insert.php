@@ -91,7 +91,7 @@ Flight::route('/insert/img/@type', function($type) {
   $dossier = "assets/img/$type/";
   $image = $_FILES['photo'];
   $taille_maxi = 5000000; // Limitation de la taille à 5 Mo
-  $extensions = array('.png', '.jpg', '.jpeg', '.gif');
+  $extensions = array('png', 'jpg', 'jpeg', 'gif');
 
   $upload = uploadFile($dossier, $taille_maxi, $image, $extensions);
 

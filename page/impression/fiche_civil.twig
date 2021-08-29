@@ -13,8 +13,6 @@
 {% block titre %}Extrait Casier {{ civil.nom }} {{ civil.prenom }}{% endblock %}
 
 {% block main %}
-  {% include "/templates/impression_civil.twig"%}
-
   <h2>Casier Judiciaires</h2>
   {% for casier in casiers %}
     <p>{{ casier.nom }} =>
